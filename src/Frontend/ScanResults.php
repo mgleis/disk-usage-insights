@@ -33,7 +33,7 @@ class ScanResults {
                 number_format_i18n(100 * $file['size'] / $totalSize, 2) . '%'
             ];
         }
-        echo (new Table(
+        (new Table(
                 'Largest Files', 
                 ['Filename', 'Size', '%'], 
                 ['', 'DUI-table__col--number', 'DUI-table__col--number']
@@ -52,7 +52,7 @@ class ScanResults {
                 number_format_i18n(100 * $file['fileSizes'] / $totalSize, 2) . '%'
             ];
         }
-        echo (new Table(
+        (new Table(
                 'Largest Folders (files only)', 
                 ['Folder', 'File Sizes', 'File Count', 'Avg File Size', '%'], 
                 ['', 'DUI-table__col--number', 'DUI-table__col--number', 'DUI-table__col--number', 'DUI-table__col--number'
@@ -65,7 +65,7 @@ class ScanResults {
         foreach ($largestFiles as $file) {
             $table[] = [$file['abs'], number_format_i18n($file['totalSize'])];
         }
-        echo (new Table('Largest Folders (incl. sub folders)', ['Folder', 'Total Size'], ['', 'DUI-table__col--number']))->output($table);
+        (new Table('Largest Folders (incl. sub folders)', ['Folder', 'Total Size'], ['', 'DUI-table__col--number']))->output($table);
         
 
         // Folders with most files  
@@ -79,7 +79,7 @@ class ScanResults {
                 number_format_i18n(round($file['fileSizes'] / $file['fileCount']))
             ];
         }
-        echo (new Table(
+        (new Table(
                 'Folders with most files', 
                 ['Folder', 'File Count', 'File Size', 'Avg File Size'], 
                 ['', 'DUI-table__col--number', 'DUI-table__col--number', 'DUI-table__col--number']
@@ -95,7 +95,7 @@ class ScanResults {
         foreach ($largestFiles as $file) {
             $table[] = [$file['name'], number_format_i18n($file['size'])];
         }
-        echo (new Table(
+        (new Table(
                 'Largest Plugin Folders', 
                 ['Folder', 'Total Size'], 
                 ['', 'DUI-table__col--number']
@@ -110,7 +110,7 @@ class ScanResults {
         foreach ($largestFiles as $file) {
             $table[] = [$file['name'], number_format_i18n($file['size'])];
         }
-        echo (new Table(
+        (new Table(
                 'Largest Theme Folders', 
                 ['Folder', 'Total Size'], 
                 ['', 'DUI-table__col--number']
