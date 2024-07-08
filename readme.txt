@@ -1,5 +1,5 @@
 === Disk Usage Insights ===
-Contributors: Marcel Gleis
+Contributors: mgleis
 Tags: disk usage, file size, large files, large folders
 Requires at least: 5.0
 Tested up to: 6.5
