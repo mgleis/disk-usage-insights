@@ -1,6 +1,6 @@
 <br>
 
-<div class="DUI-panel">
+<div class="DUI-panel" style="float:left;min-width:450px; width:69%; max-width:70%">
 <div class="DUI-panel__content--title">
 
     <div>
@@ -25,12 +25,35 @@
                 hx-target="#DUI-results"
 
             >Analyze Now</button>
-
         </form>
     </div>
 
 </div>
 </div>
+
+<div class="show-desktop" style="width:29%; float:left; overflow: hidden">
+
+    <div class="DUI-panel">
+        <div class="DUI-panel__headline dashicons-before dashicons-heart">
+            Support Open Source!
+        </div>
+        <div class="DUI-panel__content">
+            - <a target="_blank" href="https://wordpress.org/support/plugin/disk-usage-insights/reviews/#new-post">Add a 5 star WordPress review</a>
+            <br>
+            - <a target="_blank" href="https://github.com/mgleis/disk-usage-insights">Donate a github star</a>
+        </div>
+    </div>
+    <div class="DUI-panel">
+        <div class="DUI-panel__headline dashicons-before dashicons-groups">
+            Do you need help?
+        </div>
+        <div class="DUI-panel__content">
+            - <a href="https://wordpress.org/support/plugin/disk-usage-insights/" target="_blank">Plugin Support Forum</a>
+        </div>
+    </div>
+
+</div>
+<div style="clear:both"></div>
 
 <div id="DUI-loading" class="htmx-indicator" style="position: absolute; top: 100px; left:50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
     <div  class="DUI-panel">

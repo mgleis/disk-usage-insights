@@ -12,6 +12,14 @@
     }
 }
 
+@media only screen and (min-width: 1024px) {
+    .show-desktop { display: block; }
+}
+@media only screen and (max-width: 1023px) {
+    .show-desktop { display: none; }
+}
+
+
 .DUI-panel__headline { 
     padding: 6px 10px 6px 10px;
     border-bottom: 1px solid #e0e0e0;

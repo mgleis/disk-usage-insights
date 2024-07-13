@@ -12,4 +12,4 @@ Internal list of Todos
  - seee https://krasenslavov.com/how-to-add-live-preview-for-your-wordpress-org-plugins-with-blueprints/
  - docs see https://wordpress.github.io/wordpress-playground/
  - final link: https://playground.wordpress.net/?php-extension-bundle=light&plugin=disk-usage-insights&url=/wp-admin/tools.php?page=disk-usage-insights%2Fsrc%2FPlugin.php
-
+ - blueprint editor: https://playground.wordpress.net/builder/builder.html
