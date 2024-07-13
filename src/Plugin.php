@@ -5,7 +5,7 @@ use Mgleis\DiskUsageInsights\Frontend\ScanResults;
 
 class Plugin {
 
-    private const NONCE = 'disk_usage_insights';
+    const NONCE = 'disk_usage_insights';
 
     public function init() {
         // Ensure someone is logged in

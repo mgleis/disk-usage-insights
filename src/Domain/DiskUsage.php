@@ -4,7 +4,7 @@ namespace Mgleis\DiskUsageInsights\Domain;
 
 class DiskUsage {
 
-    private string $rootDirectory;
+    private /** @var string */ $rootDirectory;
 
     public function __construct(string $rootDirectory) {
         $this->rootDirectory = $rootDirectory;

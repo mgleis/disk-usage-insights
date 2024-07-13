@@ -3,9 +3,9 @@ namespace Mgleis\DiskUsageInsights\Frontend;
 
 class Table {
 
-    private string $headline;
-    private array $columnNames = [];
-    private array $columnCss = [];
+    private /** @var string */ $headline;
+    private /** @var array */ $columnNames = [];
+    private /** @var array */ $columnCss = [];
 
     public function __construct(string $headline, array $columnNames = null, array $columnCss = null)
     {

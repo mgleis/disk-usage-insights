@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'mgleis/disk-usage-insights',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'd614ba8c6ff7d10fa95c5070fa7c45b79e444879',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'mgleis/disk-usage-insights' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'd614ba8c6ff7d10fa95c5070fa7c45b79e444879',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
