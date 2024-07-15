@@ -22,10 +22,12 @@ class DiskUsage {
         if ($files !== false) {
 
             foreach ($files as $file) {
-                if ($file == '.')
+                if ($file == '.') {
                     continue;
-                if ($file == '..')
+                }
+                if ($file == '..') {
                     continue;
+                }
 
                 $absName = $directory . '/' . $file;
                 $isDir = is_dir($absName);
@@ -216,7 +218,7 @@ class DiskUsage {
         // Change Hot Spots: Folders which have most recent changes
         //   Oldest Files ? Für was?
         //   Newest Files: Recently Created, Recently Modified, ...
-        // 
+        //
         // Grouped by (Mime) Type: Images, Videos, Documents, ...
         // Grouped by Plugin / Theme
     }

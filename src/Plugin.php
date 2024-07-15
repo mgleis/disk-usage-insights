@@ -46,9 +46,9 @@ class Plugin {
         }
         global $WP_DISK_USAGE_INSIGHTS_VERSION;
         wp_enqueue_script(
-            'htmx.min.js', 
+            'htmx.min.js',
             plugins_url('/res/js/htmx-1.9.12.min.js', __DIR__),
-            [], 
+            [],
             $WP_DISK_USAGE_INSIGHTS_VERSION,
             ['in_footer' => true]
         );

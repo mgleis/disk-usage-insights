@@ -115,7 +115,7 @@ class ScanResults {
                 ['Folder', 'Total Size'],
                 ['', 'DUI-table__col--number']
             ))->output($table);
-            
+
     }
 
 }
