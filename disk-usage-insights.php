@@ -7,11 +7,13 @@
  * License: GPLv3
  * Version: 1.0
  */
-if (!defined('WPINC'))   // Ensure running within WordPress
+if (!defined('WPINC')) {   // Ensure running within WordPress
     return;
+}
 
-if (!is_admin())         // Ensure the admin interface is in use
+if (!is_admin()) {         // Ensure the admin interface is in use
     return;
+}
 
 add_action('plugins_loaded', 'disk_usage_insights_init_plugin');
 

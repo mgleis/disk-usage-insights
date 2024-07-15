@@ -127,7 +127,7 @@ class DiskUsage {
                 foreach ($flattenedEntries as $flattenedEntry) {
                     $flattened[] = $flattenedEntry;
                 }
-                
+
             }
         }
 
@@ -206,7 +206,7 @@ class DiskUsage {
                 }
             }
         }
-        
+
         return $ret;
     }
 

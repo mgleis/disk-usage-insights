@@ -9,21 +9,23 @@ class Plugin {
 
     public function init() {
         // Ensure someone is logged in
-        if (!is_user_logged_in())
+        if (!is_user_logged_in()) {
             return;
+        }
 
         // Ensure the user is an administrator
-        if (!in_array('administrator', wp_get_current_user()->roles))
+        if (!in_array('administrator', wp_get_current_user()->roles)) {
             return;
+        }
 
         // Add to Tools menue
         add_action('admin_menu', function () {
             add_submenu_page(
-                'tools.php', 
-                'Disk Usage Insights', 
-                'Disk Usage Insights', 
-                'administrator', 
-                'disk-usage-insights', 
+                'tools.php',
+                'Disk Usage Insights',
+                'Disk Usage Insights',
+                'administrator',
+                'disk-usage-insights',
                 [$this, 'index']
             );
         });
@@ -45,21 +47,21 @@ class Plugin {
         global $WP_DISK_USAGE_INSIGHTS_VERSION;
         wp_enqueue_script(
             'htmx.min.js', 
-            plugins_url('/res/js/htmx-1.9.12.min.js', __DIR__), 
+            plugins_url('/res/js/htmx-1.9.12.min.js', __DIR__),
             [], 
             $WP_DISK_USAGE_INSIGHTS_VERSION,
             ['in_footer' => true]
         );
         wp_enqueue_script(
-            'htmx-custom-error-handler.js', 
-            plugins_url('/res/js/htmx-custom-error-handler.js', __DIR__), 
-            [], 
+            'htmx-custom-error-handler.js',
+            plugins_url('/res/js/htmx-custom-error-handler.js', __DIR__),
+            [],
             $WP_DISK_USAGE_INSIGHTS_VERSION,
             ['in_footer' => true]
         );
-        wp_enqueue_style('styles', 
-            plugins_url('/res/css/styles.css', __DIR__), 
-            [],     
+        wp_enqueue_style('styles',
+            plugins_url('/res/css/styles.css', __DIR__),
+            [],
             $WP_DISK_USAGE_INSIGHTS_VERSION
         );
     }
