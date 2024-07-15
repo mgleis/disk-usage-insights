@@ -5,7 +5,7 @@
 
     <div>
         <div style="float:left">
-            <img src="<?php echo esc_url($WP_PLUGIN_URL); ?>/res/pie.svg" 
+            <img src="<?php echo esc_url($WP_PLUGIN_URL); ?>/res/pie.svg"
                  style="height:90px; vertical-align: middle; padding-right: 20px;"
                  alt="Disk Usage Insights Logo"
             >

@@ -18,7 +18,7 @@ class Table {
         }
     }
 
-    function output(array $table) {
+    public function output(array $table) {
         include __DIR__ . '/../../views/blocks/table.php';
     }
 
