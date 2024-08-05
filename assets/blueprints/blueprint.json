@@ -1,0 +1,16 @@
+{
+    "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+    "landingPage": "/wp-admin/index.php",
+    "login": true,
+    "plugins": [
+      "disk-usage-sunburst"
+    ],
+    "steps": [
+      {
+        "step": "activatePlugin",
+        "pluginName": "Disk Usage Sunburst",
+        "pluginPath": "/wordpress/wp-content/plugins/disk-usage-sunburst"
+      }
+    ]
+  }
+  
