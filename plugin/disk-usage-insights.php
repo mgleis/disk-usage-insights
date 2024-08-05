@@ -22,9 +22,8 @@ use Mgleis\DiskUsageInsights\Plugin;
 function mgleis_diskusageinsights_init_plugin() {
     require_once __DIR__.'/vendor/autoload.php';
 
-    global $WP_DISK_USAGE_INSIGHTS_VERSION;
-    $WP_DISK_USAGE_INSIGHTS_VERSION = md5_file(__FILE__);
+    $version = md5_file(__FILE__);
 
-    $plugin = new Plugin();
+    $plugin = new Plugin($version);
     $plugin->init();
 }

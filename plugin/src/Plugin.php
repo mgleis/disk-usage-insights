@@ -6,6 +6,12 @@ use Mgleis\DiskUsageInsights\Frontend\ScanResults;
 class Plugin {
 
     const NONCE = 'disk_usage_insights';
+    private string $version = '';
+
+    public function __construct(string $version)
+    {
+        $this->version = $version;
+    }
 
     public function init() {
         // Ensure someone is logged in
@@ -44,25 +50,24 @@ class Plugin {
         if ($hook_suffix != 'tools_page_disk-usage-insights') {
             return;
         }
-        global $WP_DISK_USAGE_INSIGHTS_VERSION;
         wp_enqueue_script(
             'htmx.min.js',
             plugins_url('/res/js/htmx-1.9.12.min.js', __DIR__),
             [],
-            $WP_DISK_USAGE_INSIGHTS_VERSION,
+            $this->version,
             ['in_footer' => true]
         );
         wp_enqueue_script(
             'htmx-custom-error-handler.js',
             plugins_url('/res/js/htmx-custom-error-handler.js', __DIR__),
             [],
-            $WP_DISK_USAGE_INSIGHTS_VERSION,
+            $this->version,
             ['in_footer' => true]
         );
         wp_enqueue_style('styles',
             plugins_url('/res/css/styles.css', __DIR__),
             [],
-            $WP_DISK_USAGE_INSIGHTS_VERSION
+            $this->version
         );
     }
 
