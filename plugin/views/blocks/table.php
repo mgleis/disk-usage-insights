@@ -1,3 +1,8 @@
+<?php
+if (!defined('ABSPATH')) {  // Ensure running within WordPress
+    exit;
+}
+?>
 <div class="DUI-panel DUI-panel--TOP10">
     <div class=DUI-panel__headline><?php echo esc_html($this->headline); ?></div>
     <div class=DUI-panel__content>

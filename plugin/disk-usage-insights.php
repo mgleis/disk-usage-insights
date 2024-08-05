@@ -7,11 +7,11 @@
  * License: GPLv3
  * Version: 1.0
  */
-if (!defined('WPINC')) {   // Ensure running within WordPress
-    return;
+if (!defined('ABSPATH')) {  // Ensure running within WordPress
+    exit;
 }
 
-if (!is_admin()) {         // Ensure the admin interface is in use
+if (!is_admin()) {          // Ensure the admin interface is in use
     return;
 }
 

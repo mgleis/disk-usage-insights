@@ -1,3 +1,8 @@
+<?php
+if (!defined('ABSPATH')) {  // Ensure running within WordPress
+    exit;
+}
+?>
 <br>
 
 <div class="DUI-panel" style="float:left;min-width:450px; width:69%; max-width:70%">
