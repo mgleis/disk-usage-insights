@@ -1,11 +1,10 @@
 {
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
-  "landingPage": "/wp-admin/index.php",
+  "landingPage": "/wp-admin/tools.php?page=disk-usage-insights",
   "login": true,
   "plugins": [
     "disk-usage-insights"
   ],
-  "landingPage": "/wp-admin/tools.php?page=disk-usage-insights",
   "steps": [
     {
       "step": "activatePlugin",
