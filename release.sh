@@ -7,10 +7,11 @@ set -euo pipefail
 cd `dirname $0`
 
 mkdir -p target
-cd target
-cd svnrepo
-cp -R ../../plugin/* ./
+cd target/svnrepo/trunk
+cp -R ../../../plugin/* ./
 svn status
 
-echo 'svn ci -m "commit message"'
-echo 'svn cp trunk tags/1.x'
+echo 'Hints:'
+echo '# svn ci -m "commit message"'
+echo '# svn cp trunk tags/1.x'
+echo
