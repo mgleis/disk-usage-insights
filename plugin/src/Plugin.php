@@ -6,7 +6,8 @@ use Mgleis\DiskUsageInsights\Frontend\ScanResults;
 class Plugin {
 
     const NONCE = 'disk_usage_insights';
-    private string $version = '';
+    /** @var string */
+    private $version = '';
 
     public function __construct(string $version)
     {
