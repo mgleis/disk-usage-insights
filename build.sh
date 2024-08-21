@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# build - creates the plugin zip file /target/disk-usage-insights.zip
+#
 set -euo pipefail
 
 cd `dirname $0`

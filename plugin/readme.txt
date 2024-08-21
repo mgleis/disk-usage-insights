@@ -11,8 +11,8 @@ A WordPress plugin to find large files and folders in your WordPress installatio
 
 == Description ==
 
-Find large files and large folders in no time. This plugin scans your whole WordPress installation,
-counts all files and folders, sums up the sized and outputs useful statistics to find unwanted large
+Find large files and large folders in no time. This plugin scans your whole WordPress installation, 
+counts all files and folders, sums up the sizes and outputs useful statistics to find unwanted large
 objects in your system.
 
 == Installation ==
