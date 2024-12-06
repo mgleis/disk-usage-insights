@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
                 </tr>
             </thead>
         <tbody>
-            <?php foreach ($table as $row) { ?>
+            <?php foreach ($table as $rowIdx => $row) { ?>
                 <tr>
                 <?php foreach ($row as $idx => $column) { ?>
                     <?php if (!empty($this->columnCss[$idx])) { ?>
@@ -25,7 +25,16 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
                     <?php } else { ?>
                         <td>
                     <?php } ?>
+                    <?php if ($this->hasPercentBar($idx)) { ?>
+                        <div style="position:relative">
+                            <div style="background:#eeeeee; position: absolute; top: 0; width: <?php echo $this->getPercentBar($rowIdx); ?>%;">&nbsp;</div>
+                            <div style="position: absolute; top: 0;">
+                                <?php echo esc_html($column); ?>
+                            </div>
+                        </div>
+                    <?php } else { ?>
                         <?php echo esc_html($column); ?>
+                    <?php } ?>
                     </td>
                 <?php } ?>
                 </tr>

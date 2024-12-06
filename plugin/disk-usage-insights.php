@@ -5,13 +5,21 @@
  * Description: Find large files and folders in your WordPress installation in no time!
  * Author: Marcel Gleis
  * License: GPLv3
- * Version: 1.0
+ * Version: 1.1
  */
-if (!defined('ABSPATH')) {  // Ensure running within WordPress
+
+ // Ensure running within WordPress
+if (!defined('ABSPATH')) {
     exit;
 }
 
-if (!is_admin()) {          // Ensure the admin interface is in use
+// Ensure the admin interface is in use
+if (!is_admin()) {
+    return;
+}
+
+// Ensure SuperAdmin privileges if site is a multisite
+if (is_multisite() && !current_user_can('manage_sites')) {
     return;
 }
 

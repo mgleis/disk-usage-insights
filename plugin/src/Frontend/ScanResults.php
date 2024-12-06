@@ -23,7 +23,9 @@ class ScanResults {
         echo '</div>';
         echo '</div>';
 
+        //
         // Largest Files
+        //
         $largestFiles = $d->calculateLargestFiles(20, $res);
         $table = [];
         foreach ($largestFiles as $file) {
@@ -34,13 +36,15 @@ class ScanResults {
             ];
         }
         (new Table(
-                'Largest Files',
-                ['Filename', 'Size', '%'],
-                ['', 'DUI-table__col--number', 'DUI-table__col--number']
-            ))->output($table);
+            'Largest Files',
+            ['Filename', 'Size', '%'],
+            ['', 'DUI-table__col--number', 'DUI-table__col--number']
+        ))->withPercentBar(2, 2)->withData($table)->output();
 
 
+        //
         // Largest Folders (files only)
+        //
         $largestFiles = $d->calculateLargestFolders(20, $res);
         $table = [];
         foreach ($largestFiles as $file) {
@@ -53,22 +57,30 @@ class ScanResults {
             ];
         }
         (new Table(
-                'Largest Folders (files only)', 
-                ['Folder', 'File Sizes', 'File Count', 'Avg File Size', '%'],
-                ['', 'DUI-table__col--number', 'DUI-table__col--number', 'DUI-table__col--number', 'DUI-table__col--number'
-            ]))->output($table);
+            'Largest Folders (files only)', 
+            ['Folder', 'File Sizes', 'File Count', 'Avg File Size', '%'],
+            ['', 'DUI-table__col--number', 'DUI-table__col--number', 'DUI-table__col--number', 'DUI-table__col--number']
+        ))->withPercentBar(4, 4)->withData($table)->output();
 
 
+        //
         // Largest Folders (incl. sub folders)
+        //
         $largestFiles = $d->calculateLargestFoldersRecursive(20, $res);
         $table = [];
         foreach ($largestFiles as $file) {
             $table[] = [$file['abs'], number_format_i18n($file['totalSize'])];
         }
-        (new Table('Largest Folders (incl. sub folders)', ['Folder', 'Total Size'], ['', 'DUI-table__col--number']))->output($table);
+        (new Table(
+            'Largest Folders (incl. sub folders)', 
+            ['Folder', 'Total Size'], 
+            ['', 'DUI-table__col--number']
+        ))->withData($table)->output();
 
 
+        //
         // Folders with most files
+        //
         $files = $d->calculateFoldersWithMostFiles(20, $res);
         $table = [];
         foreach ($files as $file) {
@@ -80,13 +92,15 @@ class ScanResults {
             ];
         }
         (new Table(
-                'Folders with most files',
-                ['Folder', 'File Count', 'File Size', 'Avg File Size'],
-                ['', 'DUI-table__col--number', 'DUI-table__col--number', 'DUI-table__col--number']
-            ))->output($table);
+            'Folders with most files',
+            ['Folder', 'File Count', 'File Size', 'Avg File Size'],
+            ['', 'DUI-table__col--number', 'DUI-table__col--number', 'DUI-table__col--number']
+        ))->withData($table)->output();
 
 
+        //
         // Largest Directories within /wp-content/plugins
+        //
         $pluginsDirRelative = substr(\WP_CONTENT_DIR . '/plugins', strlen($root));
         $subres = $d->findSubDir($res, $pluginsDirRelative);
 
@@ -96,12 +110,14 @@ class ScanResults {
             $table[] = [$file['name'], number_format_i18n($file['size'])];
         }
         (new Table(
-                'Largest Plugin Folders',
-                ['Folder', 'Total Size'],
-                ['', 'DUI-table__col--number']
-            ))->output($table);
+            'Largest Plugin Folders',
+            ['Folder', 'Total Size'],
+            ['', 'DUI-table__col--number']
+        ))->withData($table)->output();
 
+        //
         // Largest Directories within /wp-content/themes
+        //
         $pluginsDirRelative = substr(\WP_CONTENT_DIR . '/themes', strlen($root));
         $subres = $d->findSubDir($res, $pluginsDirRelative);
 
@@ -111,10 +127,10 @@ class ScanResults {
             $table[] = [$file['name'], number_format_i18n($file['size'])];
         }
         (new Table(
-                'Largest Theme Folders',
-                ['Folder', 'Total Size'],
-                ['', 'DUI-table__col--number']
-            ))->output($table);
+            'Largest Theme Folders',
+            ['Folder', 'Total Size'],
+            ['', 'DUI-table__col--number']
+        ))->withData($table)->output();
 
     }
 

@@ -32,11 +32,20 @@ You have two options:
 
 Simply deactivate and delete the plugin.
 
+= Is Multisite supported? =
+
+Yes, but only for users with the "manage_sites" privilege, which Super Admins have by default.
+
 == Screenshots ==
 1. Largest Files and Largest Folders
 1. Largest Folders, Folders with most files, Largest Plugins, Largest Themes
 
 == Changelog ==
+
+= 1.1 =
+* Support for Multisite installations (user must have privilege "manage_sites" which Super Admins have by default)
+* Disk Usage in percent is now visualized with a bar in the background of the first column
+
 = 1.0 =
 * Plugin released.
 
