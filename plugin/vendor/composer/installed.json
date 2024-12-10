@@ -1,5 +1,89 @@
 {
-    "packages": [],
+    "packages": [
+        {
+            "name": "mgleis/php-sqlite-job-queue",
+            "version": "1.0.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mgleis/php-sqlite-job-queue.git",
+                "reference": "86c4b136ef89e9ca962a7949126821f3d32a49bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mgleis/php-sqlite-job-queue/zipball/86c4b136ef89e9ca962a7949126821f3d32a49bf",
+                "reference": "86c4b136ef89e9ca962a7949126821f3d32a49bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.3"
+            },
+            "time": "2024-12-06T09:52:57+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Mgleis\\PhpSqliteJobQueue\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Gleis",
+                    "email": "marcel@gleis.de"
+                }
+            ],
+            "description": "A minimal job queue library written in PHP that persists data with SQLite.",
+            "support": {
+                "issues": "https://github.com/mgleis/php-sqlite-job-queue/issues",
+                "source": "https://github.com/mgleis/php-sqlite-job-queue/tree/1.0.0"
+            },
+            "install-path": "../mgleis/php-sqlite-job-queue"
+        },
+        {
+            "name": "mgleis/php-sqlite-key-value-store",
+            "version": "1.0.1",
+            "version_normalized": "1.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mgleis/php-sqlite-key-value-store.git",
+                "reference": "7d0cc2044ea743187f8fc37daeeeaaa2a7bc81d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mgleis/php-sqlite-key-value-store/zipball/7d0cc2044ea743187f8fc37daeeeaaa2a7bc81d3",
+                "reference": "7d0cc2044ea743187f8fc37daeeeaaa2a7bc81d3",
+                "shasum": ""
+            },
+            "time": "2024-12-04T17:59:24+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Mgleis\\PhpSqliteKeyValueStore\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Gleis",
+                    "email": "marcel@gleis.de"
+                }
+            ],
+            "description": "A PHP library that implements a key/value store with SQLite as the persistence layer.",
+            "support": {
+                "issues": "https://github.com/mgleis/php-sqlite-key-value-store/issues",
+                "source": "https://github.com/mgleis/php-sqlite-key-value-store/tree/1.0.1"
+            },
+            "install-path": "../mgleis/php-sqlite-key-value-store"
+        }
+    ],
     "dev": true,
     "dev-package-names": []
 }

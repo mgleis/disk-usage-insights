@@ -1,5 +1,10 @@
 TODOs
 
+
+// TODO: Es müssen zuerst nur die Directories gescannt werden, danach die files!
+
+
+
 # Internal list of Todos
 
 - Submit plugin to the WP repository here: https://wordpress.org/plugins/developers/add/
@@ -19,28 +24,17 @@ TODOs
 - Create a file YYYY-MM-DD_HHMMSS_MS.db and reference this in the upcoming worker
 - Setup a Worker that runs for 10 seconds again and again
 
-- Phase 1: collect all directories and files with name + size
-  - $q->push(new ScanForSubDirsJob($root));
-    - $q->push(new ScanForFilesJob($directory))
-    - $subdirs = fetch subdirectories
-    - foreach $subdirs $q->push(new ScanForSubDirsJob($subir))
-    - $q->push(new CheckForEndOfPhase1())
-        - if $q->size() == 0 $q->push(new StartAnalysisJob())
 
-- Phase 2: start analysis phase
-- StartAnalysisJob (created after step 1):
-    $q->push(new Analysis1Job());
-        // do work
-        $q->push(new CheckForEndOfPhase2());
-            if $q->size() == 0 $q->push(new FinishAnalysisJob())
-    $q->push(new Analysis2Job());
-        // do work
-        $q->push(new CheckForEndOfPhase2());
-    $q->push(new Analysis3Job());
-        // do work
-        $q->push(new CheckForEndOfPhase2());
 
-- Phase 3: Clean up
-FinishAnalysisJob
-    set a flag in the database of the successful analysis
-
+calculateDirTotalSizes
+calculateDirFileSizes
+calculateDirFileCount
+calculateLargestFiles
+    SELECT * FROM index WHERE name = 'file_sizes' ORDER BY value DESC LIMIT 5;
+calculateLargestFoldersRecursive
+    SELECT * FROM index WHERE name = 'dir_recursizve_sizes' ORDER BY value DESC LIMIT 10;
+calculateLargestFolders
+    SELECT * FROM index WHERE name = 'dir_sizes' ORDER BY value DESC LIMIT 10;
+calculateFoldersWithMostFiles
+    SELECT * FROM index WHERE name = 'dir_file_count' ORDER BY value DESC LIMIT 10;
+calculateLargestFilesFoldersFirstLevel

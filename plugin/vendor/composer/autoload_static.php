@@ -9,11 +9,21 @@ class ComposerStaticInitb0bae40ca647eb2fe63fda4b3a37c636
     public static $prefixLengthsPsr4 = array (
         'M' => 
         array (
+            'Mgleis\\PhpSqliteKeyValueStore\\' => 30,
+            'Mgleis\\PhpSqliteJobQueue\\' => 25,
             'Mgleis\\DiskUsageInsights\\' => 25,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Mgleis\\PhpSqliteKeyValueStore\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mgleis/php-sqlite-key-value-store/src',
+        ),
+        'Mgleis\\PhpSqliteJobQueue\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mgleis/php-sqlite-job-queue/src',
+        ),
         'Mgleis\\DiskUsageInsights\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

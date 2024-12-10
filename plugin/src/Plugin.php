@@ -73,7 +73,7 @@ class Plugin {
     }
 
     public function admin_bar_item(\WP_Admin_Bar $admin_bar ) {
-        $admin_bar->add_menu( array(
+        $admin_bar->add_menu(array(
             'id'    => 'menu-id',
             'parent' => null,
             'group'  => null,

@@ -11,7 +11,7 @@ const WP_CONTENT_DIR = '';
 const WP_PLUGIN_URL = '';
 
 class WP_Admin_Bar {
-    function add_menu() {}
+    function add_menu(array $a) {}
 }
 
 function esc_html($s) {}
@@ -20,16 +20,19 @@ function wp_get_current_user() { return new stdClass(); }
 function add_action($name, $callback, int $priority = 0) {}
 function add_submenu_page($a, $b, $c, $d, $e, $f) {}
 function number_format_i18n() {}
-function wp_enqueue_script() {}
-function plugins_url() {}
-function wp_enqueue_style() {}
-function admin_url() {}
-function plugin_dir_url() {}
-function wp_create_nonce() {}
-function check_ajax_referer() {}
+function wp_enqueue_script(string $s, string $s2, array $a, string $s3, array $a2) {}
+function plugins_url(string $s, string $s2) {}
+function wp_enqueue_style(string $s, string $s2, array $a, string $s3) {}
+function admin_url(string $s): string { return ''; }
+function plugin_dir_url(string $s): string { return ''; }
+function plugin_dir(string $s): string { return ''; }
+function wp_create_nonce(string $s): string { return ''; }
+function check_ajax_referer(string $s) {}
 function wp_die() {}
 function esc_attr() {}
 function esc_url() {}
 function is_admin() {}
 function is_multisite() {}
 function current_user_can() {}
+function wp_get_wp_version(): string { return '6.7.1'; }
+function get_locale(): string { return 'en_US'; }

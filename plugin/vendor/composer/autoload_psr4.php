@@ -6,5 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Mgleis\\PhpSqliteKeyValueStore\\' => array($vendorDir . '/mgleis/php-sqlite-key-value-store/src'),
+    'Mgleis\\PhpSqliteJobQueue\\' => array($vendorDir . '/mgleis/php-sqlite-job-queue/src'),
     'Mgleis\\DiskUsageInsights\\' => array($baseDir . '/src'),
 );

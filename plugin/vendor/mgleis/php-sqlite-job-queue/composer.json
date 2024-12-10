@@ -1,0 +1,21 @@
+{
+    "name": "mgleis/php-sqlite-job-queue",
+    "description": "A minimal job queue library written in PHP that persists data with SQLite.",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "GPLv3",
+    "autoload": {
+        "psr-4": {
+            "Mgleis\\PhpSqliteJobQueue\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marcel Gleis",
+            "email": "marcel@gleis.de"
+        }
+    ],
+    "require": {
+        "php": ">=8.3"
+    }
+}

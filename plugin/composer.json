@@ -5,7 +5,7 @@
     "license": "GPLv3",
     "config": {
         "platform": {
-            "php": "7.0.0"
+            "php": "8.3.0"
         }
     },
     "autoload": {
@@ -19,5 +19,8 @@
             "email": "marcel@gleis.de"
         }
     ],
-    "require": {}
+    "require": {
+        "mgleis/php-sqlite-job-queue": "^1.0",
+        "mgleis/php-sqlite-key-value-store": "^1.0"
+    }
 }
