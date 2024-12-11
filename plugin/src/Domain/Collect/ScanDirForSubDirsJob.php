@@ -41,5 +41,8 @@ class ScanDirForSubDirsJob extends BaseJob {
         return ['type' => self::class, 'args' => [$this->parentDir]];
     }
 
+    public function toDescription(): string {
+        return 'Scanning dir: ' . $this->parentDir;
+    }
 
 }

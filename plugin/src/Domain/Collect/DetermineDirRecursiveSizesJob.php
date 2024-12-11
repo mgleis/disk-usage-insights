@@ -31,4 +31,8 @@ class DetermineDirRecursiveSizesJob extends BaseJob {
         return ['type' => self::class, 'args' => []];
     }
 
+    public function toDescription(): string {
+        return 'Calculating recursive dir sizes...';
+    }
+
 }

@@ -76,6 +76,33 @@ class Queue {
         }
     }
 
+    public function top(): ?Job {
+        try {
+            // Reserviere den nächsten Job
+            $stmt = $this->db->prepare(sprintf("
+                SELECT id, payload
+                FROM %s
+                WHERE status = 'queued'
+                ORDER BY id ASC
+                LIMIT 1
+            ", $this->table));
+            $stmt->execute();
+            $jobData = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if (!$jobData) {
+                return null;
+            }
+
+            return new Job(
+                $jobData['id'],
+                json_decode($jobData['payload'], true, JSON_THROW_ON_ERROR)
+            );
+        } catch (\Throwable $t) {
+            $this->throwIfNotALockError($t);
+            return null;
+        }
+    }
+
     private function throwIfNotALockError(\Throwable $t) {
         if ($t instanceof \PDOException
             && str_contains($t->getMessage(), 'database is locked')) {

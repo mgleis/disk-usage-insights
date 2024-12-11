@@ -48,4 +48,8 @@ class DetermineWpCoreFileJob extends BaseJob {
         return ['type' => self::class, 'args' => [$this->skip, $this->count]];
     }
 
+    public function toDescription(): string {
+        return 'Determining WordPress core files... progress=' . $this->skip;
+    }
+
 }

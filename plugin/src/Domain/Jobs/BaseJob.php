@@ -27,4 +27,8 @@ class BaseJob {
         echo $s . "\n";
     }
 
+    public function toDescription(): string {
+        return static::class;
+    }
+
 }

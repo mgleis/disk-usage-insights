@@ -38,4 +38,8 @@ class DetermineFileSizesJob extends BaseJob {
         return ['type' => self::class, 'args' => [$this->skip, $this->count]];
     }
 
+    public function toDescription(): string {
+        return 'Determining file sizes... progress=' . $this->skip;
+    }
+
 }

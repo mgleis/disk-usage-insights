@@ -30,4 +30,8 @@ class DetermineDirSizesJob extends BaseJob {
         return ['type' => self::class, 'args' => []];
     }
 
+    public function toDescription(): string {
+        return 'Calculating dir sizes...';
+    }
+
 }

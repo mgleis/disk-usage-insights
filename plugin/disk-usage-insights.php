@@ -18,7 +18,7 @@ if (!is_admin()) {
     return;
 }
 
-// Ensure SuperAdmin privileges if site is a multisite
+// If site is a multisite: Ensure the logged in user has SuperAdmin privileges
 if (is_multisite() && !current_user_can('manage_sites')) {
     return;
 }
@@ -30,6 +30,7 @@ use Mgleis\DiskUsageInsights\Plugin;
 function mgleis_diskusageinsights_init_plugin() {
     require_once __DIR__.'/vendor/autoload.php';
 
+    // TODO: This is not good... what to do???
     $version = md5_file(__FILE__);
 
     $plugin = new Plugin($version);

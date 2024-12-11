@@ -28,7 +28,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
             <input type="hidden" name="action" value="scan">
 
             <button class="button button-primary"
-                hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>"
+                hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=scan"
                 hx-indicator="#DUI-loading"
                 hx-target="#DUI-results"
 

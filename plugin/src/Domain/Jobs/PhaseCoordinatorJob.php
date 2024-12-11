@@ -40,7 +40,7 @@ class PhaseCoordinatorJob extends BaseJob {
                 $this->increasePhase($snapshot);
                 $this->queue->push((new DetermineDirSizesJob())->toArray());
             } else if ($phase == 3) {
-                $this->log("New Phase: Determine Dir Recursive Sizes\n";
+                $this->log("New Phase: Determine Dir Recursive Sizes");
                 $this->increasePhase($snapshot);
                 $this->queue->push((new DetermineDirRecursiveSizesJob())->toArray());
            } else if ($phase == 4) {
@@ -77,6 +77,10 @@ class PhaseCoordinatorJob extends BaseJob {
 
     public function toArray() {
         return ['type' => self::class, 'args' => []];
+    }
+
+    public function toDescription(): string {
+        return 'Creating next jobs...';
     }
 
 }
