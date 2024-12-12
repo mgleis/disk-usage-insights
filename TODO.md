@@ -28,5 +28,4 @@ TODOs
 # Open
 - save paths relativ to root
 - store root in database
-- store database files in the output directory
 
