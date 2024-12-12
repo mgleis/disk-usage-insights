@@ -15,7 +15,7 @@ class IndexController {
         $databaseRepository = new DatabaseRepository();
         $DATABASES = $databaseRepository->listDatabases();
 
-        include __DIR__ . '/../../../views/index.php';
+        include_once __DIR__ . '/../../../views/index.php';
     }
 
 }

@@ -21,7 +21,7 @@ class ScanController {
 */
 
         // Create a new Snapshot Database
-        $snapshot = date('Ymd_His_') . rand(10000, 99999);
+        $snapshot = date('Ymd_His_') . random_int(10000, 99999);
         $database = (new DatabaseRepository())->loadDatabase($snapshot);
         $database->q->push((new ScanDirForSubDirsJob(__DIR__.'/../../../../../'))->toArray());
 
@@ -31,7 +31,7 @@ class ScanController {
         $WP_SNAPSHOT_FILE = $snapshot;
         $WP_PLUGIN_URL = plugin_dir_url(__DIR__);
 
-        include __DIR__ . '/../../../views/scan.php';
+        include_once __DIR__ . '/../../../views/scan.php';
 
         wp_die(); // All ajax handlers should die when finished
     }

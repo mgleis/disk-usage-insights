@@ -22,7 +22,7 @@ class ScanStatusController {
             http_response_code(286);
             header('HX-Redirect: ' . admin_url('tools.php?page=disk-usage-insights&snapshot=' . $snapshotName));
 
-            include __DIR__ . '/../../../views/results.php';
+            include_once __DIR__ . '/../../../views/results.php';
             exit;
         }
 

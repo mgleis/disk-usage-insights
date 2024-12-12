@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
     exit;
 }
 ?>
-<?php include __DIR__ . '/blocks/header.php'; ?>
+<?php include_once __DIR__ . '/blocks/header.php'; ?>
 
 
 <h1>Snapshot <? echo $snapshot; ?></h1>

@@ -32,7 +32,7 @@ class ResultsController {
         // TODO validate
         $snapshot = $_GET['snapshot'];
 
-        include __DIR__ . '/../../../views/results.php';
+        include_once __DIR__ . '/../../../views/results.php';
 
 
         // TODO Validate
