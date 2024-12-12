@@ -25,16 +25,8 @@ TODOs
 - Setup a Worker that runs for 10 seconds again and again
 
 
+# Open
+- save paths relativ to root
+- store root in database
+- store database files in the output directory
 
-calculateDirTotalSizes
-calculateDirFileSizes
-calculateDirFileCount
-calculateLargestFiles
-    SELECT * FROM index WHERE name = 'file_sizes' ORDER BY value DESC LIMIT 5;
-calculateLargestFoldersRecursive
-    SELECT * FROM index WHERE name = 'dir_recursizve_sizes' ORDER BY value DESC LIMIT 10;
-calculateLargestFolders
-    SELECT * FROM index WHERE name = 'dir_sizes' ORDER BY value DESC LIMIT 10;
-calculateFoldersWithMostFiles
-    SELECT * FROM index WHERE name = 'dir_file_count' ORDER BY value DESC LIMIT 10;
-calculateLargestFilesFoldersFirstLevel

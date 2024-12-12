@@ -21,6 +21,8 @@ class FileEntryRepository {
                 size INTEGER,
                 dir_size INTEGER,
                 dir_recursive_size INTEGER,
+                dir_count INTEGER,
+                dir_recursive_count INTEGER,
                 last_modified_date INTEGER,
                 is_wp_core_file INTEGER
             )
@@ -32,14 +34,14 @@ class FileEntryRepository {
         if ($fileEntry->id == 0) {
             $stmt = $this->db->prepare("
                 INSERT INTO fileentries
-                (parent_id, name, type, size, dir_size, dir_recursive_size, last_modified_date, is_wp_core_file)
-                VALUES (:parent_id, :name, :type, :size, :dir_size, :dir_recursive_size, :last_modified_date, :is_wp_core_file)
+                (parent_id, name, type, size, dir_size, dir_recursive_size, dir_count, dir_recursive_count, last_modified_date, is_wp_core_file)
+                VALUES (:parent_id, :name, :type, :size, :dir_size, :dir_recursive_size, :dir_count, :dir_recursive_count, :last_modified_date, :is_wp_core_file)
             ");
         } else {
             $stmt = $this->db->prepare("
                 REPLACE INTO fileentries
-                (id, parent_id, name, type, size, dir_size, dir_recursive_size, last_modified_date, is_wp_core_file)
-                VALUES (:id, :parent_id, :name, :type, :size, :dir_size, :dir_recursive_size, :last_modified_date, :is_wp_core_file)
+                (id, parent_id, name, type, size, dir_size, dir_recursive_size, dir_count, dir_recursive_count, last_modified_date, is_wp_core_file)
+                VALUES (:id, :parent_id, :name, :type, :size, :dir_size, :dir_recursive_size, :dir_count, :dir_recursive_count, :last_modified_date, :is_wp_core_file)
             ");
             $stmt->bindValue(':id', $fileEntry->id);
         }
@@ -49,6 +51,8 @@ class FileEntryRepository {
         $stmt->bindValue(':size', $fileEntry->size);
         $stmt->bindValue(':dir_size', $fileEntry->dir_size);
         $stmt->bindValue(':dir_recursive_size', $fileEntry->dir_recursive_size);
+        $stmt->bindValue(':dir_count', $fileEntry->dir_count);
+        $stmt->bindValue(':dir_recursive_count', $fileEntry->dir_recursive_count);
         $stmt->bindValue(':last_modified_date', $fileEntry->last_modified_date);
         $stmt->bindValue(':is_wp_core_file', $fileEntry->is_wp_core_file);
         $stmt->execute();

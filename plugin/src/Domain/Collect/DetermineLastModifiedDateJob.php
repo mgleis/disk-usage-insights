@@ -39,6 +39,6 @@ class DetermineLastModifiedDateJob extends BaseJob {
     }
 
     public function toDescription(): string {
-        return 'Determining last modified dates... progress=' . $this->skip;
+        return sprintf('Determining last modified dates... (%s files done)', $this->skip);
     }
 }

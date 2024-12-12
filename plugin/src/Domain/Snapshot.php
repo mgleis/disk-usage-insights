@@ -10,5 +10,6 @@ class Snapshot {
     public string $root = '';
     public int $phase = 0;
     public array $wpcorefiles = [];
+    public int $collectPhaseFinished = 0;
 
 }

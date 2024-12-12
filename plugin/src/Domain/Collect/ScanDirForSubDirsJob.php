@@ -42,7 +42,7 @@ class ScanDirForSubDirsJob extends BaseJob {
     }
 
     public function toDescription(): string {
-        return 'Scanning dir: ' . $this->parentDir;
+        return sprintf('Scanning dir: %s', $this->parentDir);
     }
 
 }

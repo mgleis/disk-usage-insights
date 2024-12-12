@@ -39,7 +39,7 @@ class DetermineFileSizesJob extends BaseJob {
     }
 
     public function toDescription(): string {
-        return 'Determining file sizes... progress=' . $this->skip;
+        return sprintf('Determining file sizes... (%s files done)', $this->skip);
     }
 
 }

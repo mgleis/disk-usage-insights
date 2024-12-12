@@ -44,7 +44,7 @@ class ScanDirForFilesJob extends BaseJob {
     }
 
     public function toDescription(): string {
-        return 'Scanning dirs for files... progress=' . $this->skip;
+        return sprintf('Scanning dirs for files... (%s files done)', $this->skip);
     }
 
 }

@@ -49,7 +49,7 @@ class DetermineWpCoreFileJob extends BaseJob {
     }
 
     public function toDescription(): string {
-        return 'Determining WordPress core files... progress=' . $this->skip;
+        return sprintf('Determining WordPress core files... (%s files done)', $this->skip);
     }
 
 }

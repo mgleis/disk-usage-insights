@@ -19,7 +19,7 @@ function is_user_logged_in() {}
 function wp_get_current_user() { return new stdClass(); }
 function add_action($name, $callback, int $priority = 0) {}
 function add_submenu_page($a, $b, $c, $d, $e, $f) {}
-function number_format_i18n() {}
+function number_format_i18n(mixed $value, $digits = 0) {}
 function wp_enqueue_script(string $s, string $s2, array $a, string $s3, array $a2) {}
 function plugins_url(string $s, string $s2) {}
 function wp_enqueue_style(string $s, string $s2, array $a, string $s3) {}

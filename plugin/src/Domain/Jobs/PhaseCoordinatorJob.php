@@ -2,6 +2,8 @@
 
 namespace Mgleis\DiskUsageInsights\Domain\Jobs;
 
+use Mgleis\DiskUsageInsights\Domain\Collect\DetermineDirCountJob;
+use Mgleis\DiskUsageInsights\Domain\Collect\DetermineDirRecursiveCountJob;
 use Mgleis\DiskUsageInsights\Domain\Collect\DetermineDirRecursiveSizesJob;
 use Mgleis\DiskUsageInsights\Domain\Collect\DetermineDirSizesJob;
 use Mgleis\DiskUsageInsights\Domain\Collect\DetermineFileSizesJob;
@@ -43,22 +45,33 @@ class PhaseCoordinatorJob extends BaseJob {
                 $this->log("New Phase: Determine Dir Recursive Sizes");
                 $this->increasePhase($snapshot);
                 $this->queue->push((new DetermineDirRecursiveSizesJob())->toArray());
-           } else if ($phase == 4) {
+            } else if ($phase == 4) {
+                $this->log("New Phase: Determine Dir Counts");
+                $this->increasePhase($snapshot);
+                $this->queue->push((new DetermineDirCountJob())->toArray());
+            } else if ($phase == 5) {
+                $this->log("New Phase: Determine Dir Recursive Counts");
+                $this->increasePhase($snapshot);
+                $this->queue->push((new DetermineDirRecursiveCountJob())->toArray());
+            } else if ($phase == 6) {
                 $this->log("New Phase: Determine Last Modified Date");
                 $this->increasePhase($snapshot);
                 $this->chunk($this->fileEntryRepository->count(), self::CHUNK_SIZE, function(int $skip, int $count) {
                     $this->queue->push((new DetermineLastModifiedDateJob($skip, $count))->toArray());
                 });
                 $this->queue->push((new PhaseCoordinatorJob())->toArray());
-            } else if ($phase == 5) {
+            } else if ($phase == 7) {
                 $this->log("New Phase: Determine WP Core Files");
                 $this->increasePhase($snapshot);
                 $this->chunk($this->fileEntryRepository->count(), self::CHUNK_SIZE, function(int $skip, int $count) {
                     $this->queue->push((new DetermineWpCoreFileJob($skip, $count))->toArray());
                 });
                 $this->queue->push((new PhaseCoordinatorJob())->toArray());
-            } else {
+            } else if ($phase == 8) {
                 $this->log("DONE");
+                $this->increasePhase($snapshot);
+                $snapshot->collectPhaseFinished = 1;
+                $this->snapshotRepository->save($snapshot);
             }
         }
     }
@@ -80,7 +93,7 @@ class PhaseCoordinatorJob extends BaseJob {
     }
 
     public function toDescription(): string {
-        return 'Creating next jobs...';
+        return 'Preparing next tasks...';
     }
 
 }
