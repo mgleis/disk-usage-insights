@@ -33,6 +33,6 @@ function esc_attr() {}
 function esc_url() {}
 function is_admin() {}
 function is_multisite() {}
-function current_user_can() {}
+function current_user_can(string $c) {}
 function wp_get_wp_version(): string { return '6.7.1'; }
 function get_locale(): string { return 'en_US'; }
