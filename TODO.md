@@ -27,5 +27,12 @@ TODOs
 
 # Open
 - save paths relativ to root
+    WP_LANG_DIR
 - store root in database
-
+ - data must be saved to wp-content/disk-usage-insights directory!
+ - that dir should also contain an empty index.php file
+- add a hook to delete snapshots on uninstall
+- reduce size of database
+    - 2024-12-13 default installation on raidboxes uses ... bytes for 1 snapshot (too much)
+            9:30 -- 430.080
+            9:56 -- 729.088

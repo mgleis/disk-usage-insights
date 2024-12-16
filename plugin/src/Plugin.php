@@ -1,6 +1,7 @@
 <?php
 namespace Mgleis\DiskUsageInsights;
 
+use Mgleis\DiskUsageInsights\Frontend\Controller\DeleteSnapshotController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\IndexController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\ResultsController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\ScanController;
@@ -48,9 +49,10 @@ class Plugin {
         add_action('admin_enqueue_scripts', [$this, 'addScripts']);
 
         // Add AJAX
-        add_action('wp_ajax_scan', function() { (new ScanController())->scan(); });
-        add_action('wp_ajax_worker', function() { (new ScanWorkerController())->worker(); });
-        add_action('wp_ajax_status', function() { (new ScanStatusController())->status(); });
+        add_action('wp_ajax_dui_scan', function() { (new ScanController())->scan(); });
+        add_action('wp_ajax_dui_worker', function() { (new ScanWorkerController())->worker(); });
+        add_action('wp_ajax_dui_status', function() { (new ScanStatusController())->status(); });
+        add_action('wp_ajax_dui_delete_snapshot', function() { (new DeleteSnapshotController())->delete(); });
     }
 
     public function addScripts($hook_suffix) {
@@ -83,7 +85,7 @@ class Plugin {
             'id'    => 'menu-id',
             'parent' => null,
             'group'  => null,
-            'title' => '<img src="' . WP_PLUGIN_URL . '/disk-usage-insights/res/pie.svg" style="margin-top:5px; width:20px" alt="Disk Usage Insights">',
+            'title' => '<img src="' . WpHelper::getPluginUrl() . '/res/pie.svg" style="margin-top:5px; width:20px" alt="Disk Usage Insights">',
             'href'  => admin_url('tools.php?page=disk-usage-insights'),
             'meta' => [
                 'title' => 'Disk Usage Insights'

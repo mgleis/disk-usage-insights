@@ -2,9 +2,7 @@
 namespace Mgleis\DiskUsageInsights\Frontend\Controller;
 
 use Mgleis\DiskUsageInsights\Domain\DatabaseRepository;
-use Mgleis\DiskUsageInsights\Domain\SnapshotRepository;
 use Mgleis\DiskUsageInsights\Plugin;
-use Mgleis\PhpSqliteJobQueue\Queue;
 
 class ScanStatusController {
 
@@ -17,12 +15,12 @@ class ScanStatusController {
         $database = (new DatabaseRepository())->loadDatabase($snapshotName);
 
         // if process finished = stop reloading
-        $snapshot = $database->snapshotRepository->load();
-        if ($snapshot->collectPhaseFinished === 1) {
+        $_snapshot = $database->snapshotRepository->load();
+        if ($_snapshot->collectPhaseFinished === 1) {
             http_response_code(286);
             header('HX-Redirect: ' . admin_url('tools.php?page=disk-usage-insights&snapshot=' . $snapshotName));
 
-            include_once __DIR__ . '/../../../views/results.php';
+//            include_once __DIR__ . '/../../../views/results.php';
             exit;
         }
 
@@ -31,7 +29,11 @@ class ScanStatusController {
 
             $reflect = new \ReflectionClass($job->payload['type']);
             $instance = $reflect->newInstanceArgs($job->payload['args']);
-            echo $instance->toDescription();
+            echo sprintf('Phase %s / %s<br>%s',
+                $_snapshot->phase + 1,
+                9,
+                $instance->toDescription()
+            );
         }
 
         wp_die(); // All ajax handlers should die when finished

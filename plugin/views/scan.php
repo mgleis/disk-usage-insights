@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
             <div style="display:inline-block;">
                 <div style="font-weight: bold">Scanning your WordPress system...</div>
                 <!-- STATUS -->
-                <div hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=status"
+                <div hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_status"
                     hx-vals='{"_ajax_nonce":"<?php echo esc_attr($WP_NONCE); ?>", "snapshot":"<?php echo $WP_SNAPSHOT_FILE; ?>"}'
                     hx-trigger="every 500ms">
                     ...
@@ -31,7 +31,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
         </div>
 
         <!-- WORKER -->
-        <div style="display:none" hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=worker"
+        <div style="display:none" hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_worker"
             hx-vals='{"_ajax_nonce":"<?php echo esc_attr($WP_NONCE); ?>", "snapshot":"<?php echo $WP_SNAPSHOT_FILE; ?>"}'
             hx-trigger="load,every 5s">
             WORKER

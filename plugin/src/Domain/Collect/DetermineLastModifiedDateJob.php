@@ -2,6 +2,7 @@
 
 namespace Mgleis\DiskUsageInsights\Domain\Collect;
 
+use Mgleis\DiskUsageInsights\Domain\FileEntry;
 use Mgleis\DiskUsageInsights\Domain\Jobs\BaseJob;
 use Mgleis\DiskUsageInsights\Domain\Jobs\PhaseCoordinatorJob;
 
@@ -9,10 +10,12 @@ class DetermineLastModifiedDateJob extends BaseJob {
 
     private int $skip;
     private int $count;
+    private int $totalCount;
 
-    public function __construct(int $skip, int $count) {
+    public function __construct(int $skip, int $count, int $totalCount) {
         $this->skip = $skip;
         $this->count = $count;
+        $this->totalCount = $totalCount;
     }
 
     public function work() {
@@ -21,24 +24,33 @@ class DetermineLastModifiedDateJob extends BaseJob {
 
         foreach ($fileEntries as $fileEntry) {
 
-            $dir = $fileEntry->parent_id != 0 
-                ? $this->fileEntryRepository->findById($fileEntry->parent_id)
-                : ''; // TODO ROOT-DIR
-            //$absoluteFilename = $dir->name . '/' . $fileEntry->name;
-            $absoluteFilename = $fileEntry->name;
-            $this->log($absoluteFilename);
+            if ($fileEntry->type === FileEntry::TYPE_DIR) {
 
-            $fileEntry->last_modified_date = filemtime($absoluteFilename);
+                $fileEntry->last_modified_date = filemtime($fileEntry->name);
+                $this->fileEntryRepository->createOrUpdate($fileEntry);
 
-            $this->fileEntryRepository->createOrUpdate($fileEntry);
+            } else if ($fileEntry->type === FileEntry::TYPE_FILE) {
+                $dir = $fileEntry->parent_id != 0
+                    ? $this->fileEntryRepository->findById($fileEntry->parent_id)
+                    : '';
+                $absoluteFilename = $dir->name . '/' . $fileEntry->name;
+                $this->log($absoluteFilename);
+
+                $fileEntry->last_modified_date = filemtime($absoluteFilename);
+                $this->fileEntryRepository->createOrUpdate($fileEntry);
+            } else {
+                throw new \Exception("Unknown file type");
+            }
+
+
         }
     }
 
     public function toArray() {
-        return ['type' => self::class, 'args' => [$this->skip, $this->count]];
+        return ['type' => self::class, 'args' => [$this->skip, $this->count, $this->totalCount]];
     }
 
     public function toDescription(): string {
-        return sprintf('Determining last modified dates... (%s files done)', $this->skip);
+        return sprintf('Determining last modified dates... %s%%', round(100 * $this->skip / $this->totalCount));
     }
 }

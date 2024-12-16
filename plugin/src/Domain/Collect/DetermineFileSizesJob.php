@@ -9,10 +9,12 @@ class DetermineFileSizesJob extends BaseJob {
 
     private int $skip;
     private int $count;
+    private int $totalCount;
 
-    public function __construct(int $skip, int $count) {
+    public function __construct(int $skip, int $count, int $totalCount) {
         $this->skip = $skip;
         $this->count = $count;
+        $this->totalCount = $totalCount;
     }
 
     public function work() {
@@ -23,9 +25,8 @@ class DetermineFileSizesJob extends BaseJob {
 
             $dir = $fileEntry->parent_id != 0 
                 ? $this->fileEntryRepository->findById($fileEntry->parent_id)
-                : ''; // TODO ROOT-DIR
-            //$absoluteFilename = $dir->name . '/' . $fileEntry->name;
-            $absoluteFilename = $fileEntry->name;
+                : '';
+            $absoluteFilename = $dir->name . '/' . $fileEntry->name;
             $this->log($absoluteFilename);
 
             $fileEntry->size = filesize($absoluteFilename);
@@ -35,11 +36,11 @@ class DetermineFileSizesJob extends BaseJob {
     }
 
     public function toArray() {
-        return ['type' => self::class, 'args' => [$this->skip, $this->count]];
+        return ['type' => self::class, 'args' => [$this->skip, $this->count, $this->totalCount]];
     }
 
     public function toDescription(): string {
-        return sprintf('Determining file sizes... (%s files done)', $this->skip);
+        return sprintf('Determining file sizes... %s%%', round(100 * $this->skip / $this->totalCount));
     }
 
 }

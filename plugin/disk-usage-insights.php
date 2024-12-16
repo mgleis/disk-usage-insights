@@ -7,6 +7,7 @@
  * License: GPLv3
  * Version: 1.2
  */
+const DISK_USAGE_INSIGHTS_VERSION = '1.2';
 
  // Ensure running within WordPress
 if (!defined('ABSPATH')) {
@@ -25,14 +26,8 @@ if (is_multisite() && !current_user_can('manage_sites')) {
 
 add_action('plugins_loaded', 'mgleis_diskusageinsights_init_plugin');
 
-use Mgleis\DiskUsageInsights\Plugin;
-
 function mgleis_diskusageinsights_init_plugin() {
     require_once __DIR__.'/vendor/autoload.php';
-
-    // TODO: This is not good... what to do???
-    $version = md5_file(__FILE__);
-
-    $plugin = new Plugin($version);
+    $plugin = new Mgleis\DiskUsageInsights\Plugin(DISK_USAGE_INSIGHTS_VERSION);
     $plugin->init();
 }

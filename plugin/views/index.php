@@ -15,11 +15,10 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
             <div style="margin: 20px;">
                 <form>
                     <input type="hidden" name="_ajax_nonce" value="<?php echo esc_attr($WP_NONCE); ?>">
-                    <input type="hidden" name="action" value="scan">
 
                     <div>
                         <button class="button button-primary"
-                            hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=scan"
+                            hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_scan"
                             hx-target="#DUI-results"
 
                         >Analyze Now</button>

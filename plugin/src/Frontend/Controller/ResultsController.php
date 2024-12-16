@@ -3,6 +3,7 @@ namespace Mgleis\DiskUsageInsights\Frontend\Controller;
 
 use Mgleis\DiskUsageInsights\Frontend\Table;
 use Mgleis\DiskUsageInsights\Plugin;
+use Mgleis\DiskUsageInsights\WpHelper;
 
 class ResultsController {
 
@@ -26,15 +27,6 @@ class ResultsController {
 
     public function execute() {
 
-        $WP_PLUGIN_URL = plugin_dir_url(__DIR__);
-        $WP_NONCE = wp_create_nonce(Plugin::NONCE);
-        $WP_ADMIN_AJAX_URL = admin_url('admin-ajax.php');
-        // TODO validate
-        $snapshot = $_GET['snapshot'];
-
-        include_once __DIR__ . '/../../../views/results.php';
-
-
         // TODO Validate
         $snapshotName = $_GET['snapshot'];
 
@@ -42,7 +34,16 @@ class ResultsController {
         $this->pdo = new \PDO("sqlite:$filename");
         $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
+
+        $WP_PLUGIN_URL = WpHelper::getPluginUrl();
+        $WP_NONCE = wp_create_nonce(Plugin::NONCE);
+        $WP_ADMIN_AJAX_URL = admin_url('admin-ajax.php');
+        // TODO validate
+        $snapshot = $_GET['snapshot'];
+        $root = ABSPATH; // TODO take from kvstore
         $totalSize = $this->selectInt("SELECT SUM(size) FROM fileentries;");
+
+        include_once __DIR__ . '/../../../views/results.php';
 
         //
         // Largest Files

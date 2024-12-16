@@ -26,15 +26,15 @@ class PhaseCoordinatorJob extends BaseJob {
             if ($phase == 0) {
                 $this->log("New Phase: Scan for Files");
                 $this->increasePhase($snapshot);
-                $this->chunk($this->fileEntryRepository->count(FileEntry::TYPE_DIR), self::CHUNK_SIZE, function(int $skip, int $count) {
-                    $this->queue->push((new ScanDirForFilesJob($skip, $count))->toArray());
+                $this->chunk($this->fileEntryRepository->count(FileEntry::TYPE_DIR), self::CHUNK_SIZE, function(int $skip, int $count, int $totalCount) {
+                    $this->queue->push((new ScanDirForFilesJob($skip, $count, $totalCount))->toArray());
                 });
                 $this->queue->push((new PhaseCoordinatorJob())->toArray());
             } elseif ($phase == 1) {
                 $this->log("New Phase: Start Analysis / Determine File Sizes");
                 $this->increasePhase($snapshot);
-                $this->chunk($this->fileEntryRepository->count(FileEntry::TYPE_FILE), self::CHUNK_SIZE, function(int $skip, int $count) {
-                    $this->queue->push((new DetermineFileSizesJob($skip, $count))->toArray());
+                $this->chunk($this->fileEntryRepository->count(FileEntry::TYPE_FILE), self::CHUNK_SIZE, function(int $skip, int $count, int $totalCount) {
+                    $this->queue->push((new DetermineFileSizesJob($skip, $count, $totalCount))->toArray());
                 });
                 $this->queue->push((new PhaseCoordinatorJob())->toArray());
             } elseif ($phase == 2) {
@@ -56,15 +56,15 @@ class PhaseCoordinatorJob extends BaseJob {
             } elseif ($phase == 6) {
                 $this->log("New Phase: Determine Last Modified Date");
                 $this->increasePhase($snapshot);
-                $this->chunk($this->fileEntryRepository->count(), self::CHUNK_SIZE, function(int $skip, int $count) {
-                    $this->queue->push((new DetermineLastModifiedDateJob($skip, $count))->toArray());
+                $this->chunk($this->fileEntryRepository->count(), self::CHUNK_SIZE, function(int $skip, int $count, int $totalCount) {
+                    $this->queue->push((new DetermineLastModifiedDateJob($skip, $count, $totalCount))->toArray());
                 });
                 $this->queue->push((new PhaseCoordinatorJob())->toArray());
             } elseif ($phase == 7) {
                 $this->log("New Phase: Determine WP Core Files");
                 $this->increasePhase($snapshot);
-                $this->chunk($this->fileEntryRepository->count(), self::CHUNK_SIZE, function(int $skip, int $count) {
-                    $this->queue->push((new DetermineWpCoreFileJob($skip, $count))->toArray());
+                $this->chunk($this->fileEntryRepository->count(), self::CHUNK_SIZE, function(int $skip, int $count, int $totalCount) {
+                    $this->queue->push((new DetermineWpCoreFileJob($skip, $count, $totalCount))->toArray());
                 });
                 $this->queue->push((new PhaseCoordinatorJob())->toArray());
             } elseif ($phase == 8) {
@@ -79,7 +79,7 @@ class PhaseCoordinatorJob extends BaseJob {
     private function chunk(int $count, int $itemsPerChunk, Callable $callable) {
         $pages = 1 + round($count / $itemsPerChunk);
         for ($i = 0; $i < $pages; $i++) {
-            $callable($i * $itemsPerChunk, $itemsPerChunk);
+            $callable($i * $itemsPerChunk, $itemsPerChunk, $count);
         }
     }
 

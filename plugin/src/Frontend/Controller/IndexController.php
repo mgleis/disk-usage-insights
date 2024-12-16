@@ -3,11 +3,12 @@ namespace Mgleis\DiskUsageInsights\Frontend\Controller;
 
 use Mgleis\DiskUsageInsights\Domain\DatabaseRepository;
 use Mgleis\DiskUsageInsights\Plugin;
+use Mgleis\DiskUsageInsights\WpHelper;
 
 class IndexController {
 
     public function execute() {
-        $WP_PLUGIN_URL = plugin_dir_url(__DIR__);
+        $WP_PLUGIN_URL = WpHelper::getPluginUrl();
         $WP_NONCE = wp_create_nonce(Plugin::NONCE);
         $WP_ADMIN_AJAX_URL = admin_url('admin-ajax.php');
 

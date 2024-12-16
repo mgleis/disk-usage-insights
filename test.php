@@ -14,6 +14,7 @@ if (!function_exists('wp_get_wp_version')) {
 }
 
 $q = new Queue("database.db");
+
 $q->push((new ScanDirForSubDirsJob(__DIR__.'/../../'))->toArray());
 //$q->push((new ScanForSubDirsJob(__DIR__))->toArray());
 
@@ -21,8 +22,8 @@ $fileEntryRepository = new FileEntryRepository($q->db);
 $snapshotRepository = new SnapshotRepository($q->db);
 
 $w = (new Worker($q))
-    //->withSleepTimeBetweenJobsInMilliseconds(100)
-    ;
+    ->withSleepTimeBetweenJobsInMilliseconds(1)
+;
 $w->process(function(Job $job) use ($q, $fileEntryRepository, $snapshotRepository) {
 
     $reflect = new \ReflectionClass($job->payload['type']);

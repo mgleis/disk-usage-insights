@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
 
 <h1>Snapshot <? echo $snapshot; ?></h1>
 <div>
-    Dashboard &gt; Snapshot <? echo $snapshot; ?>
+    <a href="?page=disk-usage-insights">Dashboard</a> &gt; Snapshot <? echo $snapshot; ?>
 </div>
 <br>
 

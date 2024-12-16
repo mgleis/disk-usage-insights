@@ -30,6 +30,7 @@ class ScanWorkerController {
         $w = (new Worker($database->q))
             ->withMaxTotalRuntimeInSeconds(5)
             ->withSleepTimeBetweenJobsInMilliseconds(1)
+            ->withSleepTimeOnEmptyQueueInMilliseconds(1)
         ;
         $w->process(function(Job $job) use ($database) {
             $reflect = new \ReflectionClass($job->payload['type']);
