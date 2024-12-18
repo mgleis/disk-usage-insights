@@ -7,7 +7,7 @@ Stable Tag: 1.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-A WordPress plugin to find large files and folders in your WordPress installation in no time!
+Find large files and folders in no time! Hunt down the TOP 10 files and folders with the most disk usage. Visualize your total consumption and zoom seamlessly into your WordPress installation.
 
 == Description ==
 

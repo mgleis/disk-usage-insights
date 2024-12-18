@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
                 <!-- STATUS -->
                 <div hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_status"
                     hx-vals='{"_ajax_nonce":"<?php echo esc_attr($WP_NONCE); ?>", "snapshot":"<?php echo $WP_SNAPSHOT_FILE; ?>"}'
-                    hx-trigger="every 500ms">
+                    hx-trigger="every 1s">
                     ...
                 </div>
             </div>

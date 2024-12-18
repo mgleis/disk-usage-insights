@@ -36,3 +36,9 @@ TODOs
     - 2024-12-13 default installation on raidboxes uses ... bytes for 1 snapshot (too much)
             9:30 -- 430.080
             9:56 -- 729.088
+
+- max_execution_time für worker berücksichtigen
+- wenn snapshot-status nicht finished ist, dann auch nichts anzeigne
+- error-jobs auf snapshot-seite anzeigen
+- exclude wp-core files from output
+- create a workflow for steps before publishing next plugin version
