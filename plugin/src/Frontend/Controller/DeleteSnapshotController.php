@@ -1,14 +1,21 @@
 <?php
 namespace Mgleis\DiskUsageInsights\Frontend\Controller;
 
+use Mgleis\DiskUsageInsights\Domain\DatabaseRepository;
+use Mgleis\DiskUsageInsights\Plugin;
+
 class DeleteSnapshotController {
 
     public function delete() {
-        // param snapshot
-        // check if exists
-        // delete from outuput directory
-        // fetch and return all
-        // TOODO
+        check_ajax_referer(Plugin::NONCE);
+
+        // TODO validate parameter
+        $snapshot = $_POST['snapshot'];
+
+        (new DatabaseRepository())->deleteDatabase($snapshot);
+
+        (new ShowSnapshotsController())->execute();
+        wp_die();
     }
 
 }

@@ -31,7 +31,7 @@ class ScanStatusController {
             $instance = $reflect->newInstanceArgs($job->payload['args']);
             echo sprintf('Phase %s / %s<br>%s',
                 $_snapshot->phase + 1,
-                9,
+                10,
                 $instance->toDescription()
             );
         }

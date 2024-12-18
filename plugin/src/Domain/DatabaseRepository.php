@@ -23,7 +23,7 @@ class DatabaseRepository {
     }
 
     public function loadDatabase(string $databaseName): Database {
-
+        // TODO verify $databaseName
         $dir = realpath(__DIR__ . '/../../output');
         $file = $dir . '/' . $databaseName . '.db';
 
@@ -33,6 +33,13 @@ class DatabaseRepository {
         $db->snapshotRepository = new SnapshotRepository($db->q->db);
 
         return $db;
+    }
+
+    public function deleteDatabase(string $databaseName) {
+        // TODO verify $databaseName
+        $dir = realpath(__DIR__ . '/../../output');
+        $file = $dir . '/' . $databaseName . '.db';
+        $success = unlink($file);
     }
 
 }

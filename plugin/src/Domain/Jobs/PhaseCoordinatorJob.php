@@ -9,6 +9,7 @@ use Mgleis\DiskUsageInsights\Domain\Collect\DetermineDirSizesJob;
 use Mgleis\DiskUsageInsights\Domain\Collect\DetermineFileSizesJob;
 use Mgleis\DiskUsageInsights\Domain\Collect\DetermineLastModifiedDateJob;
 use Mgleis\DiskUsageInsights\Domain\Collect\DetermineWpCoreFileJob;
+use Mgleis\DiskUsageInsights\Domain\Collect\OptimizeDatabaseJob;
 use Mgleis\DiskUsageInsights\Domain\FileEntry;
 use Mgleis\DiskUsageInsights\Domain\Jobs\BaseJob;
 use Mgleis\DiskUsageInsights\Domain\Collect\ScanDirForFilesJob;
@@ -68,6 +69,11 @@ class PhaseCoordinatorJob extends BaseJob {
                 });
                 $this->queue->push((new PhaseCoordinatorJob())->toArray());
             } elseif ($phase == 8) {
+                $this->log("New Phase: Optimize Database");
+                $this->increasePhase($snapshot);
+                $this->queue->push((new OptimizeDatabaseJob())->toArray());
+                $this->queue->push((new PhaseCoordinatorJob())->toArray());
+            } elseif ($phase == 9) {
                 $this->log("DONE");
                 $this->increasePhase($snapshot);
                 $snapshot->collectPhaseFinished = 1;

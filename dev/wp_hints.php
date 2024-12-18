@@ -29,7 +29,7 @@ function plugin_dir(string $s): string { return ''; }
 function wp_create_nonce(string $s): string { return ''; }
 function check_ajax_referer(string $s) {}
 function wp_die() {}
-function esc_attr() {}
+function esc_attr(string $s): string {}
 function esc_url(string $s): string { return $s; }
 function is_admin() {}
 function is_multisite() {}

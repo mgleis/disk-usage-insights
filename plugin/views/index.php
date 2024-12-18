@@ -31,32 +31,13 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
         </div>
     </div>
 
-    <div class="DUI-panel">
+    <div id="DUI-snapshots" class="DUI-panel"
+        hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_list_snapshots"
+        hx-vals='{"_ajax_nonce":"<?php echo esc_attr($WP_NONCE); ?>"}'
+        hx-trigger="load">
         <div class="DUI-panel__headline">
-            View a previous snapshot
-        </div>
-        <div class="DUI-panel__content">
-            <div style="margin: 20px;">
-
-                <table>
-                    <tr>
-                        <th>Filename</th>
-                        <th>Date</th>
-                        <th>Size</th>
-                    </tr>
-                    <?php foreach ($DATABASES as $DB) { ?>
-                        <tr>
-                            <td><a href="?page=disk-usage-insights&snapshot=<?php echo $DB['filename']; ?>"><?php echo $DB['filename']; ?></a></td>
-                            <td></td>
-                            <td><?php echo $DB['filesize']; ?></td>
-                            <td><button>Delete</button></td>
-                        </tr>
-                    <?php } ?>
-                </table>
-
-            </div>
+            ...
         </div>
     </div>
-
 
 </div>
