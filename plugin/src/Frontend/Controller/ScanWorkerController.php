@@ -22,9 +22,9 @@ class ScanWorkerController {
         // if process finished = stop reloading
         $snapshot = $database->snapshotRepository->load();
         if ($snapshot->collectPhaseFinished === 1) {
-            http_response_code(286);
+            http_response_code(286);  // htmx stops timer
             echo "DONE";
-            exit;
+            wp_die();
         }
 
         $w = (new Worker($database->q))

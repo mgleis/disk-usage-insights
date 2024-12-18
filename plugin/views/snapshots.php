@@ -10,14 +10,12 @@
                 <table>
                     <tr>
                         <th>Filename</th>
-                        <th>Date</th>
                         <th>Size</th>
                     </tr>
                     <?php foreach ($DATABASES as $DB) { ?>
                         <tr>
                             <td><a href="?page=disk-usage-insights&snapshot=<?php echo $DB['filename']; ?>"><?php echo $DB['filename']; ?></a></td>
-                            <td></td>
-                            <td><?php echo $DB['filesize']; ?></td>
+                            <td><?php echo number_format_i18n($DB['filesize']); ?></td>
                             <td>
                                 <button
                                     hx-target="#DUI-snapshots"

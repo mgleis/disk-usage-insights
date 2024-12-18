@@ -1,39 +1,27 @@
 <?php
 namespace Mgleis\DiskUsageInsights\Frontend\Controller;
 
+use Mgleis\DiskUsageInsights\Domain\Database;
+use Mgleis\DiskUsageInsights\Domain\DatabaseRepository;
 use Mgleis\DiskUsageInsights\Frontend\Table;
 use Mgleis\DiskUsageInsights\Plugin;
 use Mgleis\DiskUsageInsights\WpHelper;
 
 class ResultsController {
 
-    private \PDO $pdo;
-
-    private function selectInt(string $sql) {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetch();
-
-        return $result[0];
-    }
-
-    private function fetchAssoc(string $sql): array {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-        return $rows;
-    }
+    private Database $database;
 
     public function execute() {
 
         // TODO Validate
         $snapshotName = $_GET['snapshot'];
 
-        $filename = realpath(__DIR__ . '/../../../output') . '/' . $snapshotName . '.db';
-        $this->pdo = new \PDO("sqlite:$filename");
-        $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
+        $this->database = (new DatabaseRepository())->loadDatabase($snapshotName);
+        $sn = $this->database->snapshotRepository->load();
+        if ($sn->collectPhaseFinished !== 1) {
+            echo "Cannot read database because it is corrupt/incomplete. Please create a new snapshot.";
+            exit;
+        }
 
         $WP_PLUGIN_URL = WpHelper::getPluginUrl();
         $WP_NONCE = wp_create_nonce(Plugin::NONCE);
@@ -129,4 +117,19 @@ class ResultsController {
 
     }
 
+    private function selectInt(string $sql) {
+        $stmt = $this->database->q->db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        return $result[0];
+    }
+
+    private function fetchAssoc(string $sql): array {
+        $stmt = $this->database->q->db->prepare($sql);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $rows;
+    }
 }

@@ -25,7 +25,12 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
                         </div>
                     <br>
 
-                    <div>A new snapshot of your file system will be generated and stored for later review.</div>
+                    <div>
+                        A new snapshot of your file system will be generated and stored for later review.
+                    </div>
+                    <div>
+                        Please be aware that each snapshot requires several MB of disk space, depending on your system.
+                    </div>
                 </form>
             </div>
         </div>

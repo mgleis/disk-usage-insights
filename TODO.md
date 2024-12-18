@@ -26,6 +26,8 @@ TODOs
 
 
 # Open
+
+# Version 1.2
 - save paths relativ to root
     WP_LANG_DIR
 - store root in database
@@ -42,3 +44,7 @@ TODOs
 - error-jobs auf snapshot-seite anzeigen
 - exclude wp-core files from output
 - create a workflow for steps before publishing next plugin version
+- make sure that CSS is nice
+- make sure that safety issues are met
+- clean up the building of URLs (admin_url etc.)
+- clean up referencing of __DIR__ . '/../../../output'
