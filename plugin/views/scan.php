@@ -28,6 +28,9 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
             <div>
                 Scanning can take some time. You will be redirected automatically to the analysis results.
             </div>
+            <div>
+                Please do not close this window.
+            </div>
         </div>
 
         <!-- WORKER -->

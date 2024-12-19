@@ -82,11 +82,17 @@ class FileEntryRepository {
         return $entry;
     }
 
+    private static $cache = [];
     public function calcFullPath(FileEntry $fileEntry, string $root = ''): string {
-        // TODO Cache this in memory
         $full = $fileEntry->name;
         while ($fileEntry->parent_id != 0) {
-            $parent = $this->findById($fileEntry->parent_id);
+
+            $parent = self::$cache[$fileEntry->parent_id] ?? false;
+            if ($parent == false) {
+                $parent = $this->findById($fileEntry->parent_id);
+                self::$cache[$fileEntry->parent_id] = $parent;
+            }
+
             if ($parent->name != '') {
                 $full = $parent->name . '/' . $full;
             }
