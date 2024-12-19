@@ -3,6 +3,7 @@ namespace Mgleis\DiskUsageInsights\Frontend\Controller;
 
 use Mgleis\DiskUsageInsights\Domain\Database;
 use Mgleis\DiskUsageInsights\Domain\DatabaseRepository;
+use Mgleis\DiskUsageInsights\Domain\FileEntry;
 use Mgleis\DiskUsageInsights\Frontend\Table;
 use Mgleis\DiskUsageInsights\Plugin;
 use Mgleis\DiskUsageInsights\WpHelper;
@@ -77,7 +78,7 @@ class ResultsController {
         //
         // Largest Folders (incl. sub folders)
         //
-        $rows = $this->fetchAssoc("SELECT * FROM fileentries WHERE type in ('dir') ORDER BY dir_recursive_count DESC LIMIT 10");
+        $rows = $this->fetchAssoc("SELECT * FROM fileentries WHERE type in ('dir') ORDER BY dir_recursive_size DESC LIMIT 10");
         $table = [];
         foreach ($rows as $row) {
             $fileEntry = $this->database->fileEntryRepository->findById($row['id']);
@@ -115,12 +116,56 @@ class ResultsController {
         //
         // Largest Directories within /wp-content/plugins
         //
-        // TODO
+        $pluginDir = substr(WP_PLUGIN_DIR, strlen(rtrim(ABSPATH, '/')));    // e.g. '/wp-content/plugins' TODO store in snapshot
+        $fileEntry = $this->database->fileEntryRepository->findByRelativeName($pluginDir);
+        if ($fileEntry !== null) {
+
+            $rows = $this->fetchAssoc(sprintf("SELECT * FROM fileentries WHERE parent_id = %s AND type = 'dir' ORDER BY dir_recursive_size DESC LIMIT 10", $fileEntry->id));
+            $table = [];
+            foreach ($rows as $row) {
+                $fileEntry = $this->database->fileEntryRepository->findById($row['id']);
+                $relativeName = $row['name'];
+                $table[] = [
+                    $relativeName, 
+                    number_format_i18n($row['dir_recursive_size'])
+                ];
+            }
+            (new Table(
+                'Largest Plugin Folders',
+                ['Folder', 'Total Size'],
+                ['', 'DUI-table__col--number']
+            ))->withData($table)->output();
+
+        } else {
+            echo "plugin dir not found";
+        }
 
         //
         // Largest Directories within /wp-content/themes
         //
-        // TODO
+        $themeDir = substr(get_theme_root(), strlen(rtrim(ABSPATH, '/')));  // e.g. '/wp-content/themes'  TODO store in snapshot
+        $fileEntry = $this->database->fileEntryRepository->findByRelativeName($themeDir);
+        if ($fileEntry !== null) {
+
+            $rows = $this->fetchAssoc(sprintf("SELECT * FROM fileentries WHERE parent_id = %s AND type = 'dir' ORDER BY dir_recursive_size DESC LIMIT 10", $fileEntry->id));
+            $table = [];
+            foreach ($rows as $row) {
+                $fileEntry = $this->database->fileEntryRepository->findById($row['id']);
+                $relativeName = $row['name'];
+                $table[] = [
+                    $relativeName, 
+                    number_format_i18n($row['dir_recursive_size'])
+                ];
+            }
+            (new Table(
+                'Largest Theme Folders',
+                ['Folder', 'Total Size'],
+                ['', 'DUI-table__col--number']
+            ))->withData($table)->output();
+
+        } else {
+            echo "theme dir not found";
+        }
 
     }
 

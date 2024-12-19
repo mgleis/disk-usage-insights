@@ -9,6 +9,9 @@
     WP_LANG_DIR
 - store root in database
 
+# Version 1.3
+- fix playground version
+
 # Version 1.x
 - idea: data must be saved to wp-content/disk-usage-insights directory!
     - that dir should also contain an empty index.php file

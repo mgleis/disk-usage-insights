@@ -82,6 +82,42 @@ class FileEntryRepository {
         return $entry;
     }
 
+    /**
+     *
+     * @param string $relativeFilename e.g. '/wp-content/plugins'
+     * @throws \Exception
+     * @return FileEntry|null
+     */
+    public function findByRelativeName(string $relativeFilename): ?FileEntry {
+
+        $arr = explode('/', $relativeFilename);
+        $parentId = 0; // root entry
+        $result = null;
+        foreach ($arr as $part) {
+            $stmt = $this->db->prepare("
+                SELECT * FROM fileentries WHERE parent_id = :parent_id AND name = :name;
+            ");
+            $stmt->bindValue(':parent_id', $parentId);
+            $stmt->bindValue(':name', $part);
+            $stmt->execute();
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if ($result === false) {
+                throw new \Exception(sprintf("Error finding %s", esc_html($relativeFilename)));
+            }
+            $parentId = $result['id'];
+        }
+
+        if ($result !== null) {
+            $entry = new FileEntry();
+            foreach ($result as $key => $value) {
+                $entry->$key = $value;
+            }
+            return $entry;
+        } else {
+            return null;
+        }
+    }
+
     private static $cache = [];
     public function calcFullPath(FileEntry $fileEntry, string $root = ''): string {
         $full = $fileEntry->name;

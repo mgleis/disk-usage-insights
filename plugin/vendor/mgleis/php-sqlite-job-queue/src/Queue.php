@@ -36,41 +36,34 @@ class Queue {
     }
 
     public function pop(): ?Job {
-        $this->db->beginTransaction();
         try {
-            // Reserviere den nächsten Job
+            // Reserviere und hole den nächsten Job in einer einzigen Abfrage
             $stmt = $this->db->prepare(sprintf("
-                SELECT id, payload
-                FROM %s
-                WHERE status = 'queued'
-                ORDER BY id ASC
-                LIMIT 1
-            ", $this->table));
+                UPDATE %s
+                SET status = 'working', reserved_at = CURRENT_TIMESTAMP
+                WHERE id = (
+                    SELECT id
+                    FROM %s
+                    WHERE status = 'queued'
+                    ORDER BY id ASC
+                    LIMIT 1
+                )
+                RETURNING id, payload
+            ", $this->table, $this->table));
+
             $stmt->execute();
             $jobData = $stmt->fetch(\PDO::FETCH_ASSOC);
 
+            // Falls kein Job reserviert wurde, gib null zurück
             if (!$jobData) {
-                $this->db->rollBack();
                 return null;
             }
 
-            // Markiere den Job als "working"
-            $updateStmt = $this->db->prepare(sprintf("
-                UPDATE %s
-                SET status = 'working', reserved_at = CURRENT_TIMESTAMP
-                WHERE id = :id
-            ", $this->table));
-            $updateStmt->bindValue(':id', $jobData['id'], \PDO::PARAM_INT);
-            $updateStmt->execute();
-
-            $this->db->commit();
-
             return new Job(
-                $jobData['id'],
+                (int) $jobData['id'],
                 json_decode($jobData['payload'], true, JSON_THROW_ON_ERROR)
             );
         } catch (\Throwable $t) {
-            $this->db->rollBack();
             $this->throwIfNotALockError($t);
             return null;
         }
@@ -94,7 +87,7 @@ class Queue {
             }
 
             return new Job(
-                $jobData['id'],
+                (int) $jobData['id'],
                 json_decode($jobData['payload'], true, JSON_THROW_ON_ERROR)
             );
         } catch (\Throwable $t) {
