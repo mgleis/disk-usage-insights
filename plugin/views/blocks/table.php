@@ -27,7 +27,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
                     <?php } ?>
                     <?php if ($this->hasPercentBar($idx)) { ?>
                         <div style="position:relative; min-width: 60px; _outline: 1px solid #ddd;">
-                            <div style="background:#eeeeee; width: <?php echo $this->getPercentBar($rowIdx); ?>%;">&nbsp;</div>
+                            <div style="background:#eeeeee; width: <?php echo esc_attr($this->getPercentBar($rowIdx)); ?>%;">&nbsp;</div>
                             <div style="position:absolute; top:0; right: 0;">
                                 <?php echo esc_html($column); ?>
                             </div>

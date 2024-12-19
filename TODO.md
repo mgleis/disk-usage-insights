@@ -13,11 +13,6 @@
 - idea: data must be saved to wp-content/disk-usage-insights directory!
     - that dir should also contain an empty index.php file
     - add a hook to delete snapshots on uninstall (not needed right now)
-- reduce size of database
-    - 2024-12-13 default installation on raidboxes uses ... bytes for 1 snapshot (too much)
-            9:30 -- 430.080
-            9:56 -- 729.088
-            - 823.000
 - worker should take a look at max_execution_time
 - show error-jobs on snapshot result page
 - exclude wp-core files from output
@@ -47,3 +42,10 @@
  - docs see https://wordpress.github.io/wordpress-playground/
  - final link: https://playground.wordpress.net/?php-extension-bundle=light&plugin=disk-usage-insights&url=/wp-admin/tools.php?page=disk-usage-insights
  - blueprint editor: https://playground.wordpress.net/builder/builder.html
+
+# Escaping
+see https://developer.wordpress.org/apis/security/escaping/
+- esc_html()    -> HTML
+- esc_js()      -> Inline JS
+- esc_url()     -> ALl URLs
+- esc_attr()    -> HTML attribute

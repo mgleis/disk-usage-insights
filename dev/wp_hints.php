@@ -36,3 +36,11 @@ function is_multisite() {}
 function current_user_can(string $c) {}
 function wp_get_wp_version(): string { return '6.7.1'; }
 function get_locale(): string { return 'en_US'; }
+function sanitize_file_name(string $s): string { return $s; }
+function wp_unslash(string $s): string { return $s; }
+function wp_remote_get(string $url, array $args = array()) {
+    return file_get_contents($url);
+}
+function wp_delete_file(string $file): bool {
+    return unlink($file);
+}

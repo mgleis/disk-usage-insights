@@ -6,9 +6,9 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
 <?php include_once __DIR__ . '/blocks/header.php'; ?>
 
 
-<h1>Snapshot <? echo $snapshot; ?></h1>
+<h1>Snapshot <?php echo esc_html($snapshot); ?></h1>
 <div>
-    <a href="?page=disk-usage-insights">Dashboard</a> &gt; Snapshot <? echo $snapshot; ?>
+    <a href="?page=disk-usage-insights">Dashboard</a> &gt; Snapshot <?php echo esc_html($snapshot); ?>
 </div>
 <br>
 

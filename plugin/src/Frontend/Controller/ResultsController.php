@@ -12,9 +12,10 @@ class ResultsController {
     private Database $database;
 
     public function execute() {
+        check_ajax_referer(Plugin::NONCE);
 
         // TODO Validate
-        $snapshotName = $_GET['snapshot'];
+        $snapshotName = sanitize_file_name(wp_unslash($_GET['snapshot'] ?? ''));
 
         $this->database = (new DatabaseRepository())->loadDatabase($snapshotName);
         $sn = $this->database->snapshotRepository->load();
@@ -27,7 +28,7 @@ class ResultsController {
         $WP_NONCE = wp_create_nonce(Plugin::NONCE);
         $WP_ADMIN_AJAX_URL = admin_url('admin-ajax.php');
         // TODO validate
-        $snapshot = $_GET['snapshot'];
+        $snapshot = sanitize_file_name(wp_unslash($_GET['snapshot'] ?? ''));
         $root = $this->database->snapshotRepository->load()->root;
         $totalSize = $this->selectInt("SELECT SUM(size) FROM fileentries;");
 

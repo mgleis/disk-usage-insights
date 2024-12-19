@@ -15,7 +15,7 @@ class ScanWorkerController {
         check_ajax_referer(Plugin::NONCE);
 
         // TODO validate value: ensure file exists in data directory
-        $snapshotName = $_POST['snapshot'];
+        $snapshotName = sanitize_file_name(wp_unslash($_POST['snapshot'] ?? ''));
 
         $database = (new DatabaseRepository())->loadDatabase($snapshotName);
 

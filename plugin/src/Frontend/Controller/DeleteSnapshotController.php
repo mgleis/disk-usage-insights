@@ -10,7 +10,7 @@ class DeleteSnapshotController {
         check_ajax_referer(Plugin::NONCE);
 
         // TODO validate parameter
-        $snapshot = $_POST['snapshot'];
+        $snapshot = sanitize_file_name(wp_unslash($_POST['snapshot'] ?? ''));
 
         (new DatabaseRepository())->deleteDatabase($snapshot);
 

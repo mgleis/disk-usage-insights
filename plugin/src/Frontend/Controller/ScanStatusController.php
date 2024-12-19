@@ -10,7 +10,7 @@ class ScanStatusController {
         check_ajax_referer(Plugin::NONCE);
 
         // TODO validate value: ensure file exists in data directory
-        $snapshotName = $_POST['snapshot'];
+        $snapshotName = sanitize_file_name(wp_unslash($_POST['snapshot'] ?? ''));
 
         $database = (new DatabaseRepository())->loadDatabase($snapshotName);
 
@@ -27,11 +27,11 @@ class ScanStatusController {
 
             $reflect = new \ReflectionClass($job->payload['type']);
             $instance = $reflect->newInstanceArgs($job->payload['args']);
-            echo sprintf('Phase %s / %s<br>%s',
+            echo esc_html(sprintf('Phase %s / %s<br>%s',
                 $_snapshot->phase + 1,
                 10,
                 $instance->toDescription()
-            );
+            ));
         }
 
         wp_die(); // All ajax handlers should die when finished

@@ -22,7 +22,7 @@ class ScanController {
 */
 
         // Create a new Snapshot Database
-        $snapshotName = date('Ymd_His_') . random_int(10000, 99999);
+        $snapshotName = gmdate('Ymd_His_') . random_int(10000, 99999);
         $database = (new DatabaseRepository())->loadDatabase($snapshotName);
         $snapshot = $database->snapshotRepository->load();
         $snapshot->root = rtrim(ABSPATH, '/');

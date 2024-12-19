@@ -96,8 +96,7 @@ class Plugin {
     }
 
     public function index() {
-        $snapshot = $_GET['snapshot'] ?? '';
-        if ($snapshot == '') {
+        if (!isset($_GET['snapshot'])) {
             return (new IndexController())->execute();
         } else {
             return (new ResultsController())->execute();

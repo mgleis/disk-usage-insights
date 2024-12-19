@@ -39,7 +39,7 @@ class DatabaseRepository {
         // TODO verify $databaseName
         $dir = realpath(__DIR__ . '/../../output');
         $file = $dir . '/' . $databaseName . '.db';
-        $success = unlink($file);
+        $success = wp_delete_file($file);
     }
 
 }

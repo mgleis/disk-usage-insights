@@ -14,13 +14,13 @@
                     </tr>
                     <?php foreach ($DATABASES as $DB) { ?>
                         <tr>
-                            <td><a href="?page=disk-usage-insights&snapshot=<?php echo $DB['filename']; ?>"><?php echo $DB['filename']; ?></a></td>
-                            <td><?php echo number_format_i18n($DB['filesize']); ?></td>
+                            <td><a href="?page=disk-usage-insights&snapshot=<?php echo esc_attr($DB['filename']); ?>"><?php echo esc_html($DB['filename']); ?></a></td>
+                            <td><?php echo esc_html(number_format_i18n($DB['filesize'])); ?></td>
                             <td>
                                 <button
                                     hx-target="#DUI-snapshots"
                                     hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_delete_snapshot"
-                                    hx-vals='{"_ajax_nonce":"<?php echo esc_attr($WP_NONCE); ?>", "snapshot":"<?php echo $DB['filename']; ?>"}'
+                                    hx-vals='{"_ajax_nonce":"<?php echo esc_js($WP_NONCE); ?>", "snapshot":"<?php echo esc_js($DB['filename']); ?>"}'
                                     hx-confirm="Are you sure to delete this snapshot?"
                                 >Delete</button>
                             </td>
