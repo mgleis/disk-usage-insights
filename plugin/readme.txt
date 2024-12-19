@@ -13,12 +13,6 @@ Find large files and folders in no time! Hunt down the TOP 10 files and folders 
 
 Find large files and large folders in no time. This plugin scans your whole WordPress installation, counts all files and folders, sums up the sizes and outputs useful statistics to find unwanted large objects in your system.
 
-== Demonstration ==
-
-Use this link to get a live preview of this plugin in the WordPress Playground:
-
-[Open Demo](https://playground.wordpress.net/?php-extension-bundle=light&plugin=disk-usage-insights&url=%2Fwp-admin%2Ftools.php%3Fpage%3Ddisk-usage-insights)
-
 == Installation ==
 
 1. Upload the plugin folder to your /wp-content/plugins/ folder.

@@ -2,6 +2,9 @@
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
   "landingPage": "/wp-admin/tools.php?page=disk-usage-insights",
   "login": true,
+  "features": {
+    "networking": true
+  },
   "plugins": [
     "disk-usage-insights"
   ],
