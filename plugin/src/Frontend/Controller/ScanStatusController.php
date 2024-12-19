@@ -27,11 +27,11 @@ class ScanStatusController {
 
             $reflect = new \ReflectionClass($job->payload['type']);
             $instance = $reflect->newInstanceArgs($job->payload['args']);
-            echo esc_html(sprintf('Phase %s / %s<br>%s',
+            echo sprintf('Phase %s / %s<br>%s',
                 $_snapshot->phase + 1,
                 10,
                 $instance->toDescription()
-            ));
+            );
         }
 
         wp_die(); // All ajax handlers should die when finished

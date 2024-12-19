@@ -24,7 +24,9 @@ class DetermineWpCoreFileJob extends BaseJob {
         if (sizeof($snapshot->wpcorefiles) == 0) {
 
             // Fetch WP Core files and store them in kv store
-            $str = wp_remote_get(sprintf('https://api.wordpress.org/core/checksums/1.0/?version=%s&locale=en_US', wp_get_wp_version()));
+            $url = sprintf('https://api.wordpress.org/core/checksums/1.0/?version=%s&locale=en_US', wp_get_wp_version());
+            $this->log("Fetching from url: " . $url);
+            $str = wp_remote_get($url)['body'];
             $arr = json_decode($str, true, JSON_THROW_ON_ERROR);
             if ($arr['checksums'] === false) {
                 throw new \Exception("Could not fetch the checksums of wordpress api.");

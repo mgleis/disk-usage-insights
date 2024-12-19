@@ -12,8 +12,6 @@ class ResultsController {
     private Database $database;
 
     public function execute() {
-        check_ajax_referer(Plugin::NONCE);
-
         // TODO Validate
         $snapshotName = sanitize_file_name(wp_unslash($_GET['snapshot'] ?? ''));
 

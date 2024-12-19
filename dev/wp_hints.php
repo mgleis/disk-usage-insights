@@ -29,7 +29,7 @@ function plugin_dir(string $s): string { return ''; }
 function wp_create_nonce(string $s): string { return ''; }
 function check_ajax_referer(string $s) {}
 function wp_die() {}
-function esc_attr(string $s): string {}
+function esc_attr(string $s): string { return $s; }
 function esc_url(string $s): string { return $s; }
 function is_admin() {}
 function is_multisite() {}
@@ -39,7 +39,8 @@ function get_locale(): string { return 'en_US'; }
 function sanitize_file_name(string $s): string { return $s; }
 function wp_unslash(string $s): string { return $s; }
 function wp_remote_get(string $url, array $args = array()) {
-    return file_get_contents($url);
+    $str = file_get_contents($url);
+    return ['body' => $str];
 }
 function wp_delete_file(string $file): bool {
     return unlink($file);

@@ -24,7 +24,7 @@ class BaseJob {
     }
 
     protected function log(string $s) {
-        echo esc_html($s)."\n";
+        echo $s."\n";
         //error_log($s);
     }
 
