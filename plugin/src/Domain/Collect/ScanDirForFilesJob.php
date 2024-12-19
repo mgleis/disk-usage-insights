@@ -20,9 +20,10 @@ class ScanDirForFilesJob extends BaseJob {
     public function work() {
 
         $dirEntries = $this->fileEntryRepository->get($this->skip, $this->count, FileEntry::TYPE_DIR);
+        $root = $this->snapshotRepository->load()->root;
         foreach ($dirEntries as $dirEntry) {
 
-            $realDir = realpath($dirEntry->name);
+            $realDir = $this->fileEntryRepository->calcFullPath($dirEntry, $root);
             $pattern = $realDir . '/*';
             $this->log("Scanning " . $realDir . " for files...");
 

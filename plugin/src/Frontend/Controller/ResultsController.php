@@ -28,7 +28,7 @@ class ResultsController {
         $WP_ADMIN_AJAX_URL = admin_url('admin-ajax.php');
         // TODO validate
         $snapshot = $_GET['snapshot'];
-        $root = ABSPATH; // TODO take from kvstore
+        $root = $this->database->snapshotRepository->load()->root;
         $totalSize = $this->selectInt("SELECT SUM(size) FROM fileentries;");
 
         include_once __DIR__ . '/../../../views/results.php';
@@ -39,8 +39,10 @@ class ResultsController {
         $rows = $this->fetchAssoc("SELECT * FROM fileentries WHERE type in ('file') ORDER BY size DESC LIMIT 10");
         $table = [];
         foreach ($rows as $row) {
+            $fileEntry = $this->database->fileEntryRepository->findById($row['id']);
+            $relativeName = $this->database->fileEntryRepository->calcFullPath($fileEntry);
             $table[] = [
-                $row['name'],
+                $relativeName,
                 number_format_i18n($row['size']),
                 number_format_i18n(100 * $row['size'] / $totalSize, 2) . '%'
             ];
@@ -57,8 +59,10 @@ class ResultsController {
         $rows = $this->fetchAssoc("SELECT * FROM fileentries WHERE type in ('dir') ORDER BY dir_size DESC LIMIT 10");
         $table = [];
         foreach ($rows as $row) {
+            $fileEntry = $this->database->fileEntryRepository->findById($row['id']);
+            $relativeName = $this->database->fileEntryRepository->calcFullPath($fileEntry);
             $table[] = [
-                $row['name'],
+                $relativeName,
                 number_format_i18n($row['dir_size']),
                 number_format_i18n($row['dir_count']),
                 number_format_i18n(round($row['dir_size'] / $row['dir_count'])),
@@ -77,7 +81,9 @@ class ResultsController {
         $rows = $this->fetchAssoc("SELECT * FROM fileentries WHERE type in ('dir') ORDER BY dir_recursive_count DESC LIMIT 10");
         $table = [];
         foreach ($rows as $row) {
-            $table[] = [$row['name'], number_format_i18n($row['dir_recursive_size'])];
+            $fileEntry = $this->database->fileEntryRepository->findById($row['id']);
+            $relativeName = $this->database->fileEntryRepository->calcFullPath($fileEntry);
+            $table[] = [$relativeName, number_format_i18n($row['dir_recursive_size'])];
         }
         (new Table(
             'Largest Folders (incl. sub folders)',
@@ -91,8 +97,10 @@ class ResultsController {
         $rows = $this->fetchAssoc("SELECT * FROM fileentries WHERE type in ('dir') ORDER BY dir_count DESC LIMIT 10");
         $table = [];
         foreach ($rows as $row) {
+            $fileEntry = $this->database->fileEntryRepository->findById($row['id']);
+            $relativeName = $this->database->fileEntryRepository->calcFullPath($fileEntry);
             $table[] = [
-                $row['name'],
+                $relativeName,
                 number_format_i18n($row['dir_count']),
                 number_format_i18n($row['dir_size']),
                 number_format_i18n(round($row['dir_size'] / $row['dir_count']))

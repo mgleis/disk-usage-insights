@@ -38,7 +38,8 @@ class DetermineWpCoreFileJob extends BaseJob {
         $fileEntries = $this->fileEntryRepository->get($this->skip, $this->count);
         foreach ($fileEntries as $fileEntry) {
 
-            if (in_array($fileEntry->name, $snapshot->wpcorefiles)) {
+            $relativeFilename = $this->fileEntryRepository->calcFullPath($fileEntry);
+            if (in_array($relativeFilename, $snapshot->wpcorefiles)) {
                 $fileEntry->is_wp_core_file = 1;
                 $this->fileEntryRepository->createOrUpdate($fileEntry);
             }

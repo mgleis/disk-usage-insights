@@ -21,12 +21,10 @@ class DetermineFileSizesJob extends BaseJob {
         $this->log(self::class);
         $fileEntries = $this->fileEntryRepository->get($this->skip, $this->count, FileEntry::TYPE_FILE);
 
+        $root = $this->snapshotRepository->load()->root;
         foreach ($fileEntries as $fileEntry) {
 
-            $dir = $fileEntry->parent_id != 0 
-                ? $this->fileEntryRepository->findById($fileEntry->parent_id)
-                : '';
-            $absoluteFilename = $dir->name . '/' . $fileEntry->name;
+            $absoluteFilename = $this->fileEntryRepository->calcFullPath($fileEntry, $root);
             $this->log($absoluteFilename);
 
             $fileEntry->size = filesize($absoluteFilename);

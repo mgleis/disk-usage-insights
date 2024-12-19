@@ -12,15 +12,33 @@ class DetermineDirRecursiveSizesJob extends BaseJob {
 
         $db = $this->queue->db;
         $stmt = $db->prepare("
+            WITH RECURSIVE directory_sizes AS (
+                -- Base case: Start with all directories
+                SELECT
+                    id AS directory_id,
+                    id AS current_id,
+                    COALESCE(size, 0) AS size
+                FROM fileentries
+                WHERE type = 'dir'
+
+                UNION ALL
+
+                -- Recursive step: Add files and subdirectories
+                SELECT
+                    ds.directory_id,
+                    fe.id AS current_id,
+                    COALESCE(fe.size, 0)
+                FROM directory_sizes ds
+                JOIN fileentries fe ON fe.parent_id = ds.current_id
+            )
+            -- Update the table
             UPDATE fileentries
-            SET dir_recursive_size = COALESCE(
-                (
-                    SELECT SUM(sub.dir_size) FROM fileentries AS sub
-                    WHERE sub.type = 'dir'
-                        AND sub.name LIKE fileentries.name || '%'
-                ), 0)
-            WHERE type = 'dir'
-                AND parent_id = 0;
+            SET dir_recursive_size = (
+                SELECT SUM(size)
+                FROM directory_sizes
+                WHERE directory_sizes.directory_id = fileentries.id
+            )
+            WHERE type = 'dir';
         ");
         $stmt->execute();
 

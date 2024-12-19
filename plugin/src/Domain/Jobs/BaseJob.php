@@ -24,7 +24,8 @@ class BaseJob {
     }
 
     protected function log(string $s) {
-        echo $s . "\n";
+        echo $s."\n";
+        //error_log($s);
     }
 
     public function toDescription(): string {

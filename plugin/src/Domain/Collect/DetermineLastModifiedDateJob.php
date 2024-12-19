@@ -22,27 +22,14 @@ class DetermineLastModifiedDateJob extends BaseJob {
         $this->log(self::class);
         $fileEntries = $this->fileEntryRepository->get($this->skip, $this->count);
 
+        $root = $this->snapshotRepository->load()->root;
         foreach ($fileEntries as $fileEntry) {
 
-            if ($fileEntry->type === FileEntry::TYPE_DIR) {
+            $absoluteFilename = $this->fileEntryRepository->calcFullPath($fileEntry, $root);
+            $this->log($absoluteFilename);
 
-                $fileEntry->last_modified_date = filemtime($fileEntry->name);
-                $this->fileEntryRepository->createOrUpdate($fileEntry);
-
-            } else if ($fileEntry->type === FileEntry::TYPE_FILE) {
-                $dir = $fileEntry->parent_id != 0
-                    ? $this->fileEntryRepository->findById($fileEntry->parent_id)
-                    : '';
-                $absoluteFilename = $dir->name . '/' . $fileEntry->name;
-                $this->log($absoluteFilename);
-
-                $fileEntry->last_modified_date = filemtime($absoluteFilename);
-                $this->fileEntryRepository->createOrUpdate($fileEntry);
-            } else {
-                throw new \Exception("Unknown file type");
-            }
-
-
+            $fileEntry->last_modified_date = filemtime($absoluteFilename);
+            $this->fileEntryRepository->createOrUpdate($fileEntry);
         }
     }
 

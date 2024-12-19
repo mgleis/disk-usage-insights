@@ -19,7 +19,7 @@ class ScanStatusController {
         if ($_snapshot->collectPhaseFinished === 1) {
             http_response_code(286); // htmx stops timer
             header('HX-Redirect: ' . admin_url('tools.php?page=disk-usage-insights&snapshot=' . $snapshotName));
-            wp_die();
+            exit;
         }
 
         $job = $database->q->top();

@@ -29,7 +29,7 @@ class FileEntryRepository {
         ");
     }
 
-    public function createOrUpdate(FileEntry $fileEntry) {
+    public function createOrUpdate(FileEntry &$fileEntry) {
 
         if ($fileEntry->id == 0) {
             $stmt = $this->db->prepare("
@@ -56,6 +56,10 @@ class FileEntryRepository {
         $stmt->bindValue(':last_modified_date', $fileEntry->last_modified_date);
         $stmt->bindValue(':is_wp_core_file', $fileEntry->is_wp_core_file);
         $stmt->execute();
+
+        if ($fileEntry->id == 0) {
+            $fileEntry->id = $this->db->lastInsertId();
+        }
     }
 
     public function findById(int $id): FileEntry {
@@ -76,6 +80,20 @@ class FileEntryRepository {
         }
 
         return $entry;
+    }
+
+    public function calcFullPath(FileEntry $fileEntry, string $root = ''): string {
+        // TODO Cache this in memory
+        $full = $fileEntry->name;
+        while ($fileEntry->parent_id != 0) {
+            $parent = $this->findById($fileEntry->parent_id);
+            if ($parent->name != '') {
+                $full = $parent->name . '/' . $full;
+            }
+            $fileEntry = $parent;
+        }
+        $full = $root . '/' . $full;
+        return $full;
     }
 
     public function count(string $type = ''): int {
@@ -109,26 +127,6 @@ class FileEntryRepository {
         }
 
         return $results;
-    }
-
-    public function findDirByName(string $name): ?FileEntry {
-        $stmt = $this->db->prepare("
-            SELECT * FROM fileentries WHERE type = :type AND name =:name
-        ");
-        $stmt->bindValue(':type', FileEntry::TYPE_DIR);
-        $stmt->bindValue(':name', $name);
-        $stmt->execute();
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if ($result === false) {
-            return null;
-        }
-
-        $entry = new FileEntry();
-        foreach ($result as $key => $value) {
-            $entry->$key = $value;
-        }
-
-        return $entry;
     }
 
 }

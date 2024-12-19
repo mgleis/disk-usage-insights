@@ -8,41 +8,51 @@ use Mgleis\DiskUsageInsights\Domain\Jobs\PhaseCoordinatorJob;
 
 class ScanDirForSubDirsJob extends BaseJob {
 
-    private string $parentDir;
+    private int $parentId;
+    private string $parentName = '';
 
-    public function __construct(string $parentDir) {
-        $this->parentDir = $parentDir;
+    public function __construct(int $parentId, string $parentName = '') {
+        $this->parentId = $parentId;
+        $this->parentName = $parentName;
     }
 
     public function work() {
-        $realDir = realpath($this->parentDir);
+
+        if ($this->parentId != 0) {
+            $parentFileEntry = $this->fileEntryRepository->findById($this->parentId);
+        } else {
+            // create dummy entry
+            $parentFileEntry = new FileEntry();
+            $parentFileEntry->parent_id = 0;
+        }
+        $root = $this->snapshotRepository->load()->root;
+
+        $realDir = realpath($this->fileEntryRepository->calcFullPath($parentFileEntry, $root));
+
         $pattern = $realDir . '/*';
         $this->log("Scanning " . $realDir . " for sub directories...");
 
-        // fetch parent
-        $parent = $this->fileEntryRepository->findDirByName($this->parentDir);
-        $parentId = $parent === null ? 0 : $parent->id;
-
         foreach (glob($pattern, GLOB_ONLYDIR) as $dir) {
-            $this->queue->push((new ScanDirForSubDirsJob($dir))->toArray());
 
             // persist dir info
             $fileEntry = new FileEntry();
-            $fileEntry->parent_id = $parentId;
-            $fileEntry->name = $dir;
+            $fileEntry->parent_id = $parentFileEntry->id;
+            $fileEntry->name = basename($dir);
             $fileEntry->type = FileEntry::TYPE_DIR;
             $fileEntry->size = 0;
             $this->fileEntryRepository->createOrUpdate($fileEntry);
+
+            $this->queue->push((new ScanDirForSubDirsJob($fileEntry->id, $dir))->toArray());
         }
         $this->queue->push((new PhaseCoordinatorJob())->toArray());
     }
 
     public function toArray() {
-        return ['type' => self::class, 'args' => [$this->parentDir]];
+        return ['type' => self::class, 'args' => [$this->parentId, $this->parentName]];
     }
 
     public function toDescription(): string {
-        return sprintf('Scanning dir: %s', $this->parentDir);
+        return sprintf('Scanning dir: %s', $this->parentName);
     }
 
 }
