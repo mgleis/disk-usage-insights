@@ -14,5 +14,6 @@ svn status
 echo 'Hints:'
 echo '# svn ci -m "commit message"'
 echo '# svn cp trunk tags/1.x'
-echo '# svn commit -m "Release 1.x"
+echo '# svn commit -m "Release 1.x"'
 echo
+
