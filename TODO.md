@@ -1,5 +1,11 @@
 # TODOs
 
+Goal: PHP 7.0 as min requirement (supports most systems)
+    oder lieber 8.0?
+    mal schauen, was der compat check ergibt
+
+- WordPress Version + PHP Version https://wordpress.org/about/stats/
+- WP Version / PHP Compatability https://make.wordpress.org/core/handbook/references/php-compatibility-and-wordpress-versions/
 
 
 # Open

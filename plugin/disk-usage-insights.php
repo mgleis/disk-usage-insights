@@ -5,9 +5,10 @@
  * Description: Find large files and folders in your WordPress installation in no time!
  * Author: Marcel Gleis
  * License: GPLv3
- * Version: 1.3
+ * Version: 1.4
+ * Requires PHP: 7.4
  */
-const DISK_USAGE_INSIGHTS_VERSION = '1.3';
+const DISK_USAGE_INSIGHTS_VERSION = '1.4';
 
  // Ensure running within WordPress
 if (!defined('ABSPATH')) {

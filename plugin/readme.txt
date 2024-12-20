@@ -3,7 +3,7 @@ Contributors: mgleis
 Tags: disk usage, file size, large files, large folders
 Requires at least: 5.0
 Tested up to: 6.7.1
-Stable Tag: 1.3
+Stable Tag: 1.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -34,11 +34,18 @@ Simply deactivate and delete the plugin.
 
 Yes, but only for users with the "manage_sites" privilege, which Super Admins have by default.
 
+= Which PHP version is supported? =
+
+You need a PHP version >= 7.4.
+
 == Screenshots ==
 1. Largest Files and Largest Folders
 1. Largest Folders, Folders with most files, Largest Plugins, Largest Themes
 
 == Changelog ==
+
+= 1.4 =
+* Plugin now runs with PHP >=7.4 ()
 
 = 1.3 =
 * Reimplemented "Largest Plugin Folder" and "Largest Theme Folders" from v1.1

@@ -5,9 +5,9 @@ namespace Mgleis\PhpSqliteJobQueue;
 
 class Job {
     public int $id;
-    public mixed $payload;
+    public $payload;
 
-    public function __construct(int $id, mixed $payload) {
+    public function __construct(int $id, $payload) {
         $this->id = $id;
         $this->payload = $payload;
     }

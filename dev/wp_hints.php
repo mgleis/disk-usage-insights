@@ -31,6 +31,8 @@ function check_ajax_referer(string $s) {}
 function wp_die() {}
 function esc_attr(string $s): string { return $s; }
 function esc_url(string $s): string { return $s; }
+function esc_js(string $s): string { return $s; }
+
 function is_admin() {}
 function is_multisite() {}
 function current_user_can(string $c) {}

@@ -8,12 +8,15 @@ class KeyValueStore {
     private \PDO $db;
     private string $table;
 
-    public function __construct(mixed $dbFileOrPdo = 'kvstore.sqlite', string $table = 'key_value_store') {
+    public function __construct($dbFileOrPdo = null, string $table = 'key_value_store') {
         $this->table = $table;
         if (!preg_match('/^[a-zA-Z0-9_]+$/', $table)) {
             throw new \InvalidArgumentException("Invalid table name");
         }
 
+        if (is_null($dbFileOrPdo)) {
+            $dbFileOrPdo = 'kvstore.sqlite';
+        }
         if (is_string($dbFileOrPdo)) {
             $this->db = new \PDO("sqlite:" . $dbFileOrPdo);
             $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -35,7 +38,7 @@ class KeyValueStore {
         ");
     }
 
-    public function get(string $key, $default = null): mixed {
+    public function get(string $key, $default = null) {
         $stmt = $this->db->prepare("SELECT value FROM {$this->table} WHERE key = :key");
         $stmt->bindParam(':key', $key, \PDO::PARAM_STR);
         $stmt->execute();
@@ -62,7 +65,7 @@ class KeyValueStore {
         $stmt->execute();
     }
 
-    public function set(string $key, mixed $value): void {
+    public function set(string $key, $value): void {
         $jsonValue = json_encode($value, JSON_THROW_ON_ERROR);
 
         $stmt = $this->db->prepare("

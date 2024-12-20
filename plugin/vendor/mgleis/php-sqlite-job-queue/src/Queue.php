@@ -27,7 +27,7 @@ class Queue {
         ", $this->table));
     }
 
-    public function push(mixed $payload) {
+    public function push($payload) {
         $strPayload = json_encode($payload, JSON_THROW_ON_ERROR);
 
         $stmt = $this->db->prepare(sprintf("INSERT INTO %s (payload, status) VALUES (:payload, 'queued')", $this->table));
@@ -37,27 +37,30 @@ class Queue {
 
     public function pop(): ?Job {
         try {
-            // Reserviere und hole den nächsten Job in einer einzigen Abfrage
-            $stmt = $this->db->prepare(sprintf("
-                UPDATE %s
-                SET status = 'working', reserved_at = CURRENT_TIMESTAMP
-                WHERE id = (
-                    SELECT id
-                    FROM %s
-                    WHERE status = 'queued'
-                    ORDER BY id ASC
-                    LIMIT 1
-                )
-                RETURNING id, payload
-            ", $this->table, $this->table));
 
+            // find the next job
+            $stmt = $this->db->prepare(sprintf("
+                SELECT id, payload
+                FROM %s
+                WHERE status = 'queued'
+                ORDER BY id ASC
+                LIMIT 1
+            ", $this->table));
             $stmt->execute();
             $jobData = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            // Falls kein Job reserviert wurde, gib null zurück
             if (!$jobData) {
                 return null;
             }
+
+            // mark the job as "working"
+            $updateStmt = $this->db->prepare(sprintf("
+                UPDATE %s
+                SET status = 'working', reserved_at = CURRENT_TIMESTAMP
+                WHERE id = :id AND status = 'queued'
+            ", $this->table));
+            $updateStmt->bindValue(':id', (int) $jobData['id'], \PDO::PARAM_INT);
+            $updateStmt->execute();
 
             return new Job(
                 (int) $jobData['id'],
