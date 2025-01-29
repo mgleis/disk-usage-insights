@@ -21,20 +21,21 @@ class ScanDirForFilesJob extends BaseJob {
 
         $dirEntries = $this->fileEntryRepository->get($this->skip, $this->count, FileEntry::TYPE_DIR);
         $root = $this->snapshotRepository->load()->root;
+
         foreach ($dirEntries as $dirEntry) {
 
             $realDir = $this->fileEntryRepository->calcFullPath($dirEntry, $root);
-            $pattern = $realDir . '/*';
-            $this->log("Scanning " . $realDir . " for files...");
+            //$this->log("Scanning " . $realDir . " for files...");
 
-            $entries = glob($pattern);
-            $files = array_values(array_filter($entries, 'is_file'));
+            $files = scandir($realDir . '/');
 
             foreach ($files as $file) {
+                if (!is_file($realDir . '/' . $file))
+                    continue;
                 // persist file info
                 $fileEntry = new FileEntry();
                 $fileEntry->parent_id = $dirEntry->id;
-                $fileEntry->name = basename($file);
+                $fileEntry->name = $file;
                 $fileEntry->type = FileEntry::TYPE_FILE;
                 $fileEntry->size = 0;
                 $this->fileEntryRepository->createOrUpdate($fileEntry);

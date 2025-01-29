@@ -16,7 +16,7 @@ use Mgleis\DiskUsageInsights\Domain\Snapshot;
 
 class PhaseCoordinatorJob extends BaseJob {
 
-    const CHUNK_SIZE = 50;
+    const CHUNK_SIZE = 1000;
     public function work() {
 
         $snapshot = $this->snapshotRepository->load();
@@ -31,7 +31,7 @@ class PhaseCoordinatorJob extends BaseJob {
                 });
                 $this->queue->push((new PhaseCoordinatorJob())->toArray());
             } elseif ($phase == 1) {
-                $this->log("New Phase: Start Analysis / Determine File Sizes");
+                $this->log("New Phase: Determine File Sizes");
                 $this->increasePhase($snapshot);
                 $this->chunk($this->fileEntryRepository->count(FileEntry::TYPE_FILE), self::CHUNK_SIZE, function(int $skip, int $count, int $totalCount) {
                     $this->queue->push((new DetermineFileSizesJob($skip, $count, $totalCount))->toArray());

@@ -29,15 +29,18 @@ class ScanDirForSubDirsJob extends BaseJob {
 
         $realDir = realpath($this->fileEntryRepository->calcFullPath($parentFileEntry, $root));
 
-        $pattern = $realDir . '/*';
-        $this->log("Scanning " . $realDir . " for sub directories...");
+        //$this->log("Scanning " . $realDir . " for sub directories...");
 
-        foreach (glob($pattern, GLOB_ONLYDIR) as $dir) {
+        $files = scandir($realDir) ?? [];
+        foreach ($files as $file) {
+            if ($file == '.' || $file == '..' || !is_dir($realDir . '/' . $file))
+                continue;
+            $dir = $file;
 
             // persist dir info
             $fileEntry = new FileEntry();
             $fileEntry->parent_id = $parentFileEntry->id;
-            $fileEntry->name = basename($dir);
+            $fileEntry->name = $dir;
             $fileEntry->type = FileEntry::TYPE_DIR;
             $fileEntry->size = 0;
             $this->fileEntryRepository->createOrUpdate($fileEntry);

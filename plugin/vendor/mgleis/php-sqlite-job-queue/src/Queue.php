@@ -12,6 +12,8 @@ class Queue {
     public function __construct(string $filename, string $table = 'jobs') {
         $this->db = new \PDO("sqlite:$filename");
         $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $this->db->exec('PRAGMA journal_mode = WAL;');
+        $this->db->exec('PRAGMA synchronous = NORMAL;');
         $this->table = $this->db->quote($table);
         $this->initializeDatabase();
     }
@@ -23,7 +25,7 @@ class Queue {
                 payload TEXT NOT NULL,
                 status TEXT NOT NULL DEFAULT 'queued',
                 reserved_at TIMESTAMP DEFAULT NULL
-            )
+            );
         ", $this->table));
     }
 

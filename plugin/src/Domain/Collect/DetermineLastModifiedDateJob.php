@@ -26,7 +26,7 @@ class DetermineLastModifiedDateJob extends BaseJob {
         foreach ($fileEntries as $fileEntry) {
 
             $absoluteFilename = $this->fileEntryRepository->calcFullPath($fileEntry, $root);
-            $this->log($absoluteFilename);
+            //$this->log($absoluteFilename);
 
             $fileEntry->last_modified_date = filemtime($absoluteFilename);
             $this->fileEntryRepository->createOrUpdate($fileEntry);

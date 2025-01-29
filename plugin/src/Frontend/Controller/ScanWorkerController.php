@@ -29,16 +29,20 @@ class ScanWorkerController {
 
         $w = (new Worker($database->q))
             ->withMaxTotalRuntimeInSeconds(5)
-            ->withSleepTimeBetweenJobsInMilliseconds(1)
-            ->withSleepTimeOnEmptyQueueInMilliseconds(1)
+            ->withSleepTimeBetweenJobsInMilliseconds(0)
+            ->withSleepTimeOnEmptyQueueInMilliseconds(0)
         ;
+
         $w->process(function(Job $job) use ($database) {
             $reflect = new \ReflectionClass($job->payload['type']);
             $instance = $reflect->newInstanceArgs($job->payload['args']);
             $instance->setQueue($database->q);
             $instance->setFileEntryRepository($database->fileEntryRepository);
             $instance->setSnapshotRepository($database->snapshotRepository);
+
+            $database->q->db->beginTransaction();
             $instance->work();
+            $database->q->db->commit();
         });
 
         wp_die(); // All ajax handlers should die when finished
