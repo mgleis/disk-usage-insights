@@ -27,6 +27,7 @@ function admin_url(string $s): string { return ''; }
 function plugin_dir_url(string $s): string { return ''; }
 function plugin_dir(string $s): string { return ''; }
 function wp_create_nonce(string $s): string { return ''; }
+function wp_verify_nonce(string $s, string $s2): string { return ''; }
 function check_ajax_referer(string $s) {}
 function wp_die() {}
 function esc_attr(string $s): string { return $s; }

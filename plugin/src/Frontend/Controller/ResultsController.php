@@ -3,7 +3,6 @@ namespace Mgleis\DiskUsageInsights\Frontend\Controller;
 
 use Mgleis\DiskUsageInsights\Domain\Database;
 use Mgleis\DiskUsageInsights\Domain\DatabaseRepository;
-use Mgleis\DiskUsageInsights\Domain\FileEntry;
 use Mgleis\DiskUsageInsights\Frontend\Table;
 use Mgleis\DiskUsageInsights\Plugin;
 use Mgleis\DiskUsageInsights\WpHelper;

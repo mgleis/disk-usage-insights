@@ -16,7 +16,7 @@ use Mgleis\DiskUsageInsights\Domain\Snapshot;
 
 class PhaseCoordinatorJob extends BaseJob {
 
-    const CHUNK_SIZE = 1000;
+    const CHUNK_SIZE = 250;
     public function work() {
 
         $snapshot = $this->snapshotRepository->load();
