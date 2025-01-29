@@ -6,9 +6,11 @@ use Mgleis\PhpSqliteJobQueue\Queue;
 
 class DatabaseRepository {
 
+    private const OUTPUT_DIR = __DIR__ . '/../../output';
+
     public function listDatabases(): array {
 
-        $dir = realpath(__DIR__ . '/../../output');
+        $dir = realpath(self::OUTPUT_DIR);
         $pattern = $dir . '/*.db';
         $files = glob($pattern);
         rsort($files);
@@ -24,7 +26,7 @@ class DatabaseRepository {
 
     public function loadDatabase(string $databaseName): Database {
         // TODO verify $databaseName
-        $dir = realpath(__DIR__ . '/../../output');
+        $dir = realpath(self::OUTPUT_DIR);
         $file = $dir . '/' . $databaseName . '.db';
 
         $db = new Database();
@@ -37,7 +39,7 @@ class DatabaseRepository {
 
     public function deleteDatabase(string $databaseName) {
         // TODO verify $databaseName
-        $dir = realpath(__DIR__ . '/../../output');
+        $dir = realpath(self::OUTPUT_DIR);
         $file = $dir . '/' . $databaseName . '.db';
         $success = wp_delete_file($file);
     }

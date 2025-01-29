@@ -30,8 +30,10 @@ class ScanDirForFilesJob extends BaseJob {
             $files = scandir($realDir . '/');
 
             foreach ($files as $file) {
-                if (!is_file($realDir . '/' . $file))
+                if (!is_file($realDir . '/' . $file)) {
                     continue;
+                }
+
                 // persist file info
                 $fileEntry = new FileEntry();
                 $fileEntry->parent_id = $dirEntry->id;
