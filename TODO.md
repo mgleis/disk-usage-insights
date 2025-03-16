@@ -8,6 +8,10 @@ Goal: PHP 7.0 as min requirement (supports most systems)
 - WP Version / PHP Compatability https://make.wordpress.org/core/handbook/references/php-compatibility-and-wordpress-versions/
 
 
+Respect Special Content Folders:
+    https://developer.wordpress.org/advanced-administration/wordpress/wp-config/#Moving_wp-content_folder
+
+
 # Open
 
 # Version 1.2

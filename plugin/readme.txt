@@ -2,7 +2,7 @@
 Contributors: mgleis
 Tags: disk usage, file size, large files, large folders
 Requires at least: 5.0
-Tested up to: 6.7.1
+Tested up to: 6.7.2
 Stable Tag: 1.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -45,7 +45,7 @@ You need a PHP version >= 7.4.
 == Changelog ==
 
 = 1.5 =
-* Plugin is now 2-5x fast in scanning and analysis
+* Plugin is now 2-5x faster in scanning and analysis
 
 = 1.4 =
 * Plugin now runs with PHP >=7.4
