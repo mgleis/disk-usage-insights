@@ -17,6 +17,19 @@ use Mgleis\DiskUsageInsights\Domain\Snapshot;
 class PhaseCoordinatorJob extends BaseJob {
 
     const CHUNK_SIZE = 250;
+
+    const PHASES = [
+        'Phase 1: Scan for Files',
+        'Phase 2: Determine File Sizes',
+        'Phase 3: Determine Dir Sizes',
+        'Phase 4: Determine Dir Recursive Sizes',
+        'Phase 5: Determine Dir Counts',
+        'Phase 6: Determine Dir Recursive Counts',
+        'Phase 7: Determine Last Modified Date',
+        'Phase 8: Determine WP Core Files',
+        'Phase 9: Finish Data Collection'
+    ];
+
     public function work() {
 
         $snapshot = $this->snapshotRepository->load();
