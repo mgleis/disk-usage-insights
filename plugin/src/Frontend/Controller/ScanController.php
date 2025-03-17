@@ -12,14 +12,6 @@ class ScanController {
 
     public function scan() {
         check_ajax_referer(Plugin::NONCE);
-/*
-        // TODO: Remove Code
-        // OLD v1.1 code:
-        $scanResults = new ScanResults();
-        $scanResults->execute();
-
-        sleep(1);
-*/
 
         // Create a new Snapshot Database
         $snapshotName = gmdate('Ymd_His_') . random_int(10000, 99999);
