@@ -3,7 +3,7 @@ Contributors: mgleis
 Tags: disk usage, file size, large files, large folders
 Requires at least: 5.0
 Tested up to: 6.7.2
-Stable Tag: 1.5
+Stable Tag: 1.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,6 +43,10 @@ You need a PHP version >= 7.4.
 1. Largest Folders, Folders with most files, Largest Plugins, Largest Themes
 
 == Changelog ==
+
+= 1.6 =
+* Pagination for result tables
+* New visuals of the data analysis phases
 
 = 1.5 =
 * Plugin is now 2-5x faster in scanning and analysis
