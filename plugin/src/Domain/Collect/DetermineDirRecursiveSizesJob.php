@@ -42,7 +42,9 @@ class DetermineDirRecursiveSizesJob extends BaseJob {
         ");
         $stmt->execute();
 
-        $this->queue->push((new PhaseCoordinatorJob())->toArray());
+        if ($this->queue->size() == 0) {
+            $this->queue->push((new PhaseCoordinatorJob())->toArray());
+        }
     }
 
     public function toArray() {
