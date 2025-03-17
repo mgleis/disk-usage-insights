@@ -2,9 +2,7 @@
 
 namespace Mgleis\DiskUsageInsights\Domain\Collect;
 
-use Mgleis\DiskUsageInsights\Domain\FileEntry;
 use Mgleis\DiskUsageInsights\Domain\Jobs\BaseJob;
-use Mgleis\DiskUsageInsights\Domain\Jobs\PhaseCoordinatorJob;
 
 class DetermineLastModifiedDateJob extends BaseJob {
 
