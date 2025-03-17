@@ -2,11 +2,8 @@
 namespace Mgleis\DiskUsageInsights\Frontend\Controller;
 
 use Mgleis\DiskUsageInsights\Domain\DatabaseRepository;
-use Mgleis\DiskUsageInsights\Domain\FileEntryRepository;
-use Mgleis\DiskUsageInsights\Domain\SnapshotRepository;
 use Mgleis\DiskUsageInsights\Plugin;
 use Mgleis\PhpSqliteJobQueue\Job;
-use Mgleis\PhpSqliteJobQueue\Queue;
 use Mgleis\PhpSqliteJobQueue\Worker;
 
 class ScanWorkerController {
