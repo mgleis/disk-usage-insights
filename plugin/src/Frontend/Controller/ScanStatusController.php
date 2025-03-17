@@ -2,6 +2,7 @@
 namespace Mgleis\DiskUsageInsights\Frontend\Controller;
 
 use Mgleis\DiskUsageInsights\Domain\DatabaseRepository;
+use Mgleis\DiskUsageInsights\Domain\Jobs\PhaseCoordinatorJob;
 use Mgleis\DiskUsageInsights\Plugin;
 
 class ScanStatusController {
@@ -21,17 +22,31 @@ class ScanStatusController {
             header('HX-Redirect: ' . admin_url('tools.php?page=disk-usage-insights&snapshot=' . $snapshotName));
             exit;
         }
+        $currentPhase = $_snapshot->phase;
 
-        $job = $database->q->top();
-        if ($job !== null) {
+        echo "<br>\n";
+        foreach(PhaseCoordinatorJob::PHASES as $idx => $phaseText) {
 
-            $reflect = new \ReflectionClass($job->payload['type']);
-            $instance = $reflect->newInstanceArgs($job->payload['args']);
-            echo sprintf('Phase %s / %s<br>%s',
-                $_snapshot->phase + 1,
-                10,
-                $instance->toDescription()
-            );
+            $phaseStatus = $currentPhase > $idx ? '&check; ' : '';
+            $taskDescription = '';
+
+            if ($currentPhase == $idx) {
+
+                $job = $database->q->peek();
+                if ($job !== null) {
+                    $reflect = new \ReflectionClass($job->payload['type']);
+                    $instance = $reflect->newInstanceArgs($job->payload['args']);
+
+                    $taskDescription = ' -- ' . $instance->toDescription();
+                }
+
+            }
+            if ($idx == $currentPhase)
+                echo "<b>";
+            echo sprintf('%s%s%s', $phaseStatus, $phaseText, $taskDescription);
+            if ($idx == $currentPhase)
+                echo "</b>";
+            echo "<br>\n";
         }
 
         wp_die(); // All ajax handlers should die when finished
