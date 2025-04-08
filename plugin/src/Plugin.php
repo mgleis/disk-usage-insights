@@ -12,6 +12,7 @@ use Mgleis\DiskUsageInsights\Frontend\Controller\ShowSnapshotsController;
 
 class Plugin {
 
+    const TITLE = 'Disk Usage Insights';
     const NONCE = 'disk_usage_insights';
     /** @var string */
     private $version = '';
@@ -36,8 +37,8 @@ class Plugin {
         add_action('admin_menu', function () {
             add_submenu_page(
                 'tools.php',
-                'Disk Usage Insights',
-                'Disk Usage Insights',
+                self::TITLE,
+                self::TITLE,
                 'administrator',
                 'disk-usage-insights',
                 [$this, 'index']
@@ -89,10 +90,10 @@ class Plugin {
             'id'    => 'menu-id',
             'parent' => null,
             'group'  => null,
-            'title' => '<img src="' . WpHelper::getPluginUrl() . '/res/pie.svg" style="margin-top:5px; width:20px" alt="Disk Usage Insights">',
+            'title' => '<img src="' . WpHelper::getPluginUrl() . '/res/pie.svg" style="margin-top:5px; width:20px" alt="'. self::TITLE .'">',
             'href'  => admin_url('tools.php?page=disk-usage-insights'),
             'meta' => [
-                'title' => 'Disk Usage Insights'
+                'title' => self::TITLE
             ]
         ));
     }
