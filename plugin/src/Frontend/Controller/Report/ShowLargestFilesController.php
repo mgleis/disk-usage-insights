@@ -16,7 +16,7 @@ class ShowLargestFilesController {
 
         if (isset($_GET['p'])) {
 
-            $pagination = Pagination::parseFromString($_SERVER['REQUEST_URI']);
+            $pagination = Pagination::parseFromString(wp_unslash($_SERVER['REQUEST_URI'] ?? ''));
 
         } else {
 

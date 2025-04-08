@@ -9,11 +9,11 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
         <?php if ($pagination !== null) { ?> 
             <div class="DUI-panel__headline-actions">
                 <?php if ($pagination->hasPreviousPage()) { ?> 
-                    <a href="" hx-trigger="click" hx-target="closest .DUI-panel" hx-swap="outerHTML" hx-get="<?php echo $pagination->buildPreviousPageUrl(); ?>">&lt;&lt; Previous</a>
+                    <a href="" hx-trigger="click" hx-target="closest .DUI-panel" hx-swap="outerHTML" hx-get="<?php echo esc_url($pagination->buildPreviousPageUrl()); ?>">&lt;&lt; Previous</a>
                     &nbsp;
                 <?php } ?>
                 <?php if ($pagination->hasNextPage()) { ?> 
-                    <a href="" hx-trigger="click" hx-target="closest .DUI-panel" hx-swap="outerHTML" hx-get="<?php echo $pagination->buildNextPageUrl(); ?>">Next &gt;&gt;</a>
+                    <a href="" hx-trigger="click" hx-target="closest .DUI-panel" hx-swap="outerHTML" hx-get="<?php echo esc_url($pagination->buildNextPageUrl()); ?>">Next &gt;&gt;</a>
                 <?php } ?>
             </div>
         <?php } ?>

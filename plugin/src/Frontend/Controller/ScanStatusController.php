@@ -43,7 +43,7 @@ class ScanStatusController {
             }
             if ($idx == $currentPhase)
                 echo "<b>";
-            echo sprintf('%s%s%s', $phaseStatus, $phaseText, $taskDescription);
+            echo sprintf('%s%s%s', esc_html($phaseStatus), esc_html($phaseText), esc_html($taskDescription));
             if ($idx == $currentPhase)
                 echo "</b>";
             echo "<br>\n";

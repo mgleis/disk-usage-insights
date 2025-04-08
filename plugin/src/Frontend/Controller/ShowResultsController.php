@@ -33,10 +33,6 @@ class ShowResultsController {
         $WP_SNAPSHOT_FILE = $snapshot;
 
         include_once __DIR__ . '/../../../views/results.php';
-
-
-
-
     }
 
     private function selectInt(string $sql) {

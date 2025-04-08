@@ -16,7 +16,7 @@ class ShowFoldersMostFilesController {
 
         if (isset($_GET['p'])) {
 
-            $pagination = Pagination::parseFromString($_SERVER['REQUEST_URI']);
+            $pagination = Pagination::parseFromString($_SERVER['REQUEST_URI'] ?? '');
 
         } else {
 
