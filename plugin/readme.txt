@@ -48,27 +48,27 @@ All data is stored within the plugin directory of this plugin. If you update or 
 
 == Changelog ==
 
-= 1.6 =
+= 1.6 (2025-04-08) =
 * Pagination for result tables
 * New visuals of the data analysis phases
 
-= 1.5 =
+= 1.5 (2025-03-16) =
 * Plugin is now 2-5x faster in scanning and analysis
 
-= 1.4 =
+= 1.4 (2024-12-20) =
 * Plugin now runs with PHP >=7.4
 
-= 1.3 =
+= 1.3 (2024-12-19) =
 * Reimplemented "Largest Plugin Folder" and "Largest Theme Folders" from v1.1
 * Bugfix: Report "Largest Folders (incl. sub folders)" was sorted by count instead of size
 * Bugfix: Fix issues with the playground demo version
 
-= 1.2 =
+= 1.2 (2024-12-19) =
 * Support for really big and slow installations (complete code rewrite, usage of sqlite as a database and job queues on top of it)
 
-= 1.1 =
+= 1.1 (2024-12-19) =
 * Support for Multisite installations (user must have privilege "manage_sites" which Super Admins have by default)
 * Disk Usage in percent is now visualized with a bar in the background of the first column
 
-= 1.0 =
+= 1.0 (2024-08-20) =
 * Plugin released.
