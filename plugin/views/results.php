@@ -18,3 +18,88 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
         Total Size: <?php echo esc_html(number_format_i18n($totalSize)); ?>
     </div>
 </div>
+
+<div hx-trigger="load"
+    hx-get="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_results_table&table=largest-files&snapshot=<?php echo esc_js($WP_SNAPSHOT_FILE); ?>"
+    hx-vals='{"_ajax_nonce":"<?php echo esc_js($WP_NONCE); ?>"}'
+    class="TOP10"
+    >
+
+    <div class="DUI-panel DUI-panel--TOP10">
+        <div class="DUI-panel__content">
+            ...
+        </div>
+    </div>
+
+</div>
+
+<div hx-trigger="load"
+    hx-get="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_results_table&table=largest-folders-files&snapshot=<?php echo esc_js($WP_SNAPSHOT_FILE); ?>"
+    hx-vals='{"_ajax_nonce":"<?php echo esc_js($WP_NONCE); ?>"}'
+    class="TOP10"
+    >
+
+    <div class="DUI-panel DUI-panel--TOP10">
+        <div class="DUI-panel__content">
+            ...
+        </div>
+    </div>
+
+</div>
+
+<div hx-trigger="load"
+    hx-get="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_results_table&table=largest-folders-sub-folders&snapshot=<?php echo esc_js($WP_SNAPSHOT_FILE); ?>"
+    hx-vals='{"_ajax_nonce":"<?php echo esc_js($WP_NONCE); ?>"}'
+    class="TOP10"
+    >
+
+    <div class="DUI-panel DUI-panel--TOP10">
+        <div class="DUI-panel__content">
+            ...
+        </div>
+    </div>
+
+</div>
+
+<div hx-trigger="load"
+    hx-get="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_results_table&table=folders-most-files&snapshot=<?php echo esc_js($WP_SNAPSHOT_FILE); ?>"
+    hx-vals='{"_ajax_nonce":"<?php echo esc_js($WP_NONCE); ?>"}'
+    class="TOP10"
+    >
+
+    <div class="DUI-panel DUI-panel--TOP10">
+        <div class="DUI-panel__content">
+            ...
+        </div>
+    </div>
+
+</div>
+
+<div hx-trigger="load"
+    hx-get="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_results_table&table=largest-plugins&snapshot=<?php echo esc_js($WP_SNAPSHOT_FILE); ?>"
+    hx-vals='{"_ajax_nonce":"<?php echo esc_js($WP_NONCE); ?>"}'
+    class="TOP10"
+    >
+
+    <div class="DUI-panel DUI-panel--TOP10">
+        <div class="DUI-panel__content">
+            ...
+        </div>
+    </div>
+
+</div>
+
+<div hx-trigger="load"
+
+    hx-get="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_results_table&table=largest-themes&snapshot=<?php echo esc_js($WP_SNAPSHOT_FILE); ?>"
+    hx-vals='{"_ajax_nonce":"<?php echo esc_js($WP_NONCE); ?>"}'
+    class="TOP10"
+    >
+
+    <div class="DUI-panel DUI-panel--TOP10">
+        <div class="DUI-panel__content">
+            ...
+        </div>
+    </div>
+
+</div>

@@ -7,16 +7,20 @@
 
             <?php if (sizeof($DATABASES) > 0) { ?>
 
-                <table>
-                    <tr>
-                        <th>Filename</th>
-                        <th>Size</th>
-                    </tr>
+                <table class="DUI-table">
+                    <thead>
+                        <tr class="DUI-table__header">
+                            <th>Filename</th>
+                            <th>Snapshot Size</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     <?php foreach ($DATABASES as $DB) { ?>
                         <tr>
                             <td><a href="?page=disk-usage-insights&snapshot=<?php echo esc_attr($DB['filename']); ?>"><?php echo esc_html($DB['filename']); ?></a></td>
-                            <td><?php echo esc_html(number_format_i18n($DB['filesize'])); ?></td>
+                            <td class="DUI-table__col--number"><?php echo esc_html(number_format_i18n($DB['filesize'])); ?></td>
                             <td>
+                                &nbsp;
                                 <button
                                     hx-target="#DUI-snapshots"
                                     hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_delete_snapshot"
@@ -26,12 +30,11 @@
                             </td>
                         </tr>
                     <?php } ?>
-                    </table>
-
+                    </tbody>
+                </table>
             <?php } else { ?>
                 You haven't taken any snapshots yet.
             <?php } ?>
-
         </div>
     </div>
 </div>

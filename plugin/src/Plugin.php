@@ -3,10 +3,11 @@ namespace Mgleis\DiskUsageInsights;
 
 use Mgleis\DiskUsageInsights\Frontend\Controller\DeleteSnapshotController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\IndexController;
-use Mgleis\DiskUsageInsights\Frontend\Controller\ResultsController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\ScanController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\ScanStatusController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\ScanWorkerController;
+use Mgleis\DiskUsageInsights\Frontend\Controller\ShowResultsController;
+use Mgleis\DiskUsageInsights\Frontend\Controller\ShowResultsTableController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\ShowSnapshotsController;
 
 class Plugin {
@@ -55,6 +56,7 @@ class Plugin {
         add_action('wp_ajax_dui_status', function() { (new ScanStatusController())->status(); });
         add_action('wp_ajax_dui_delete_snapshot', function() { (new DeleteSnapshotController())->delete(); });
         add_action('wp_ajax_dui_list_snapshots', function() { (new ShowSnapshotsController())->execute(); });
+        add_action('wp_ajax_dui_results_table', function() { (new ShowResultsTableController())->execute(); });
     }
 
     public function addScripts($hook_suffix) {
@@ -99,7 +101,7 @@ class Plugin {
         if (!isset($_GET['snapshot'])) {
             return (new IndexController())->execute();
         } else {
-            return (new ResultsController())->execute();
+            return (new ShowResultsController())->execute();
         }
     }
 

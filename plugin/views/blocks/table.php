@@ -4,11 +4,24 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
 }
 ?>
 <div class="DUI-panel DUI-panel--TOP10">
-    <div class=DUI-panel__headline><?php echo esc_html($this->headline); ?></div>
-    <div class=DUI-panel__content>
-        <table class=DUI-table>
+    <div class="DUI-panel__headline">
+        <?php echo esc_html($this->headline); ?>
+        <?php if ($pagination !== null) { ?> 
+            <div class="DUI-panel__headline-actions">
+                <?php if ($pagination->hasPreviousPage()) { ?> 
+                    <a href="" hx-trigger="click" hx-target="closest .DUI-panel" hx-swap="outerHTML" hx-get="<?php echo $pagination->buildPreviousPageUrl(); ?>">&lt;&lt; Previous</a>
+                    &nbsp;
+                <?php } ?>
+                <?php if ($pagination->hasNextPage()) { ?> 
+                    <a href="" hx-trigger="click" hx-target="closest .DUI-panel" hx-swap="outerHTML" hx-get="<?php echo $pagination->buildNextPageUrl(); ?>">Next &gt;&gt;</a>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </div>
+    <div class="DUI-panel__content">
+        <table class="DUI-table">
             <thead>
-                <tr class=DUI-table__header>
+                <tr class="DUI-table__header">
                     <?php foreach ($this->columnNames as $col) { ?>
                         <th>
                             <?php echo esc_html($col); ?>

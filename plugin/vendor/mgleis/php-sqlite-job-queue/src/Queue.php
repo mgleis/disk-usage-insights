@@ -1,7 +1,6 @@
 <?php
 declare(strict_types = 1);
 
-
 namespace Mgleis\PhpSqliteJobQueue;
 
 class Queue {
@@ -12,8 +11,6 @@ class Queue {
     public function __construct(string $filename, string $table = 'jobs') {
         $this->db = new \PDO("sqlite:$filename");
         $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        $this->db->exec('PRAGMA journal_mode = WAL;');
-        $this->db->exec('PRAGMA synchronous = NORMAL;');
         $this->table = $this->db->quote($table);
         $this->initializeDatabase();
     }
@@ -74,13 +71,11 @@ class Queue {
         }
     }
 
-    public function top(): ?Job {
+    public function peek(): ?Job {
         try {
-            // Reserviere den nächsten Job
             $stmt = $this->db->prepare(sprintf("
                 SELECT id, payload
                 FROM %s
-                WHERE status = 'queued'
                 ORDER BY id ASC
                 LIMIT 1
             ", $this->table));

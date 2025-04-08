@@ -8,8 +8,9 @@ class Table {
     private /** @var array */ $columnCss = [];
     private /** @var array */ $percentBar = null; // [$colDisplay, $colSource]
     private /** @var array */ $data = [];
+    private ?Pagination $pagination = null;
 
-    public function __construct(string $headline, array $columnNames = null, array $columnCss = null)
+    public function __construct(string $headline, array $columnNames = [], array $columnCss = [])
     {
         $this->headline = $headline;
         if ($columnNames !== null) {
@@ -28,11 +29,18 @@ class Table {
 
     public function output() {
         $table = $this->data;
+        $pagination = $this->pagination;
         include __DIR__ . '/../../views/blocks/table.php';
     }
 
     public function withPercentBar(int $colDisplay, int $colSource): self {
         $this->percentBar = [$colDisplay, $colSource];
+
+        return $this;
+    }
+
+    public function withPagination(Pagination $pagination): self {
+        $this->pagination = $pagination;
 
         return $this;
     }
