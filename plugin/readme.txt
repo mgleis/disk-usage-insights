@@ -28,7 +28,7 @@ You have two options:
 
 = How to uninstall the plugin? =
 
-Simply deactivate and delete the plugin.
+Simply deactivate and delete the plugin. All previous snapshot databases will be deleted, too.
 
 = Is Multisite supported? =
 
@@ -37,6 +37,10 @@ Yes, but only for users with the "manage_sites" privilege, which Super Admins ha
 = Which PHP version is supported? =
 
 You need a PHP version >= 7.4.
+
+= Where are the snapshot database files stored? =
+
+All data is stored within the plugin directory of this plugin. If you update or delete this plugin, previous snapshots will be deleted.
 
 == Screenshots ==
 1. Largest Files and Largest Folders
