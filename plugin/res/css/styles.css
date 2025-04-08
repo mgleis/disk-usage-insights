@@ -25,6 +25,9 @@
     border-bottom: 1px solid #e0e0e0;
     font-weight: bold;
 }
+.DUI-panel__headline-actions { 
+    float: right;
+}
 .DUI-panel__content {
     padding: 6px;
 }
@@ -39,7 +42,9 @@
     color: black;
 }
 .DUI-table td { overflow-wrap: anywhere; }
-.DUI-table thead th { border-bottom: 1px solid #eee;  }
+.DUI-table thead th { border-bottom: 1px solid #eee; white-space: nowrap; }
 .DUI-table tbody tr:nth-child(odd) { background-color: white; }
 .DUI-table tbody tr:nth-child(even) { background-color: white; }
+.DUI-table tbody tr:hover { background-color: #eee; }
 .DUI-table__col--number { text-align: right; white-space: nowrap; }
+.DUI-table__col--grow { width: 100%; }
