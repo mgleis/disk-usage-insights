@@ -14,13 +14,14 @@ Respect Special Content Folders:
 
 # Open
 
-# Version 1.2
-- save paths relativ to root
-    WP_LANG_DIR
-- store root in database
+# Version 1.6
+- pagination for tables
 
-# Version 1.3
-- fix playground version
+- delete single file
+- delete multiple files
+- delete directories
+- hide wordpress files
+
 
 # Version 1.x
 - idea: data must be saved to wp-content/disk-usage-insights directory!
@@ -44,17 +45,10 @@ Respect Special Content Folders:
 - make it browsable
 
 # Later
-- Submit plugin to the WP repository here: https://wordpress.org/plugins/developers/add/
-- Support for large folder structurs (xhr load)
 - Support for Soft Links
 - Integrate Charts
  - icicle? https://observablehq.com/@d3/icicle/2?intent=fork
-- Add Live Preview Button
- - see https://wordpress.org/plugins/visualizer/
- - seee https://krasenslavov.com/how-to-add-live-preview-for-your-wordpress-org-plugins-with-blueprints/
- - docs see https://wordpress.github.io/wordpress-playground/
- - final link: https://playground.wordpress.net/?php-extension-bundle=light&plugin=disk-usage-insights&url=/wp-admin/tools.php?page=disk-usage-insights
- - blueprint editor: https://playground.wordpress.net/builder/builder.html
+
 
 # Escaping
 see https://developer.wordpress.org/apis/security/escaping/
@@ -62,3 +56,11 @@ see https://developer.wordpress.org/apis/security/escaping/
 - esc_js()      -> Inline JS
 - esc_url()     -> ALl URLs
 - esc_attr()    -> HTML attribute
+
+
+[X] Add Live Preview Button
+ - see https://wordpress.org/plugins/visualizer/
+ - seee https://krasenslavov.com/how-to-add-live-preview-for-your-wordpress-org-plugins-with-blueprints/
+ - docs see https://wordpress.github.io/wordpress-playground/
+ - final link: https://playground.wordpress.net/?php-extension-bundle=light&plugin=disk-usage-insights&url=/wp-admin/tools.php?page=disk-usage-insights
+ - blueprint editor: https://playground.wordpress.net/builder/builder.html
