@@ -48,3 +48,4 @@ function wp_remote_get(string $url, array $args = array()) {
 function wp_delete_file(string $file): bool {
     return unlink($file);
 }
+function get_theme_root(): string { return ''; }
