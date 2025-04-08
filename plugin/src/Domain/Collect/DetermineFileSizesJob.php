@@ -25,10 +25,8 @@ class DetermineFileSizesJob extends BaseJob {
         foreach ($fileEntries as $fileEntry) {
 
             $absoluteFilename = $this->fileEntryRepository->calcFullPath($fileEntry, $root);
-            //$this->log($absoluteFilename);
 
             $fileEntry->size = filesize($absoluteFilename);
-
             $this->fileEntryRepository->createOrUpdate($fileEntry);
         }
     }
