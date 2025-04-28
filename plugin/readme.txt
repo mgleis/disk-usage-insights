@@ -3,14 +3,13 @@ Contributors: mgleis
 Tags: disk usage, file size, large files, large folders
 Requires at least: 5.0
 Tested up to: 6.8.0
-Stable Tag: 1.6
+Stable Tag: 1.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Find large files and folders in no time! Hunt down the TOP 10 files and folders with the most disk usage.
 
 == Description ==
-
 Find large files and large folders in no time. This plugin scans your whole WordPress installation, counts all files and folders, sums up the sizes and outputs useful statistics to find unwanted large objects in your system.
 
 == Installation ==
@@ -21,32 +20,42 @@ Find large files and large folders in no time. This plugin scans your whole Word
 == Frequently Asked Questions ==
 
 = How do I use this plugin? =
-
 You have two options:
 * Open the Tools section in the Admin Area and select "Disk Usage Insights".
 * Click the pie chart in the admin bar.
 
 = How to uninstall the plugin? =
-
 Simply deactivate and delete the plugin. All previous snapshot databases will be deleted, too.
 
-= Is Multisite supported? =
+= Does this plugin delete files? =
+No, this plugin only shows big files and directories. You need to delete them manually.
 
+= Where are the snapshot database files stored? =
+All data is stored within the plugin directory of this plugin. If you update or delete this plugin, previous snapshots will be deleted.
+
+= Is a different wp-content directory location possible?
+No, but it is planned for the future.
+
+= Is a different plugin directory location possible?
+No, but it is planned for the future.
+
+= Is a different uploads directory location possible?
+No, but it is planned for the future.
+
+= Is Multisite supported? =
 Yes, but only for users with the "manage_sites" privilege, which Super Admins have by default.
 
 = Which PHP version is supported? =
-
 You need a PHP version >= 7.4.
-
-= Where are the snapshot database files stored? =
-
-All data is stored within the plugin directory of this plugin. If you update or delete this plugin, previous snapshots will be deleted.
 
 == Screenshots ==
 1. Largest Files and Largest Folders
 1. Largest Folders, Folders with most files, Largest Plugins, Largest Themes
 
 == Changelog ==
+
+= 1.7 (TODO) =
+* Added bar charts
 
 = 1.6 (2025-04-08) =
 * Pagination for result tables
