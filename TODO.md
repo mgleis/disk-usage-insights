@@ -1,22 +1,27 @@
 # TODOs
 
-Goal: PHP 7.0 as min requirement (supports most systems)
-    oder lieber 8.0?
-    mal schauen, was der compat check ergibt
+Goal: PHP 7.4 as min requirement (supports most systems)
 
 - WordPress Version + PHP Version https://wordpress.org/about/stats/
 - WP Version / PHP Compatability https://make.wordpress.org/core/handbook/references/php-compatibility-and-wordpress-versions/
 
 
-Respect Special Content Folders:
-    https://developer.wordpress.org/advanced-administration/wordpress/wp-config/#Moving_wp-content_folder
+Charts:
+ - https://chartscss.org/
+ - Flip Card CSS Effect: 
+    https://codepen.io/mondal10/pen/WNNEvjV
+    https://3dtransforms.desandro.com/card-flip https://codepen.io/desandro/pen/LmWoWe
 
 
-# Open
+# Open Tasks / Ideas
 
-# Version 1.6
-- pagination for tables
+https://developer.wordpress.org/advanced-administration/wordpress/wp-config/#moving-wp-content-folder
+- You can move the wp-content directory, which holds your themes, plugins, and uploads, outside of the WordPress application directory.
+=> Support for WP_CONTENT_DIR
+=> Support for WP_PLUGIN_DIR
+=> Support for UPLOADS
 
+# Future
 - delete single file
 - delete multiple files
 - delete directories

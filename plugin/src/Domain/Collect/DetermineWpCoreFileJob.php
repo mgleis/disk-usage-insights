@@ -27,7 +27,7 @@ class DetermineWpCoreFileJob extends BaseJob {
             global $wp_version;
             $url = sprintf('https://api.wordpress.org/core/checksums/1.0/?version=%s&locale=en_US', $wp_version);
             $this->log("Fetching from url: " . $url);
-            $str = wp_remote_get($url)['body'];
+            $str = wp_remote_get($url)['body']; // TODO: Cannot use object of type WP_Error as array
             $arr = json_decode($str, true, JSON_THROW_ON_ERROR);
             if ($arr['checksums'] === false) {
                 throw new \Exception("Could not fetch the checksums of wordpress api.");
@@ -42,8 +42,9 @@ class DetermineWpCoreFileJob extends BaseJob {
         foreach ($fileEntries as $fileEntry) {
 
             $relativeFilename = $this->fileEntryRepository->calcFullPath($fileEntry);
+            $relativeFilename = trim($relativeFilename, '/'); // remove slash at the beginning
             if (in_array($relativeFilename, $snapshot->wpcorefiles)) {
-                $fileEntry->is_wp_core_file = 1;
+                    $fileEntry->is_wp_core_file = 1;
                 $this->fileEntryRepository->createOrUpdate($fileEntry);
             }
         }

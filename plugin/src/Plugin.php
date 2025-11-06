@@ -52,12 +52,27 @@ class Plugin {
         add_action('admin_enqueue_scripts', [$this, 'addScripts']);
 
         // Add AJAX
-        add_action('wp_ajax_dui_scan', function() { (new ScanController())->scan(); });
-        add_action('wp_ajax_dui_worker', function() { (new ScanWorkerController())->worker(); });
-        add_action('wp_ajax_dui_status', function() { (new ScanStatusController())->status(); });
-        add_action('wp_ajax_dui_delete_snapshot', function() { (new DeleteSnapshotController())->delete(); });
-        add_action('wp_ajax_dui_list_snapshots', function() { (new ShowSnapshotsController())->execute(); });
-        add_action('wp_ajax_dui_results_table', function() { (new ShowResultsTableController())->execute(); });
+        add_action('wp_ajax_dui_scan', $this->wrapErrors(function() { (new ScanController())->scan(); }));
+        add_action('wp_ajax_dui_worker', $this->wrapErrors(function() { (new ScanWorkerController())->worker(); }));
+        add_action('wp_ajax_dui_status', $this->wrapErrors(function() { (new ScanStatusController())->status(); }));
+        add_action('wp_ajax_dui_delete_snapshot', $this->wrapErrors(function() { (new DeleteSnapshotController())->delete(); }));
+        add_action('wp_ajax_dui_list_snapshots', $this->wrapErrors(function() { (new ShowSnapshotsController())->execute(); }));
+        add_action('wp_ajax_dui_results_table', $this->wrapErrors(function() { (new ShowResultsTableController())->execute(); }));
+    }
+
+    public function wrapErrors(callable $fn) {
+        return function() use ($fn) {
+            try {
+                return $fn();
+            } catch (\Throwable $e) {
+                status_header(500, 'Interner Fehler');
+                //echo 'Fehler: Interner Serverfehler.';
+                echo "\n\n";
+                echo $e->getMessage();
+                echo $e->getTraceAsString();
+                wp_die();
+            }
+        };
     }
 
     public function addScripts($hook_suffix) {

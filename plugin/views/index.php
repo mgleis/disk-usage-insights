@@ -36,7 +36,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
         </div>
     </div>
 
-    <div id="DUI-snapshots" class="DUI-panel"
+    <div class="DUI-panel"
         hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_list_snapshots"
         hx-vals='{"_ajax_nonce":"<?php echo esc_attr($WP_NONCE); ?>"}'
         hx-trigger="load"

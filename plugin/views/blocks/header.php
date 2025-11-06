@@ -43,3 +43,14 @@
 
 </div>
 <div style="clear:both"></div>
+<div id="dui_errors" style="display:none">
+    <div class="DUI-panel DUI-panel--error">
+        <div class="DUI-panel__headline dashicons-before dashicons-warning">
+            Errors - Please report errors occuring here to our 
+            <a target="_blank" href="https://wordpress.org/support/plugin/disk-usage-insights/">plugin support forum</a> 
+            at WordPress.org
+        </div>
+        <div class="DUI-panel__content" id="dui_errors_content">
+        </div>
+    </div>
+</div>

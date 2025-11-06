@@ -8,7 +8,7 @@
  * Version: 1.7
  * Requires PHP: 7.4
  */
-const DISK_USAGE_INSIGHTS_VERSION = '1.7';
+const DISK_USAGE_INSIGHTS_VERSION = '1.7.2';
 
  // Ensure running within WordPress
 if (!defined('ABSPATH')) {

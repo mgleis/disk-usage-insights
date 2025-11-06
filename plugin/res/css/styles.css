@@ -19,7 +19,6 @@
     .show-desktop { display: none; }
 }
 
-
 .DUI-panel__headline { 
     padding: 6px 10px 6px 10px;
     border-bottom: 1px solid #e0e0e0;
@@ -35,6 +34,14 @@
     padding: 20px;
 }
 
+.DUI-panel--error {
+    border-color: #e0b4b4;
+    background-color: red;
+    color: white;
+}
+.DUI-panel--error a {
+    color: white;
+}
 
 .DUI-table {
     _border: 1px solid #aaa;
@@ -48,3 +55,29 @@
 .DUI-table tbody tr:hover { background-color: #eee; }
 .DUI-table__col--number { text-align: right; white-space: nowrap; }
 .DUI-table__col--grow { width: 100%; }
+
+/* Stacked Bar Chart */
+
+.stackedbarchart {
+    display: flex;
+    width: 600px;
+    text-align: center;
+}
+.stackedbarchart__bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    word-break: break-all;
+    overflow: hidden;
+    padding: 5px;
+}
+.stackedbarchart__bar:nth-child(1) { background-color: rgba(255, 180, 50, .75); }
+.stackedbarchart__bar:nth-child(2) { background-color: rgba(255, 220, 90, .75); }
+.stackedbarchart__bar:nth-child(3) { background-color: rgba(100, 210, 80, .75); }
+.stackedbarchart__bar:nth-child(4) { background-color: rgba(90, 165, 255, .75); }
+.stackedbarchart__bar:nth-child(5) { background-color: hsla(0, 0%, 71%, .75); }
+.stackedbarchart__bar:nth-child(6) { background-color: rgba(170, 90, 240, .75); }
+.stackedbarchart__bar:nth-child(7) { background-color: hsla(0, 0%, 43%, .75); }
+.stackedbarchart__bar:nth-child(8) { background-color: hsla(40, 26%, 55%, .75); }
+.stackedbarchart__bar:nth-child(9) { background-color: rgba(240, 50, 50, .75); }

@@ -49,3 +49,9 @@ function wp_delete_file(string $file): bool {
     return unlink($file);
 }
 function get_theme_root(): string { return ''; }
+function status_header(int $code, string $description = '') {
+    http_response_code($code);
+    if ($description) {
+        echo $description;
+    }
+}

@@ -56,6 +56,7 @@ You need a PHP version >= 7.4.
 
 = 1.7 (TODO) =
 * Added bar charts
+* Error Output to  Website so it can be reported to the WordPress Forum
 
 = 1.6 (2025-04-08) =
 * Pagination for result tables

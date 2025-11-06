@@ -24,13 +24,28 @@ class ShowResultsController {
 
         // TODO validate
         $snapshot = sanitize_file_name(wp_unslash($_GET['snapshot'] ?? ''));
-        $root = $this->database->snapshotRepository->load()->root;
+        $root = $sn->root;
         $totalSize = $this->selectInt("SELECT SUM(size) FROM fileentries;");
 
         $WP_PLUGIN_URL = WpHelper::getPluginUrl();
         $WP_NONCE = wp_create_nonce(Plugin::NONCE);
         $WP_ADMIN_AJAX_URL = admin_url('admin-ajax.php');
         $WP_SNAPSHOT_FILE = $snapshot;
+
+        // Bar Chart
+        $wpCoreSize = $this->selectInt("SELECT SUM(size) FROM fileentries WHERE is_wp_core_file = 1;");
+        $uploadsSize = $this->selectInt("SELECT dir_recursive_size FROM fileentries WHERE name = 'uploads';"); // TODO wrong
+        $themesSize = $this->selectInt("SELECT dir_recursive_size FROM fileentries WHERE name = 'themes';"); // TODO wrong
+        $pluginsSize = $this->selectInt("SELECT dir_recursive_size FROM fileentries WHERE name = 'plugins';"); // TODO wrong
+        $wpContentSize = $this->selectInt("SELECT dir_recursive_size FROM fileentries WHERE name = 'wp-content';") // TODO wrong
+            - $themesSize - $pluginsSize;
+        $barChart = [
+            ['label' => 'WP Core',      'percent' => round(100 * $wpCoreSize / $totalSize), 'gb' => round($wpCoreSize / 1_000_000, 1)],
+            ['label' => 'Uploads',      'percent' => round(100 * $uploadsSize / $totalSize), 'gb' => round($uploadsSize / 1_000_000, 1)],
+            ['label' => 'Themes',       'percent' => round(100 * $themesSize / $totalSize), 'gb' => round($themesSize / 1_000_000, 1)],
+            ['label' => 'Plugins',      'percent' => round(100 * $pluginsSize / $totalSize), 'gb' => round($pluginsSize / 1_000_000, 1)],
+            ['label' => 'wp-content',   'percent' => round(100 * $wpContentSize / $totalSize), 'gb' => round($wpContentSize / 1_000_000, 1)],
+        ];
 
         include_once __DIR__ . '/../../../views/results.php';
     }

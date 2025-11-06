@@ -41,8 +41,6 @@ class Worker {
                     $callback($job);
                 } catch (\Throwable $e) {
                     $this->queue->error($job);
-                    echo $e->getMessage()."\n";
-                    echo $e->getTraceAsString()."\n";
                     throw $e;
                 }
                 $this->queue->done($job);
