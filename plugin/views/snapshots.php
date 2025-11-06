@@ -1,4 +1,4 @@
-<div class="DUI-panel">
+<div id="DUI-snapshots" class="DUI-panel">
     <div class="DUI-panel__headline">
         View a previous snapshot
     </div>
