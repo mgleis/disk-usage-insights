@@ -29,7 +29,7 @@ class ShowLargestPluginsController {
                 ];
             }
             (new Table(
-                'Largest Plugin Folders',
+                'Plugins',
                 ['Folder', 'Total Size'],
                 ['DUI-table__col--grow', 'DUI-table__col--number']
             ))->withData($table)->output();

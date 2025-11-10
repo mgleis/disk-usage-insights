@@ -29,7 +29,7 @@ class ShowLargestThemesController {
                 ];
             }
             (new Table(
-                'Largest Theme Folders',
+                'Themes',
                 ['Folder', 'Total Size'],
                 ['DUI-table__col--grow', 'DUI-table__col--number']
             ))->withData($table)->output();

@@ -3,7 +3,7 @@ Contributors: mgleis
 Tags: disk usage, file size, large files, large folders
 Requires at least: 5.0
 Tested up to: 6.8.3
-Stable Tag: 1.7
+Stable Tag: 1.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -54,8 +54,11 @@ You need a PHP version >= 7.4.
 
 == Changelog ==
 
-= 1.7 (TODO) =
-* Added bar charts
+= 1.8 =
+* Better Bar Chart
+
+= 1.7 =
+* Added Bar Charts
 * Error Output to  Website so it can be reported to the WordPress Forum
 
 = 1.6 (2025-04-08) =
