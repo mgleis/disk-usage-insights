@@ -15,24 +15,30 @@ class ShowLargestPluginsController {
         // Largest Directories within /wp-content/plugins
         //
         $pluginDir = substr(WP_PLUGIN_DIR, strlen(rtrim(ABSPATH, '/')));    // e.g. '/wp-content/plugins' TODO store in snapshot
-        $fileEntry = $database->fileEntryRepository->findByRelativeName($pluginDir);
-        if ($fileEntry !== null) {
+        $pluginEntry = $database->fileEntryRepository->findByRelativeName($pluginDir);
+        if ($pluginEntry !== null) {
 
-            $rows = $this->fetchAssoc($database, sprintf("SELECT * FROM fileentries WHERE parent_id = %s AND type = 'dir' ORDER BY dir_recursive_size DESC LIMIT 10", $fileEntry->id));
+            $rows = $this->fetchAssoc($database, sprintf(
+                "SELECT * FROM fileentries WHERE parent_id = %s AND type = 'dir' ORDER BY dir_recursive_size DESC LIMIT 10", 
+                $pluginEntry->id)
+            );
             $table = [];
             foreach ($rows as $row) {
                 $fileEntry = $database->fileEntryRepository->findById($row['id']);
                 $relativeName = $row['name'];
                 $table[] = [
-                    $relativeName, 
-                    number_format_i18n($row['dir_recursive_size'])
+                    $relativeName,
+                    number_format_i18n($row['dir_recursive_size']),
+                    number_format_i18n(100 * $row['dir_recursive_size'] / $pluginEntry->dir_recursive_size, 2) . '%'
                 ];
             }
             (new Table(
                 'Plugins',
-                ['Folder', 'Total Size'],
-                ['DUI-table__col--grow', 'DUI-table__col--number']
-            ))->withData($table)->output();
+                ['Folder', 'Total Size', '%'],
+                ['DUI-table__col--grow', 'DUI-table__col--number', 'DUI-table__col--number']
+            ))->withPercentBar(2, 2)
+                ->withData($table)
+                ->output();
 
         } else {
             echo "plugin dir not found";

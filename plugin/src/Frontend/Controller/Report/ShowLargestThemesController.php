@@ -15,24 +15,30 @@ class ShowLargestThemesController {
         // Largest Directories within /wp-content/themes
         //
         $themeDir = substr(get_theme_root(), strlen(rtrim(ABSPATH, '/')));  // e.g. '/wp-content/themes'  TODO store in snapshot
-        $fileEntry = $database->fileEntryRepository->findByRelativeName($themeDir);
-        if ($fileEntry !== null) {
+        $themeEntry = $database->fileEntryRepository->findByRelativeName($themeDir);
+        if ($themeEntry !== null) {
 
-            $rows = $this->fetchAssoc($database, sprintf("SELECT * FROM fileentries WHERE parent_id = %s AND type = 'dir' ORDER BY dir_recursive_size DESC LIMIT 10", $fileEntry->id));
+            $rows = $this->fetchAssoc($database, sprintf(
+                "SELECT * FROM fileentries WHERE parent_id = %s AND type = 'dir' ORDER BY dir_recursive_size DESC LIMIT 10", 
+                $themeEntry->id)
+            );
             $table = [];
             foreach ($rows as $row) {
                 $fileEntry = $database->fileEntryRepository->findById($row['id']);
                 $relativeName = $row['name'];
                 $table[] = [
-                    $relativeName, 
-                    number_format_i18n($row['dir_recursive_size'])
+                    $relativeName,
+                    number_format_i18n($row['dir_recursive_size']),
+                    number_format_i18n(100 * $row['dir_recursive_size'] / $themeEntry->dir_recursive_size, 2) . '%'
                 ];
             }
             (new Table(
                 'Themes',
-                ['Folder', 'Total Size'],
-                ['DUI-table__col--grow', 'DUI-table__col--number']
-            ))->withData($table)->output();
+                ['Folder', 'Total Size', '%'],
+                ['DUI-table__col--grow', 'DUI-table__col--number', 'DUI-table__col--number']
+            ))->withPercentBar(2, 2)
+                ->withData($table)
+                ->output();
 
         } else {
             echo "theme dir not found";
