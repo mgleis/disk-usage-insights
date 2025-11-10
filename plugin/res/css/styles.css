@@ -96,3 +96,17 @@
 .stackedbarchart__color--7 { background-color: hsla(40, 26%, 55%, .75); }
 .stackedbarchart__color--8 { background-color: rgba(240, 50, 50, .75); }
 .stackedbarchart__color--9 { background-color: rgba(50, 200, 200, .75); }
+
+.color-cycle {
+    animation: color-cycle-animation 10s infinite;
+}
+
+@keyframes color-cycle-animation {
+    0% { color: red; }
+    16.66% { color: orange; }
+    33.33% { color: yellow; }
+    50% { color: green; }
+    66.66% { color: blue; }
+    83.33% { color: purple; }
+    100% { color: red; }
+}

@@ -56,6 +56,8 @@ You need a PHP version >= 7.4.
 
 = 1.8 =
 * Better Bar Chart
+* Percentage Display for Plugins and Themes
+* Changed the Review and Help links
 
 = 1.7 =
 * Added Bar Charts
