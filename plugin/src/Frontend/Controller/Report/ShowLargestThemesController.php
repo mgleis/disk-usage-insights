@@ -56,6 +56,4 @@ class ShowLargestThemesController {
         return $result[0];
     }
 
-
-
 }

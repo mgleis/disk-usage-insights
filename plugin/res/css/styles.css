@@ -72,27 +72,6 @@
     overflow: hidden;
     padding: 5px;
 }
-:root {
-    --color-1: rgba(255, 180, 50, .75);
-    --color-2: rgba(255, 220, 90, .75);
-    --color-3: rgba(100, 210, 80, .75);
-    --color-4: rgba(90, 165, 255, .75);
-    --color-5: hsla(0, 0%, 71%, .75);
-    --color-6: rgba(170, 90, 240, .75);
-    --color-7: hsla(0, 0%, 43%, .75);
-    --color-8: hsla(40, 26%, 55%, .75);
-    --color-9: rgba(240, 50, 50, .75);
-}
-
-.stackedbarchart__bar:nth-child(1) { background-color: var(--color-1); }
-.stackedbarchart__bar:nth-child(2) { background-color: var(--color-2); }
-.stackedbarchart__bar:nth-child(3) { background-color: var(--color-3); }
-.stackedbarchart__bar:nth-child(4) { background-color: var(--color-4); }
-.stackedbarchart__bar:nth-child(5) { background-color: var(--color-5); }
-.stackedbarchart__bar:nth-child(6) { background-color: var(--color-6); }
-.stackedbarchart__bar:nth-child(7) { background-color: var(--color-7); }
-.stackedbarchart__bar:nth-child(8) { background-color: var(--color-8); }
-.stackedbarchart__bar:nth-child(9) { background-color: var(--color-9); }
 
 .stackedbarchart__legend {
     display:grid;
@@ -106,12 +85,14 @@
     margin-right: 5px;
     border: 1px solid black;
 }
-.stackedbarchart__color--0 { background-color: var(--color-1); }
-.stackedbarchart__color--1 { background-color: var(--color-2); }
-.stackedbarchart__color--2 { background-color: var(--color-3); }
-.stackedbarchart__color--3 { background-color: var(--color-4); }
-.stackedbarchart__color--4 { background-color: var(--color-5); }
-.stackedbarchart__color--5 { background-color: var(--color-6); }
-.stackedbarchart__color--6 { background-color: var(--color-7); }
-.stackedbarchart__color--7 { background-color: var(--color-8); }
-.stackedbarchart__color--8 { background-color: var(--color-9); }
+
+.stackedbarchart__color--0 { background-color: rgba(255, 180, 50, .75); }
+.stackedbarchart__color--1 { background-color: rgba(255, 220, 90, .75); }
+.stackedbarchart__color--2 { background-color: rgba(100, 210, 80, .75); }
+.stackedbarchart__color--3 { background-color: rgba(90, 165, 255, .75); }
+.stackedbarchart__color--4 { background-color: hsla(0, 0%, 71%, .75); }
+.stackedbarchart__color--5 { background-color: rgba(170, 90, 240, .75); }
+.stackedbarchart__color--6 { background-color: hsla(0, 0%, 43%, .75); }
+.stackedbarchart__color--7 { background-color: hsla(40, 26%, 55%, .75); }
+.stackedbarchart__color--8 { background-color: rgba(240, 50, 50, .75); }
+.stackedbarchart__color--9 { background-color: rgba(50, 200, 200, .75); }
