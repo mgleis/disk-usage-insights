@@ -38,6 +38,7 @@ class ShowLargestPluginsController {
                 ['DUI-table__col--grow', 'DUI-table__col--number', 'DUI-table__col--number']
             ))->withPercentBar(2, 2)
                 ->withData($table)
+                ->withVbarChart(2)
                 ->output();
 
         } else {

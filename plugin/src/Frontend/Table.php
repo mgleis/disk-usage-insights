@@ -8,6 +8,7 @@ class Table {
     private /** @var array */ $columnCss = [];
     private /** @var array */ $percentBar = null; // [$colDisplay, $colSource]
     private /** @var array */ $data = [];
+    private /** @var array */ $vbarChart = [];
     private ?Pagination $pagination = null;
 
     public function __construct(string $headline, array $columnNames = [], array $columnCss = [])
@@ -35,6 +36,16 @@ class Table {
 
     public function withPercentBar(int $colDisplay, int $colSource): self {
         $this->percentBar = [$colDisplay, $colSource];
+
+        return $this;
+    }
+
+    public function withVbarChart(int $colSource): self {
+        // vbar chart
+        $this->vbarChart = [];
+        foreach ($this->data as $row) {
+            $this->vbarChart[] = floatval($row[$colSource]);
+        }
 
         return $this;
     }

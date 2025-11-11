@@ -32,12 +32,14 @@ class ShowLargestThemesController {
                     number_format_i18n(100 * $row['dir_recursive_size'] / $themeEntry->dir_recursive_size, 2) . '%'
                 ];
             }
+
             (new Table(
                 'Themes',
                 ['Folder', 'Total Size', '%'],
                 ['DUI-table__col--grow', 'DUI-table__col--number', 'DUI-table__col--number']
             ))->withPercentBar(2, 2)
                 ->withData($table)
+                ->withVbarChart(2)
                 ->output();
 
         } else {

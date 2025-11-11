@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
         Total Size: <?php echo esc_html(number_format_i18n($totalSize)); ?>
         <br>
         <br>
-        <div class="stackedbarchart" style="border: 1px solid black;">
+        <div class="stackedbarchart" style="border: 1px solid black; margin-bottom: 5px;">
             <?php foreach ($barChart as $idx => $bar): ?>
                 <div class="stackedbarchart__bar stackedbarchart__color--<?php echo ($idx % 10); ?>" style="width: <?php echo esc_html($bar['percent']) ?>%; height: 20px;">
                     <?php if ($bar['percent'] > 10): ?>
@@ -36,7 +36,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
                 <div>
                     <div class="stackedbarchart__legendcolor stackedbarchart__color--<?php echo ($idx % 10); ?>"></div>
                     <!-- <?php echo esc_html($bar['percent']) ?>% -->
-                    <?php echo esc_html($bar['gb']) ?> GB
+                    <?php echo esc_html($bar['mb']) ?> MB
                     <?php echo esc_html($bar['label']) ?>
                 </div>
             <?php endforeach ?>
