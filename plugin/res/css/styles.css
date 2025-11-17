@@ -98,7 +98,8 @@
 .stackedbarchart__color--9 { background-color: rgba(50, 200, 200, .75); }
 
 .color-cycle {
-    animation: color-cycle-animation 10s infinite;
+    animation: color-cycle-animation 5s infinite, bounce-animation 15s 10s infinite linear;
+    transform-origin: center;
 }
 
 @keyframes color-cycle-animation {
@@ -109,6 +110,27 @@
     66.66% { color: blue; }
     83.33% { color: purple; }
     100% { color: red; }
+}
+
+@keyframes bounce-animation {
+    0%  { transform: rotate(0deg) scale(1.0) }
+    5% { transform: rotate(36deg) scale(1.25); }
+    10% { transform: rotate(72deg) scale(1.5); }
+    15% { transform: rotate(108deg) scale(1.25); }
+    20% { transform: rotate(144deg) scale(1.0); }
+    25% { transform: rotate(180deg) scale(1.25); }
+    30% { transform: rotate(216deg) scale(1.5); }
+    35% { transform: rotate(252deg) scale(1.25); }
+    40% { transform: rotate(288deg) scale(1.0); }
+    45% { transform: rotate(324deg) scale(1.0); }
+    50% { transform: rotate(360deg) scale(1.0); }
+    100% { transform: rotate(360deg) scale(1.0); }
+
+}
+
+@keyframes rotate-animation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .vbarchart {
