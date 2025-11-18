@@ -3,7 +3,7 @@ Contributors: mgleis
 Tags: disk usage, file size, large files, large folders
 Requires at least: 5.0
 Tested up to: 6.8
-Stable Tag: 1.9
+Stable Tag: 1.10
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -53,6 +53,11 @@ You need a PHP version >= 7.4.
 1. Largest Folders, Folders with most files, Largest Plugins, Largest Themes
 
 == Changelog ==
+
+= 1.10 (TODO) =
+* Maintenance Release
+* Cleaned up CSS
+* Cleaned up PHP (checks with phpstan and Plugin Checker)
 
 = 1.9 (2025-11-18) =
 * File Browser: Donut Chart + Navigate through folders
