@@ -30,12 +30,11 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
                     .donut-chart {
                         background: conic-gradient(
                             <?php foreach ($items as $index => $item): ?>
-                                var(--dui-legend-color-<?php echo $index % 10; ?>) <?php echo $item['conic']; ?><?php echo ($index < count($items) - 1) ? ',' : ''; ?>
+                                    var(--dui-legend-color-<?php echo $index % 10; ?>) <?php echo $item['conic']; ?><?php echo ($index < count($items) - 1) ? ',' : ''; ?>
                             <?php endforeach; ?>
                         );
                     }
                 </style>
-
                 <div>
                     <div class="donut-chart">
                         <div class="donut-chart__center">
@@ -52,7 +51,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
                     <div style="margin-bottom: 4px; display: flex; align-items: center;">
                         <div class="donutchart__legendcolor donutchart__color--<?php echo $index % 10; ?>"></div>
                         <div>
-                            <?php if ($item['type'] == 'dir'): ?>
+                        <?php if ($item['type'] == 'dir'): ?>
                                 <a href="#" hx-trigger="click" hx-target="closest .DUI-panel" hx-swap="outerHTML"
                                     hx-get="<?php echo esc_url($item['link']); ?>"
                                 >[<?php echo esc_html($item['name']); ?>]</a>

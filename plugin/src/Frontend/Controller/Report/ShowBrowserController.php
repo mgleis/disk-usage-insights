@@ -41,10 +41,11 @@ class ShowBrowserController {
         $pagination = new Pagination('', 0, 0, 10);
 
         $rows = $this->fetchAssoc($database, sprintf(
-            "SELECT * FROM fileentries WHERE parent_id = %s ORDER BY CASE WHEN type = 'dir' THEN dir_recursive_size ELSE size END DESC LIMIT %s OFFSET %s",
+            "SELECT *, CASE WHEN type = 'dir' THEN dir_recursive_size ELSE size END AS ordersize FROM fileentries WHERE parent_id = %s ORDER BY ordersize DESC LIMIT %s OFFSET %s",
             $parent_id, $pagination->getItemsPerPage(), $pagination->calcOffset())
         );
         $items = [];
+
         foreach ($rows as $row) {
             $items[] = [
                 'id' => $row['id'],
@@ -62,8 +63,8 @@ class ShowBrowserController {
             ];
         }
         $totalSize = array_reduce($items, fn($carry, $item) => $carry + $item['size'], 0);
-        foreach ($items as &$item) {
-            $item['percent'] = $totalSize > 0 ? round(100 * $item['size'] / $totalSize, 2) : 0;
+        for ($i = 0; $i < count($items); $i++) {
+            $items[$i]['percent'] = $totalSize > 0 ? round(100 * $items[$i]['size'] / $totalSize, 2) : 0;
         }
         $last = 0;
         for ($i = 0; $i < count($items); $i++) {
