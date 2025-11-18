@@ -55,7 +55,7 @@ You need a PHP version >= 7.4.
 == Changelog ==
 
 = 1.9 (TODO) =
-* TODO
+* File Browser: Navigate through the largest folders
 
 = 1.8 (2025-11-11) =
 * Better Bar Chart

@@ -86,16 +86,29 @@
     border: 1px solid black;
 }
 
-.stackedbarchart__color--0 { background-color: rgba(255, 180, 50, .75); }
-.stackedbarchart__color--1 { background-color: rgba(255, 220, 90, .75); }
-.stackedbarchart__color--2 { background-color: rgba(100, 210, 80, .75); }
-.stackedbarchart__color--3 { background-color: rgba(90, 165, 255, .75); }
-.stackedbarchart__color--4 { background-color: hsla(0, 0%, 71%, .75); }
-.stackedbarchart__color--5 { background-color: rgba(170, 90, 240, .75); }
-.stackedbarchart__color--6 { background-color: hsla(0, 0%, 43%, .75); }
-.stackedbarchart__color--7 { background-color: hsla(40, 26%, 55%, .75); }
-.stackedbarchart__color--8 { background-color: rgba(240, 50, 50, .75); }
-.stackedbarchart__color--9 { background-color: rgba(50, 200, 200, .75); }
+:root {
+    --dui-legend-color-0: rgba(255, 180, 50, .75);
+    --dui-legend-color-1: rgba(255, 220, 90, .75);
+    --dui-legend-color-2: rgba(100, 210, 80, .75);
+    --dui-legend-color-3: rgba(90, 165, 255, .75);
+    --dui-legend-color-4: hsla(0, 0%, 71%, .75);
+    --dui-legend-color-5: rgba(170, 90, 240, .75);
+    --dui-legend-color-6: hsla(0, 0%, 43%, .75);
+    --dui-legend-color-7: hsla(40, 26%, 55%, .75);
+    --dui-legend-color-8: rgba(240, 50, 50, .75);
+    --dui-legend-color-9: rgba(50, 200, 200, .75);
+}
+
+.stackedbarchart__color--0 { background-color: var(--dui-legend-color-0); }
+.stackedbarchart__color--1 { background-color: var(--dui-legend-color-1); }
+.stackedbarchart__color--2 { background-color: var(--dui-legend-color-2); }
+.stackedbarchart__color--3 { background-color: var(--dui-legend-color-3); }
+.stackedbarchart__color--4 { background-color: var(--dui-legend-color-4); }
+.stackedbarchart__color--5 { background-color: var(--dui-legend-color-5); }
+.stackedbarchart__color--6 { background-color: var(--dui-legend-color-6); }
+.stackedbarchart__color--7 { background-color: var(--dui-legend-color-7); }
+.stackedbarchart__color--8 { background-color: var(--dui-legend-color-8); }
+.stackedbarchart__color--9 { background-color: var(--dui-legend-color-9); }
 
 .color-cycle {
     animation: color-cycle-animation 5s infinite, bounce-animation 15s 10s infinite linear;
@@ -153,13 +166,66 @@
     margin-right: 5px;
     border: 1px solid black;
 }
-.vbarchart__color--0 { background-color: rgba(255, 180, 50, .75); }
-.vbarchart__color--1 { background-color: rgba(255, 220, 90, .75); }
-.vbarchart__color--2 { background-color: rgba(100, 210, 80, .75); }
-.vbarchart__color--3 { background-color: rgba(90, 165, 255, .75); }
-.vbarchart__color--4 { background-color: hsla(0, 0%, 71%, .75); }
-.vbarchart__color--5 { background-color: rgba(170, 90, 240, .75); }
-.vbarchart__color--6 { background-color: hsla(0, 0%, 43%, .75); }
-.vbarchart__color--7 { background-color: hsla(40, 26%, 55%, .75); }
-.vbarchart__color--8 { background-color: rgba(240, 50, 50, .75); }
-.vbarchart__color--9 { background-color: rgba(50, 200, 200, .75); }
+.vbarchart__color--0 { background-color: var(--dui-legend-color-0); }
+.vbarchart__color--1 { background-color: var(--dui-legend-color-1); }
+.vbarchart__color--2 { background-color: var(--dui-legend-color-2); }
+.vbarchart__color--3 { background-color: var(--dui-legend-color-3); }
+.vbarchart__color--4 { background-color: var(--dui-legend-color-4); }
+.vbarchart__color--5 { background-color: var(--dui-legend-color-5); }
+.vbarchart__color--6 { background-color: var(--dui-legend-color-6); }
+.vbarchart__color--7 { background-color: var(--dui-legend-color-7); }
+.vbarchart__color--8 { background-color: var(--dui-legend-color-8); }
+.vbarchart__color--9 { background-color: var(--dui-legend-color-9); }
+
+.donut-chart {
+    position: relative;
+    width: 227px;
+    height: 227px;
+    border-radius: 50%;
+    margin:10px;
+}
+
+.donut-chart__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.donutchart__legendcolor {
+
+    width: 20px;
+    height: 10px;
+    display: inline-block;
+    margin-right: 5px;
+    border: 1px solid black;
+}
+.donut-chart__label {
+    font-size: 14px;
+    color: #666;
+}
+
+.donut-chart__value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.donutchart__color--0 { background-color: var(--dui-legend-color-0); }
+.donutchart__color--1 { background-color: var(--dui-legend-color-1); }
+.donutchart__color--2 { background-color: var(--dui-legend-color-2); }
+.donutchart__color--3 { background-color: var(--dui-legend-color-3); }
+.donutchart__color--4 { background-color: var(--dui-legend-color-4); }
+.donutchart__color--5 { background-color: var(--dui-legend-color-5); }
+.donutchart__color--6 { background-color: var(--dui-legend-color-6); }
+.donutchart__color--7 { background-color: var(--dui-legend-color-7); }
+.donutchart__color--8 { background-color: var(--dui-legend-color-8); }
+.donutchart__color--9 { background-color: var(--dui-legend-color-9); }

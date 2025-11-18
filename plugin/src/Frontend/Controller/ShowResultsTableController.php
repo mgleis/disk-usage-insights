@@ -2,6 +2,7 @@
 namespace Mgleis\DiskUsageInsights\Frontend\Controller;
 
 use Mgleis\DiskUsageInsights\Domain\DatabaseRepository;
+use Mgleis\DiskUsageInsights\Frontend\Controller\Report\ShowBrowserController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\Report\ShowFoldersMostFilesController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\Report\ShowLargestFilesController;
 use Mgleis\DiskUsageInsights\Frontend\Controller\Report\ShowLargestFoldersFilesOnlyController;
@@ -46,6 +47,9 @@ class ShowResultsTableController {
                 break;
             case 'largest-plugins':
                 (new ShowLargestPluginsController())->execute($database);
+                break;
+            case 'browser':
+                (new ShowBrowserController())->execute($database);
                 break;
             default:
                 echo "unknown table";

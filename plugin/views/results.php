@@ -44,6 +44,19 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
     </div>
 </div>
 
+<div hx-trigger="load"
+    hx-get="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_results_table&table=browser&snapshot=<?php echo esc_js($WP_SNAPSHOT_FILE); ?>"
+    hx-vals='{"_ajax_nonce":"<?php echo esc_js($WP_NONCE); ?>"}'
+    class="TOP10"
+    >
+
+    <div class="DUI-panel DUI-panel--TOP10">
+        <div class="DUI-panel__content">
+            ...
+        </div>
+    </div>
+
+</div>
 
 <div hx-trigger="load"
     hx-get="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_results_table&table=largest-files&snapshot=<?php echo esc_js($WP_SNAPSHOT_FILE); ?>"
