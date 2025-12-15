@@ -54,10 +54,13 @@ You need a PHP version >= 7.4.
 
 == Changelog ==
 
-= 1.10 (TODO) =
+= 1.11 (upcoming) =
 * Maintenance Release
 * Cleaned up CSS
 * Cleaned up PHP (checks with phpstan and Plugin Checker)
+
+= 1.10 (2025-12-15) =
+* WordPress 6.9 compatability =
 
 = 1.9 (2025-11-18) =
 * File Browser: Donut Chart + Navigate through folders
