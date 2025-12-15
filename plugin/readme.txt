@@ -3,7 +3,7 @@ Contributors: mgleis
 Tags: disk usage, file size, large files, large folders
 Requires at least: 5.0
 Tested up to: 6.9
-Stable Tag: 1.10
+Stable Tag: 1.11
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
