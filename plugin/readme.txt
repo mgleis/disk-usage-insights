@@ -57,12 +57,16 @@ No, symlinks are completely ignored (for now) to prevent getting into loops.
 
 == Changelog ==
 
-= 1.11 (upcoming) =
+= 1.12 (upcoming) =
 * Maintenance Release
 * Cleaned up CSS
 * Cleaned up PHP (checks with phpstan and Plugin Checker)
+
+= 1.11 (DATE) =
 * Prevent looping by ignoring symlinks (Thanks, @djf3)
 * In case of error added the URL of the ajax request for debugging purposes
+* Added a stopwatch "Running for xx seconds..." in the status bar for debugging purposes
+* Fix for Multisite installations (Thanks, @mattenser)
 
 = 1.10 (2025-12-15) =
 * WordPress 6.9 compatability =
