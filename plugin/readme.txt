@@ -48,6 +48,9 @@ Yes, but only for users with the "manage_sites" privilege, which Super Admins ha
 = Which PHP version is supported? =
 You need a PHP version >= 7.4.
 
+= Are symlinks supported? =
+No, symlinks are completely ignored (for now) to prevent getting into loops.
+
 == Screenshots ==
 1. Largest Files and Largest Folders
 1. Largest Folders, Folders with most files, Largest Plugins, Largest Themes

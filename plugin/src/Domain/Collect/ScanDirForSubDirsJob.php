@@ -33,9 +33,20 @@ class ScanDirForSubDirsJob extends BaseJob {
 
         $files = scandir($realDir) ?? [];
         foreach ($files as $file) {
-            if ($file == '.' || $file == '..' || !is_dir($realDir . '/' . $file)) {
+
+        if ($file == '.') {
+                continue;;
+            }
+            if ($file == '..') {
                 continue;
             }
+            if (!is_dir($realDir . '/' . $file)) {
+                continue;
+            }
+            if (is_link($realDir . '/' . $file)) {
+                continue;
+            }
+
             $dir = $file;
 
             // persist dir info
