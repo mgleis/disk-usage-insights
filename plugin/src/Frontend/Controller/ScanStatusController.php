@@ -51,6 +51,12 @@ class ScanStatusController {
             echo "<br>\n";
         }
 
+        // debug counter
+        $counter = (int) ($_POST['counter'] ?? 0);
+        $counter++;
+        echo '<input type="hidden" name="counter" value="' . $counter . '">';
+        echo "<br>\nRunning for " . esc_html($counter) . " seconds...<br>\n";
+
         wp_die(); // All ajax handlers should die when finished
     }
 

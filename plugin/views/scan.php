@@ -26,7 +26,9 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
                 <!-- STATUS -->
                 <div hx-post="<?php echo esc_url($WP_ADMIN_AJAX_URL); ?>?action=dui_status"
                     hx-vals='{"_ajax_nonce":"<?php echo esc_js($WP_NONCE); ?>", "snapshot":"<?php echo esc_js($WP_SNAPSHOT_FILE); ?>"}'
+                    hx-include="[name='counter']"
                     hx-trigger="every 1s">
+                    <input type="hidden" name="counter" value="1">
                     <br>
                     ...
                 </div>
