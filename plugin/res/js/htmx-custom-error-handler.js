@@ -13,7 +13,7 @@ function dui_handleHtmxError(title, msg) {
 // https://htmx.org/events/#htmx:responseError
 htmx.on('htmx:responseError', function (evt) {
     // 403=Forbidden
-    dui_handleHtmxError('Response error from server (code=' + evt.detail.xhr.status + ')', evt.detail.xhr.responseText);
+    dui_handleHtmxError('Response error from server (code=' + evt.detail.xhr.status + '), URL=' + evt.detail.xhr.responseURL, evt.detail.xhr.responseText);
 });
 
 // https://htmx.org/events/#htmx:sendError

@@ -61,6 +61,8 @@ No, symlinks are completely ignored (for now) to prevent getting into loops.
 * Maintenance Release
 * Cleaned up CSS
 * Cleaned up PHP (checks with phpstan and Plugin Checker)
+* Prevent looping by ignoring symlinks (Thanks, @djf3)
+* In case of error added the URL of the ajax request for debugging purposes
 
 = 1.10 (2025-12-15) =
 * WordPress 6.9 compatability =
