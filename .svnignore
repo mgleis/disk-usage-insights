@@ -1,0 +1,11 @@
+# Mirrors .gitignore for Subversion.
+#
+# SVN ignore patterns are directory-scoped (svn:ignore property),
+# so apply these patterns on the matching directories.
+
+# Apply on repository root (.)
+target
+vendor
+
+# Apply on plugin/output
+*.db*
