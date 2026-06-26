@@ -9,6 +9,7 @@ return;
 const ABSPATH = '';
 const WP_CONTENT_DIR = '';
 const WP_PLUGIN_URL = '';
+const WP_PLUGIN_DIR = '';
 
 class WP_Admin_Bar {
     function add_menu(array $a) {}
@@ -49,6 +50,7 @@ function wp_delete_file(string $file): bool {
     return unlink($file);
 }
 function get_theme_root(): string { return ''; }
+function wp_upload_dir(): array { return ['basedir' => '']; }
 function status_header(int $code, string $description = '') {
     http_response_code($code);
     if ($description) {
