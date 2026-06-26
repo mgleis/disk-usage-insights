@@ -5,6 +5,7 @@ use Mgleis\DiskUsageInsights\Domain\Database;
 use Mgleis\DiskUsageInsights\Domain\FileEntry;
 use Mgleis\DiskUsageInsights\Frontend\Pagination;
 use Mgleis\DiskUsageInsights\Frontend\Table;
+use Mgleis\DiskUsageInsights\Plugin;
 use PDO;
 
 class ShowBrowserController {
@@ -12,6 +13,8 @@ class ShowBrowserController {
     private PDO $db;
 
     public function execute(Database $database) {
+        check_ajax_referer(Plugin::NONCE);
+
         $this->db = $database->q->db;
 
         $WP_ADMIN_AJAX_URL = admin_url('admin-ajax.php');
@@ -19,8 +22,7 @@ class ShowBrowserController {
 
         $totalSize = $this->selectInt($database, "SELECT SUM(size) FROM fileentries;");
 
-        $parent_id = $_GET['parent_id'] ?? 1;
-
+        $parent_id = intval(wp_unslash($_GET['parent_id'] ?? 1));
 
         $parentDir = $this->findById($parent_id);
         $breadCrumbs = $this->calcDirBreadcrumbs($parentDir);
@@ -82,7 +84,7 @@ class ShowBrowserController {
     private function fetchAssoc(Database $database, string $sql): array {
         $stmt = $database->q->db->prepare($sql);
         $stmt->execute();
-        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $rows;
     }
@@ -116,7 +118,7 @@ class ShowBrowserController {
         ");
         $stmt->bindValue(':id', $id);
         $stmt->execute();
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($result === false) {
             throw new \Exception(sprintf("No file entry with id %s found.", esc_html($id)));
         }

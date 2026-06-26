@@ -2,11 +2,13 @@
 
 namespace Mgleis\DiskUsageInsights\Domain;
 
+use PDO;
+
 class FileEntryRepository {
 
-    private \PDO $db;
+    private PDO $db;
 
-    public function __construct(\PDO $db) {
+    public function __construct(PDO $db) {
         $this->db = $db;
         $this->initializeDatabase();
     }
@@ -69,7 +71,7 @@ class FileEntryRepository {
         ");
         $stmt->bindValue(':id', $id);
         $stmt->execute();
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($result === false) {
             throw new \Exception(sprintf("No file entry with id %s found.", esc_html($id)));
         }
@@ -100,7 +102,7 @@ class FileEntryRepository {
             $stmt->bindValue(':parent_id', $parentId);
             $stmt->bindValue(':name', $part);
             $stmt->execute();
-            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($result === false) {
                 throw new \Exception(sprintf("Error finding %s", esc_html($relativeFilename)));
             }
@@ -157,7 +159,7 @@ class FileEntryRepository {
             SELECT * FROM fileentries WHERE type in ($types) LIMIT $count OFFSET $skip
         ");
         $stmt->execute();
-        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $results = [];
         foreach ($rows as $row) {

@@ -15,7 +15,7 @@ use Mgleis\DiskUsageInsights\Plugin;
 class ShowResultsTableController {
 
     public function execute() {
-        // TODO Security
+        check_ajax_referer(Plugin::NONCE);
 
         $WP_NONCE = wp_create_nonce(Plugin::NONCE);
         $WP_ADMIN_AJAX_URL = admin_url('admin-ajax.php');

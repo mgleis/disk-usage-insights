@@ -68,8 +68,8 @@ class Plugin {
                 status_header(500, 'Interner Fehler');
                 //echo 'Fehler: Interner Serverfehler.';
                 echo "\n\n";
-                echo $e->getMessage();
-                echo $e->getTraceAsString();
+                echo esc_html($e->getMessage());
+                echo esc_html($e->getTraceAsString());
                 wp_die();
             }
         };

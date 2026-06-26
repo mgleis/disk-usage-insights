@@ -3,11 +3,15 @@ namespace Mgleis\DiskUsageInsights\Frontend\Controller\Report;
 
 use Mgleis\DiskUsageInsights\Domain\Database;
 use Mgleis\DiskUsageInsights\Frontend\Table;
+use Mgleis\DiskUsageInsights\Plugin;
+use PDO;
 
 class ShowLargestPluginsController {
 
 
     public function execute(Database $database) {
+        check_ajax_referer(Plugin::NONCE);
+
         $WP_ADMIN_AJAX_URL = admin_url('admin-ajax.php');
         $WP_SNAPSHOT_FILE = sanitize_file_name(wp_unslash($_GET['snapshot'] ?? ''));
 
@@ -50,7 +54,7 @@ class ShowLargestPluginsController {
     private function fetchAssoc(Database $database, string $sql): array {
         $stmt = $database->q->db->prepare($sql);
         $stmt->execute();
-        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $rows;
     }

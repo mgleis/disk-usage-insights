@@ -4,11 +4,15 @@ namespace Mgleis\DiskUsageInsights\Frontend\Controller\Report;
 use Mgleis\DiskUsageInsights\Domain\Database;
 use Mgleis\DiskUsageInsights\Frontend\Pagination;
 use Mgleis\DiskUsageInsights\Frontend\Table;
+use Mgleis\DiskUsageInsights\Plugin;
+use PDO;
 
 
 class ShowFoldersMostFilesController {
 
     public function execute(Database $database) {
+        check_ajax_referer(Plugin::NONCE);
+
         $WP_ADMIN_AJAX_URL = admin_url('admin-ajax.php');
         $WP_SNAPSHOT_FILE = sanitize_file_name(wp_unslash($_GET['snapshot'] ?? ''));
 
@@ -16,7 +20,7 @@ class ShowFoldersMostFilesController {
 
         if (isset($_GET['p'])) {
 
-            $pagination = Pagination::parseFromString($_SERVER['REQUEST_URI'] ?? '');
+            $pagination = Pagination::parseFromString(esc_url_raw(wp_unslash($_SERVER['REQUEST_URI'] ?? '')));
 
         } else {
 
@@ -60,7 +64,7 @@ class ShowFoldersMostFilesController {
     private function fetchAssoc(Database $database, string $sql): array {
         $stmt = $database->q->db->prepare($sql);
         $stmt->execute();
-        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $rows;
     }

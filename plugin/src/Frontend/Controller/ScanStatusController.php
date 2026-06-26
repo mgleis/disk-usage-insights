@@ -27,7 +27,7 @@ class ScanStatusController {
         echo "<br>\n";
         foreach(PhaseCoordinatorJob::PHASES as $idx => $phaseText) {
 
-            $phaseStatus = $currentPhase > $idx ? '&check; ' : '';
+            $phaseStatus = $currentPhase > $idx ? '✓ ' : '';
             $taskDescription = '';
 
             if ($currentPhase == $idx) {
@@ -44,7 +44,7 @@ class ScanStatusController {
             if ($idx == $currentPhase) {
                 echo "<b>";
             }
-            echo sprintf('%s%s%s', $phaseStatus, esc_html($phaseText), esc_html($taskDescription));
+            echo sprintf('%s%s%s', esc_html($phaseStatus), esc_html($phaseText), esc_html($taskDescription));
             if ($idx == $currentPhase) {
                 echo "</b>";
             }
@@ -52,9 +52,9 @@ class ScanStatusController {
         }
 
         // debug counter
-        $counter = (int) ($_POST['counter'] ?? 0);
+        $counter = (int) sanitize_text_field(wp_unslash($_POST['counter'] ?? 0));
         $counter++;
-        echo '<input type="hidden" name="counter" value="' . $counter . '">';
+        echo '<input type="hidden" name="counter" value="' . esc_attr($counter) . '">';
         echo "<br>\nRunning for " . esc_html($counter) . " seconds...<br>\n";
 
         wp_die(); // All ajax handlers should die when finished

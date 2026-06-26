@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
         <?php if (!empty($this->vbarChart)) { ?>
             <div class="vbarchart">
             <?php foreach ($this->vbarChart as $idx => $height) { ?>
-                <div class="vbarchart__bar vbarchart__color--<?php echo $idx % 10; ?>" style="height:<?php echo esc_attr($height); ?>%"></div>
+                <div class="vbarchart__bar vbarchart__color--<?php echo esc_attr($idx % 10); ?>" style="height:<?php echo esc_attr($height); ?>%"></div>
             <?php } ?>
             </div>
         <?php } ?>
@@ -47,7 +47,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
                         <td>
                     <?php } ?>
                     <?php if ($idx == 0 && !empty($this->vbarChart)) { ?>
-                        <div class="vbarchart__legendcolor vbarchart__color--<?php echo $rowIdx % 10; ?>"></div>
+                        <div class="vbarchart__legendcolor vbarchart__color--<?php echo esc_attr($rowIdx % 10); ?>"></div>
                     <?php } ?>
                     <?php if ($this->hasPercentBar($idx)) { ?>
                         <div style="position:relative; min-width: 60px; _outline: 1px solid #ddd;">

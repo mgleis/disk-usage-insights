@@ -11,7 +11,6 @@ class ShowResultsController {
     private Database $database;
 
     public function execute() {
-        // TODO Validate
         $snapshot = sanitize_file_name(wp_unslash($_GET['snapshot'] ?? ''));
 
         $this->database = (new DatabaseRepository())->loadDatabase($snapshot);

@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
         <br>
         <div class="stackedbarchart" style="border: 1px solid black; margin-bottom: 5px;">
             <?php foreach ($barChart as $idx => $bar): ?>
-                <div class="stackedbarchart__bar stackedbarchart__color--<?php echo ($idx % 10); ?>" style="width: <?php echo esc_html($bar['percent']) ?>%; height: 20px;">
+                <div class="stackedbarchart__bar stackedbarchart__color--<?php echo esc_attr($idx % 10); ?>" style="width: <?php echo esc_html($bar['percent']) ?>%; height: 20px;">
                     <?php if ($bar['percent'] > 10): ?>
                         <?php echo esc_html($bar['label']) ?>
                     <?php endif; ?>
@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {  // Ensure running within WordPress
         <div class="stackedbarchart__legend">
             <?php foreach ($barChart as $idx => $bar): ?>
                 <div>
-                    <div class="stackedbarchart__legendcolor stackedbarchart__color--<?php echo ($idx % 10); ?>"></div>
+                    <div class="stackedbarchart__legendcolor stackedbarchart__color--<?php echo esc_attr($idx % 10); ?>"></div>
                     <!-- <?php echo esc_html($bar['percent']) ?>% -->
                     <?php echo esc_html($bar['mb']) ?> MB
                     <?php echo esc_html($bar['label']) ?>

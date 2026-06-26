@@ -2,7 +2,7 @@
 Contributors: mgleis
 Tags: disk usage, file size, large files, large folders
 Requires at least: 5.0
-Tested up to: 6.9
+Tested up to: 7.0
 Stable Tag: 1.11
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -60,13 +60,16 @@ No, symlinks are completely ignored (for now) to prevent getting into loops.
 = 1.12 (upcoming) =
 * Maintenance Release
 * Cleaned up CSS
-* Cleaned up PHP (checks with phpstan and Plugin Checker)
+* Cleaned up PHP (checks with phpstan)
+* Migrated templates from include(...) to load_template(...)
 
-= 1.11 (DATE) =
+= 1.11 (2026-06-26) =
 * Prevent looping by ignoring symlinks (Thanks, @djf3)
 * In case of error added the URL of the ajax request for debugging purposes
 * Added a stopwatch "Running for xx seconds..." in the status bar for debugging purposes
 * Fix for Multisite installations (Thanks, @mattenser)
+* Subtracted uploads size from wp-content size (Thanks, @kaiyoma)
+* Security updates (plugin checker warnings)
 
 = 1.10 (2025-12-15) =
 * WordPress 6.9 compatability =

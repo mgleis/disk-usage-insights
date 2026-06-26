@@ -3,12 +3,13 @@
 namespace Mgleis\DiskUsageInsights\Domain;
 
 use Mgleis\PhpSqliteKeyValueStore\KeyValueStore;
+use PDO;
 
 class SnapshotRepository {
 
     private KeyValueStore $kvstore;
 
-    public function __construct(\PDO $pdo) {
+    public function __construct(PDO $pdo) {
         $this->kvstore = new KeyValueStore($pdo);
     }
 
